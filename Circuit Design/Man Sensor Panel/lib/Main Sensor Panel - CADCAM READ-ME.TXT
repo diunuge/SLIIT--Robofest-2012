@@ -1,0 +1,39 @@
+LABCENTER PROTEUS TOOL INFORMATION FILE
+=======================================
+
+In case of difficulty, please e-mail support@labcenter.co.uk
+
+Tool set up for Proteus layout 'Main Sensor Panel.LYT'.
+CADCAM generated at 4:09:39 AM on Tuesday, August 21, 2012.
+
+File List
+---------
+Top Copper              : Main Sensor Panel - CADCAM Top Copper.TXT
+Bottom Copper           : Main Sensor Panel - CADCAM Bottom Copper.TXT
+Top Silk Screen         : Main Sensor Panel - CADCAM Top Silk Screen.TXT
+Top Solder Resist       : Main Sensor Panel - CADCAM Top Solder Resist.TXT
+Bottom Solder Resist    : Main Sensor Panel - CADCAM Bottom Solder Resist.TXT
+Drill                   : Main Sensor Panel - CADCAM Drill.TXT
+
+Photoplotter Setup
+------------------
+Format: RS274X, ASCII, 2.4, imperial, absolute, eob=*, LZO
+Notes:  D=Diameter, S=Side, W=Width, H=Height
+
+D10	CIRCLE	D=30th                                      DRAW
+D11	SQUARE	S=80th                                      FLASH
+D12	CIRCLE	D=70th                                      FLASH
+D13	CIRCLE	D=8th                                       DRAW
+D14	SMT	W=100th               H=100th               FLASH
+D15	CIRCLE	D=90th                                      FLASH
+
+NC Drill Setup
+--------------
+Format: ASCII, 2.4, imperial, absolute, eob=<CR><LF>, no zero suppression.
+Notes:  Tool sizes are diameters. Layer sets are in brackets - 0=TOP, 15=BOTTOM, 1-14=INNER.
+
+T01	40th (0-15)
+T02	30th (0-15)
+
+
+[END OF FILE]
