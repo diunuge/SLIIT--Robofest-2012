@@ -27,7 +27,9 @@ void Move_Delay() {
 }
 
 void main(){
-
+ TRISD = 0;
+ TRISC = 0;
+ TRISA = 0;
 
 
 
@@ -60,9 +62,17 @@ void main(){
  Move_Delay();
  }
 
+ PORTA = 255;
+ PORTC = 255;
+ PORTD = 255;
+
  for(i=0; i<8; i++) {
  Lcd_Cmd(_LCD_SHIFT_RIGHT);
  Move_Delay();
  }
+
+ PORTA = 0;
+ PORTC = 0;
+ PORTD = 0;
  }
 }

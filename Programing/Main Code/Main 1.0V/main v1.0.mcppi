@@ -6,23 +6,24 @@ Value=0
 [BUILD_TYPE]
 Value=0
 [ACTIVE_TAB]
-Value=LCD.c
+Value=main v1.0.c
 [USE_EEPROM]
 Value=0
 [EEPROM_DEFINITION]
 Value=
 [FILES]
 Count=1
-File0=LCD.c
+File0=main v1.0.c
 [BINARIES]
 Count=0
 [IMAGES]
 Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
-Count=2
-File0=LCD.c
-File1=E:\Electronic\Pic\brainstorm\USART\test\18F\new.c
+Count=3
+File0=main v1.0.c
+File1=E:\Electronic\Pic\brainstorm\analog\test\test_1\voltage_lcd_1.c
+File2=E:\Electronic\Pic\brainstorm\analog\test\Vidda\test_adc\test_adc.c
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -33,7 +34,7 @@ Count=0
 Count=3
 Path0=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\defs\
 Path1=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\
-Path2=D:\Robotics\SLIIT- Robofest 2012\Programing\Test Codes\LCD\
+Path2=D:\Robotics\SLIIT- Robofest 2012\Programing\Main Code\Main 1.0V\
 [HEADER_PATH]
 Count=0
 [HEADERS]

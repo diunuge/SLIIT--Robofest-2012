@@ -1,0 +1,6 @@
+main
+	configureation
+		UART1_Init
+	UART1_Write
+	ADC_Read
+		Delay_22us

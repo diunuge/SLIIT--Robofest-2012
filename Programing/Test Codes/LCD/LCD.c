@@ -26,7 +26,9 @@ void Move_Delay() {                  // Function used for text moving
 }
 
 void main(){
-//   TRISD = 255;
+   TRISD = 0;
+   TRISC = 0;
+   TRISA = 0;
 //  ANSEL  = 0;                        // Configure AN pins as digital I/O
 //  ANSELH = 0;
 //  C1ON_bit = 0;                      // Disable comparators
@@ -58,10 +60,18 @@ void main(){
       Lcd_Cmd(_LCD_SHIFT_LEFT);
       Move_Delay();
     }
+    
+    PORTA = 255;
+    PORTC = 255;
+    PORTD = 255;
 
     for(i=0; i<8; i++) {             // Move text to the right 7 times
       Lcd_Cmd(_LCD_SHIFT_RIGHT);
       Move_Delay();
     }
+    
+    PORTA = 0;
+    PORTC = 0;
+    PORTD = 0;
   }
 }
