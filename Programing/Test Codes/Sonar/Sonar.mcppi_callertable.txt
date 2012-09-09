@@ -1,0 +1,7 @@
+main
+	__CC2DW
+	configure
+		UART1_Init
+	UART1_Write_Text
+		UART1_Write
+	UART1_Write

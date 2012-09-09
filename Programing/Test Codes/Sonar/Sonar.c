@@ -1,3 +1,10 @@
+
+char* ConnectionEstablished = "Connection Established!";
+int count, counter;
+char command,command_old,error;                 // Auxiliary variables
+
+unsigned int temp_res;
+
 void configure(){
 
       //PWM1_Init(5000);
@@ -36,5 +43,38 @@ void configure(){
       INTCON.ADIF = 0;
       INTCON.ADIE = 1;
       INTCON.GIE = 1;
+
+}
+
+void main() {
+      configure();
+
+      UART1_Write_Text(ConnectionEstablished);
+
+      do {
+
+
+
+      //30cm-20cm
+      if(temp_res<500 && temp_res >=400){
+            command = 'A';
+
+      }
+
+      //30cm-40cm
+      if(temp_res<400 && temp_res >=300){
+            command = 'B';
+      }
+
+      //40cm-60cm
+      if(temp_res<300 && temp_res >=200){
+            command = 'C';
+      }
+
+      UART1_Write(command);
+      delay_ms(100);
+      /*******************    sending command     ********************/
+
+      } while(1);
 
 }

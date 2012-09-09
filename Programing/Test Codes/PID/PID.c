@@ -1,9 +1,20 @@
+#include "motion.h"
+
+char* ConnectionEstablished = "Connection Established!";
+int count, counter;
+char command,command_old,error;                 // Auxiliary variables
+float Kp, Kd;
+int deviation, previousDeviation;
+float correction, totalError;
+
+unsigned int temp_res;
+
 void configure(){
 
-      //PWM1_Init(5000);
-      //PWM2_Init(5000);
-      //PWM1_Start();
-      //PWM2_Start();
+      PWM1_Init(5000);
+      PWM2_Init(5000);
+      PWM1_Start();
+      PWM2_Start();
       UART1_Init(9600);
       TRISD=0;
       TRISC=0;
@@ -36,5 +47,16 @@ void configure(){
       INTCON.ADIF = 0;
       INTCON.ADIE = 1;
       INTCON.GIE = 1;
+
+}
+
+void main() {
+      configure();
+
+      UART1_Write_Text(ConnectionEstablished);
+
+      do {
+            UART1_Write('A');
+      } while(1);
 
 }
