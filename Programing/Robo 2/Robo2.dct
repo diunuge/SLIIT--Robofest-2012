@@ -616,6 +616,7 @@ kd
 keypad_init
 keypad_key_click
 keypad_key_press
+ki
 kp
 labs
 lata
@@ -700,6 +701,7 @@ lcd_out_cp
 ldexp
 ldiv
 left_to_right
+linefollow
 linefollownormal
 linefollowpid
 log
@@ -857,6 +859,8 @@ peie
 peie_bit
 pen
 pen_bit
+pid_leftrpm
+pid_rightrpm
 pie1
 pie2
 pir1

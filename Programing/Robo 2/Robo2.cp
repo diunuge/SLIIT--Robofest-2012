@@ -131,16 +131,17 @@ char* ConnectionEstablished = "Connection Established!";
 char* debugText = "move forward";
 int count, counter;
 char command, command_old,error, receiveCommand;
-float Kp, Kd;
+float Kp, Ki, Kd;
 int deviation, previousDeviation;
 float correction, totalError;
-int MIN_RPM, MID_RPM, MAX_RPM, TEST_RPM;
+int MIN_RPM, MID_RPM, MAX_RPM, TEST_RPM, PID_RightRPM, PID_LeftRPM;
 
 unsigned int temp_res;
 
 void setPID();
 void lineFollowNormal();
 void lineFollowPID();
+void lineFollow();
 void sendSensorStatus();
 void testPIC();
 
@@ -161,7 +162,7 @@ void main() {
  debugText = "Test Sensors   ";
  UART1_Write_Text(debugText);
 
- for(count=0; count<2; count++){
+ for(count=0; count<5; count++){
  receiveCommand = UART1_Read();
  sendSensorStatus();
  delay_ms(1000);
@@ -169,25 +170,51 @@ void main() {
 
  debugText = "Start Line follow..   ";
  UART1_Write_Text(debugText);
- lineFollowNormal();
+
+ lineFollow();
 }
+void lineFollow(){
 
-void setPID(){
- MIN_RPM = 155;
- MID_RPM = 210;
- MAX_RPM = 255;
- TEST_RPM = 200;
+ while(1){
+ if( ( PORTD.B4 ==1 ||  PORTD.B5 ==1 ||  PORTD.B6 ==1 ||  PORTD.B7 ==1 ||  PORTB.B2 ==1) &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0 ){
 
- Kp = 10;
- Kd = 0;
+ debugText = "Line follow PID..   ";
+ UART1_Write_Text(debugText);
+ lineFollowPID();
+ }
+ else if( !(  PORTB.B5 ==1 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1) || !(  PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)){
 
- Pwm1_Set_Duty(MID_RPM);
- Pwm2_Set_Duty(MID_RPM);
+ debugText = "Line follow Normal..   ";
+ UART1_Write_Text(debugText);
+ lineFollowNormal();
+ }
+ else if((  PORTB.B5 ==1 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1) || !(  PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)){
+
+ stop();
+ sendSensorStatus();
+ delay_ms(200);
+ }
+ }
 }
 
 void lineFollowNormal(){
- while(1){
- if(  PORTD.B5 ==1 &&  PORTD.B6 ==1){
+ while(!(( PORTD.B4 ==1 ||  PORTD.B5 ==1 ||  PORTD.B6 ==1 ||  PORTD.B7 ==1 ||  PORTB.B2 ==1) &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)){
+ if(  PORTB.B5 ==1 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1){
+ stop();
+ }
+ else if( ( PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1) || ( PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1)){
+
+ while( PORTB.B5 ==0){
+ rotateClockwise(TEST_RPM);
+ }
+ }
+ else if( ( PORTB.B5 ==0 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0) && ( PORTB.B5 ==0 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)){
+
+ while( PORTB.B5 ==0){
+ rotateAntiClockwise(TEST_RPM);
+ }
+ }
+ else if(  PORTD.B5 ==1 &&  PORTD.B6 ==1){
 
  moveForward(TEST_RPM,TEST_RPM);
  }
@@ -201,18 +228,22 @@ void lineFollowNormal(){
  }
  else if(  PORTD.B5 ==1 &&  PORTD.B6 ==0 &&  PORTB.B5 ==0){
 
- turnLeft(TEST_RPM);
+ stop();
+
+ rotateAntiClockwise(TEST_RPM);
  }
  else if(  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTB.B5 ==0){
 
- turnRight(TEST_RPM);
+ stop();
+
+ rotateClockwise(TEST_RPM);
  }
  else if(  PORTD.B5 ==0 &&  PORTD.B6 ==0 ){
  if( PORTD.B4  ==1){
- turnLeft(TEST_RPM);
+ rotateAntiClockwise(TEST_RPM);
  }
  else if( PORTD.B7  ==1){
- turnRight(TEST_RPM);
+ rotateClockwise(TEST_RPM);
  }
  else if( PORTB.B3  ==1){
  rotateAntiClockwise(TEST_RPM);
@@ -221,14 +252,78 @@ void lineFollowNormal(){
  rotateClockwise(TEST_RPM);
  }
 
+ else{
  stop();
+ sendSensorStatus();
+
+ }
  }
 
  }
 }
 
+void setPID(){
+ MIN_RPM = 185;
+ MID_RPM = 180;
+ MAX_RPM = 255;
+ TEST_RPM = 200;
+
+ Kp = 9;
+ Ki = 0;
+ Kd = 0;
+
+ totalError = 0;
+ previousDeviation = 0;
+ PID_LeftRPM = 0;
+ PID_RightRPM = 0;
+
+ Pwm1_Set_Duty(MID_RPM);
+ Pwm2_Set_Duty(MID_RPM);
+}
+
 void lineFollowPID(){
-#line 108 "D:/Robotics/SLIIT- Robofest 2012/Programing/Robo 2/Robo2.c"
+ while( !( PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)){
+
+
+ if(  PORTD.B4 ==1 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 4;
+ if(  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 3;
+ if(  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 2;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 1;
+
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 0;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0)
+ deviation = 0;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 0;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0)
+ deviation = 0;
+
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0)
+ deviation = -1;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1)
+ deviation = -2;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1)
+ deviation = -3;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==1)
+ deviation = -4;
+
+ correction = Kp*deviation + Ki*totalError + Kd*(deviation-previousDeviation);
+ totalError += correction;
+ previousDeviation = deviation;
+
+ PID_LeftRPM = MID_RPM - correction;
+ PID_RightRPM = MID_RPM + correction;
+
+ moveForward(PID_LeftRPM, PID_RightRPM);
+
+ }
+ correction = 0;
+ totalError = 0;
 }
 
 void sendSensorStatus(){
