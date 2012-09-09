@@ -1,4 +1,5 @@
-#line 1 "D:/Robotics/SLIIT- Robofest 2012/Programing/Robo 2/Robo2.c"
+#line 1 "D:/Robotics/SLIIT- Robofest 2012/Programing/Robo 2/Robo2 v1.1.c"
+#line 1 "d:/robotics/sliit- robofest 2012/programing/robo 2/linefollow.h"
 #line 1 "d:/robotics/sliit- robofest 2012/programing/robo 2/motion.h"
 #line 19 "d:/robotics/sliit- robofest 2012/programing/robo 2/motion.h"
 void motorLeft_foward(int pwm);
@@ -90,83 +91,153 @@ void testMotion(int pwm){
  moveForward(pwm,pwm);
  delay_ms(1000);
 }
-#line 1 "d:/robotics/sliit- robofest 2012/programing/robo 2/configuration.h"
-void configure(){
-
-
- TRISA = 0b11111111;
- TRISB = 0b11111111;
- TRISC = 0b00000000;
- TRISD = 0b11110000;
-
-
- PORTA = 0;
- PORTB = 0;
- PORTC = 0;
- PORTD = 0;
-
-
- PWM1_Init(5000);
- PWM2_Init(5000);
- PWM1_Start();
- PWM2_Start();
- UART1_Init(9600);
+#line 1 "d:/robotics/sliit- robofest 2012/programing/robo 2/debug.h"
 
 
 
-
-
-
-
- ADCON0 = 0b11000001;
- ADCON1 = 0b00000000;
-
-
-
-
-
-}
-#line 5 "D:/Robotics/SLIIT- Robofest 2012/Programing/Robo 2/Robo2.c"
+char* ConnectionEstablished = "Connection Established!";
+char* debugText = "move forward";
 int count, counter;
-char command, command_old,error, receiveCommand;
+
+void sendSensorStatus();
+void testPIC();
+
+
+void sendSensorStatus(){
+ if(  PORTB.B4  == 1){
+ debugText = "1";
+ UART1_Write_Text(debugText);
+ }
+ else if(  PORTB.B4  == 0){
+ debugText = "0";
+ UART1_Write_Text(debugText);
+ }
+
+ if(  PORTB.B3  == 1){
+ debugText = "1";
+ UART1_Write_Text(debugText);
+ }
+ else if(  PORTB.B3  == 0){
+ debugText = "0";
+ UART1_Write_Text(debugText);
+ }
+
+ if(  PORTD.B4  == 1){
+ debugText = "1";
+ UART1_Write_Text(debugText);
+ }
+ else if(  PORTD.B4  == 0){
+ debugText = "0";
+ UART1_Write_Text(debugText);
+ }
+
+ if(  PORTD.B5  == 1){
+ debugText = "1";
+ UART1_Write_Text(debugText);
+ }
+ else if(  PORTD.B5  == 0){
+ debugText = "0";
+ UART1_Write_Text(debugText);
+ }
+
+ if(  PORTD.B6  == 1){
+ debugText = "1";
+ UART1_Write_Text(debugText);
+ }
+ else if(  PORTD.B6  == 0){
+ debugText = "0";
+ UART1_Write_Text(debugText);
+ }
+
+ if(  PORTD.B7  == 1){
+ debugText = "1";
+ UART1_Write_Text(debugText);
+ }
+ else if(  PORTD.B7  == 0){
+ debugText = "0";
+ UART1_Write_Text(debugText);
+ }
+
+ if(  PORTB.B2  == 1){
+ debugText = "1";
+ UART1_Write_Text(debugText);
+ }
+ else if(  PORTB.B2  == 0){
+ debugText = "0";
+ UART1_Write_Text(debugText);
+ }
+
+ if(  PORTB.B6  == 1){
+ debugText = "1";
+ UART1_Write_Text(debugText);
+ }
+ else if(  PORTB.B6  == 0){
+ debugText = "0";
+ UART1_Write_Text(debugText);
+ }
+
+ if(  PORTB.B7  == 1){
+ debugText = "1";
+ UART1_Write_Text(debugText);
+ }
+ else if(  PORTB.B7  == 0){
+ debugText = "0";
+ UART1_Write_Text(debugText);
+ }
+
+ if(  PORTB.B5  == 1){
+ debugText = " 1; ";
+ UART1_Write_Text(debugText);
+ }
+ else if(  PORTB.B5  == 0){
+ debugText = " 0; ";
+ UART1_Write_Text(debugText);
+ }
+}
+
+void testPIC(){
+ moveForward(200,200);
+ debugText = "move Forward  ";
+ UART1_Write_Text(debugText);
+ delay_ms(5000);
+
+ motorRight_foward(255);
+ debugText = "turn Left";
+ UART1_Write_Text(debugText);
+ motorLeft_stop();
+ delay_ms(5000);
+
+ motorLeft_foward(255);
+ debugText = "turn Right";
+ UART1_Write_Text(debugText);
+ motorRight_stop();
+ delay_ms(5000);
+
+ stop();
+ debugText = "Stopping..   ";
+ UART1_Write_Text(debugText);
+
+ debugText = "Decrease PWM..   ";
+ UART1_Write_Text(debugText);
+
+ for( count=255; count>0; count--){
+ moveForward(count,count);
+ delay_ms(100);
+
+
+ }
+}
+#line 4 "d:/robotics/sliit- robofest 2012/programing/robo 2/linefollow.h"
 float Kp, Ki, Kd;
 int deviation, previousDeviation;
 float correction, totalError;
 int MIN_RPM, MID_RPM, MAX_RPM, TEST_RPM, PID_RightRPM, PID_LeftRPM;
-
-unsigned int temp_res;
 
 void setPID();
 void lineFollowNormal();
 void lineFollowPID();
 void lineFollow();
 
-void main() {
- configure();
-
- UART1_Write_Text(ConnectionEstablished);
- setPID();
-
-
-
- debugText = "          Starting..  ";
- UART1_Write_Text(debugText);
-
- delay_ms(1000);
- debugText = "Test Sensors   ";
- UART1_Write_Text(debugText);
-
- for(count=0; count<5; count++){
- receiveCommand = UART1_Read();
- sendSensorStatus();
- delay_ms(1000);
- }
-
- debugText = "Start Line follow..   ";
- UART1_Write_Text(debugText);
-
- lineFollow();
-}
 void lineFollow(){
 
  while(1){
@@ -174,19 +245,21 @@ void lineFollow(){
 
  debugText = "Line follow PID..   ";
  UART1_Write_Text(debugText);
+ sendSensorStatus();
  lineFollowPID();
  }
  else if( !(  PORTB.B5 ==1 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1) || !(  PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)){
 
  debugText = "Line follow Normal..   ";
  UART1_Write_Text(debugText);
+ sendSensorStatus();
  lineFollowNormal();
  }
  else if((  PORTB.B5 ==1 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1) || !(  PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)){
 
  stop();
  sendSensorStatus();
- delay_ms(200);
+
  }
  }
 }
@@ -198,12 +271,18 @@ void lineFollowNormal(){
  }
  else if( ( PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1) || ( PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1)){
 
+ debugText = "90 to right..   ";
+ UART1_Write_Text(debugText);
+ sendSensorStatus();
  while( PORTB.B5 ==0){
  rotateClockwise(TEST_RPM);
  }
  }
- else if( ( PORTB.B5 ==0 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0) && ( PORTB.B5 ==0 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)){
+ else if( ( PORTB.B5 ==0 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0) && ( PORTB.B5 ==0 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)){
 
+ debugText = "90 to left..   ";
+ UART1_Write_Text(debugText);
+ sendSensorStatus();
  while( PORTB.B5 ==0){
  rotateAntiClockwise(TEST_RPM);
  }
@@ -248,12 +327,13 @@ void lineFollowNormal(){
 
  else{
  stop();
- sendSensorStatus();
+
 
  }
  }
 
  }
+
 }
 
 void setPID(){
@@ -276,7 +356,26 @@ void setPID(){
 }
 
 void lineFollowPID(){
- while( !( PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)){
+ while( !( PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0) ){
+
+ if( ( PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1) || ( PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1)){
+
+ debugText = "90 to right..   ";
+ UART1_Write_Text(debugText);
+ sendSensorStatus();
+ while( PORTB.B5 ==0){
+ rotateClockwise(TEST_RPM);
+ }
+ }
+ else if( ( PORTB.B5 ==0 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0) && ( PORTB.B5 ==0 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)){
+
+ debugText = "90 to left..   ";
+ UART1_Write_Text(debugText);
+ sendSensorStatus();
+ while( PORTB.B5 ==0){
+ rotateAntiClockwise(TEST_RPM);
+ }
+ }
 
 
  if(  PORTD.B4 ==1 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
@@ -318,4 +417,70 @@ void lineFollowPID(){
  }
  correction = 0;
  totalError = 0;
+
+}
+#line 1 "d:/robotics/sliit- robofest 2012/programing/robo 2/configuration.h"
+void configure(){
+
+
+ TRISA = 0b11111111;
+ TRISB = 0b11111111;
+ TRISC = 0b00000000;
+ TRISD = 0b11110000;
+
+
+ PORTA = 0;
+ PORTB = 0;
+ PORTC = 0;
+ PORTD = 0;
+
+
+ PWM1_Init(5000);
+ PWM2_Init(5000);
+ PWM1_Start();
+ PWM2_Start();
+ UART1_Init(9600);
+
+
+
+
+
+
+
+ ADCON0 = 0b11000001;
+ ADCON1 = 0b00000000;
+
+
+
+
+
+}
+#line 5 "D:/Robotics/SLIIT- Robofest 2012/Programing/Robo 2/Robo2 v1.1.c"
+char command, command_old,error, receiveCommand;
+
+void main() {
+ configure();
+
+ UART1_Write_Text(ConnectionEstablished);
+ setPID();
+
+
+
+ debugText = "          Starting..  ";
+ UART1_Write_Text(debugText);
+
+ delay_ms(1000);
+ debugText = "Test Sensors   ";
+ UART1_Write_Text(debugText);
+
+ for(count=0; count<5; count++){
+ receiveCommand = UART1_Read();
+ sendSensorStatus();
+ delay_ms(1000);
+ }
+
+ debugText = "Start Line follow..   ";
+ UART1_Write_Text(debugText);
+
+ lineFollow();
 }
