@@ -4,10 +4,10 @@ diagnostics: 0	126	All files Preprocessed in 62 ms
 diagnostics: 0	122	Compilation Started	motion.h
 warning: 20	1509	Generated baud rate is 9615 bps (error = 0.16 percent)	configuration.h
 diagnostics: 32	123	Compiled Successfully	Robo2 v1.1.c
-diagnostics: 0	127	All files Compiled in 890 ms	 
+diagnostics: 0	127	All files Compiled in 812 ms	 
 hint: 0	1143	Used RAM (bytes): 336 (22%)  Free RAM (bytes): 1179 (78%)	Used RAM (bytes): 336 (22%)  Free RAM (bytes): 1179 (78%)
 hint: 0	1143	Used ROM (bytes): 6038 (18%)  Free ROM (bytes): 26730 (82%)	Used ROM (bytes): 6038 (18%)  Free ROM (bytes): 26730 (82%)
 diagnostics: 0	125	Project Linked Successfully	Robo2 v1.1.mcppi
-diagnostics: 0	128	Linked in 1762 ms	 
-diagnostics: 0	129	Project 'Robo2 v1.1.mcppi' completed: 4087 ms	 
-diagnostics: 0	103	Finished successfully: 09 Sep 2012, 19:38:51	Robo2 v1.1.mcppi
+diagnostics: 0	128	Linked in 1747 ms	 
+diagnostics: 0	129	Project 'Robo2 v1.1.mcppi' completed: 3931 ms	 
+diagnostics: 0	103	Finished successfully: 10 Sep 2012, 12:07:41	Robo2 v1.1.mcppi
