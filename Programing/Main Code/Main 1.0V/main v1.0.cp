@@ -60,15 +60,12 @@ void countInc(){
 
 void main() {
  configureation();
-
- for(counter=1; counter<128; counter++){
- UART1_Write(counter);
- delay_ms(100);
- }
+#line 67 "D:/Robotics/SLIIT- Robofest 2012/Programing/Main Code/Main 1.0V/main v1.0.c"
+ UART1_Write_Text("Connected!.. ");
  temp_res = 'Z';
 
  do {
- temp_res = ADC_Read(0);
+ temp_res = ADC_Read(1);
  PORTB = temp_res;
  PORTC = temp_res >> 8;
 

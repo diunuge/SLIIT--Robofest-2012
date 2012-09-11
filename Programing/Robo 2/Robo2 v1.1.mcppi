@@ -20,11 +20,12 @@ Count=0
 Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
-Count=4
+Count=5
 File0=Robo2 v1.1.c
 File1=debug.h
 File2=linefollow.h
 File3=..\..\Resourses\Line_Follower\Find_Path.c
+File4=..\Main Code\Main 2.0V\Main 2.0V.c
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]

@@ -1,13 +1,13 @@
 0	1	mikroCPIC1618.exe -MSF -DBG -pP18F452 -DL -O11111114 -fo20 -N"D:\Robotics\SLIIT- Robofest 2012\Programing\Main Code\Main 1.0V\main v1.0.mcppi" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" -SP"D:\Robotics\SLIIT- Robofest 2012\Programing\Main Code\Main 1.0V\" "main v1.0.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CType.mcl" "__Lib_CString.mcl" "__Lib_CStdlib.mcl" "__Lib_CMath.mcl" "__Lib_Conversions.mcl" "__Lib_Sprintf.mcl" "__Lib_PrintOut.mcl" "__Lib_Sprinti.mcl" "__Lib_Sprintl.mcl" "__Lib_Time.mcl" "__Lib_Trigonometry.mcl" "__Lib_Button.mcl" "__Lib_Keypad4x4.mcl" "__Lib_Manchester.mcl" "__Lib_OneWire.mcl" "__Lib_PS2.mcl" "__Lib_Sound.mcl" "__Lib_SoftI2C.mcl" "__Lib_SoftSPI.mcl" "__Lib_SoftUART.mcl" "__Lib_ADC_A_C.mcl" "__Lib_EEPROM_256.mcl" "__Lib_FLASH_w8_e64.mcl" "__Lib_I2C_c34.mcl" "__Lib_PWM_c21.mcl" "__Lib_SPI_c345.mcl" "__Lib_UART_c67.mcl" "__Lib_PortExpander.mcl" "__Lib_CANSPI.mcl" "__Lib_CF.mcl" "__Lib_CFFat16.mcl" "__Lib_GlcdFonts.mcl" "__Lib_Glcd.mcl" "__Lib_LcdConsts.mcl" "__Lib_Lcd.mcl" "__Lib_Mmc.mcl" "__Lib_MmcFat16.mcl" "__Lib_RS485.mcl" "__Lib_S1D13700.mcl" "__Lib_T6963C.mcl" "__Lib_SPIGlcd.mcl" "__Lib_SPILcd.mcl" "__Lib_SPILcd8.mcl" "__Lib_SPIT6963C.mcl" "__Lib_EthEnc28j60.mcl" "__Lib_TFT.mcl" "__Lib_TouchPanel_TFT.mcl" "__Lib_EthEnc24j600.mcl" "__Lib_TouchPanel.mcl"	 
 hint: 0	1138	Available RAM: 1515 [bytes], Available ROM: 32768 [bytes]	 
-diagnostics: 0	126	All files Preprocessed in 31 ms	 
+diagnostics: 0	126	All files Preprocessed in 47 ms	 
 diagnostics: 0	122	Compilation Started	main v1.0.c
 warning: 12	1509	Generated baud rate is 9615 bps (error = 0.16 percent)	main v1.0.c
 diagnostics: 110	123	Compiled Successfully	main v1.0.c
-diagnostics: 0	127	All files Compiled in 172 ms	 
-hint: 0	1143	Used RAM (bytes): 22 (1%)  Free RAM (bytes): 1493 (99%)	Used RAM (bytes): 22 (1%)  Free RAM (bytes): 1493 (99%)
-hint: 0	1143	Used ROM (bytes): 478 (1%)  Free ROM (bytes): 32290 (99%)	Used ROM (bytes): 478 (1%)  Free ROM (bytes): 32290 (99%)
+diagnostics: 0	127	All files Compiled in 156 ms	 
+hint: 0	1143	Used RAM (bytes): 38 (3%)  Free RAM (bytes): 1477 (97%)	Used RAM (bytes): 38 (3%)  Free RAM (bytes): 1477 (97%)
+hint: 0	1143	Used ROM (bytes): 526 (2%)  Free ROM (bytes): 32242 (98%)	Used ROM (bytes): 526 (2%)  Free ROM (bytes): 32242 (98%)
 diagnostics: 0	125	Project Linked Successfully	main v1.0.mcppi
-diagnostics: 0	128	Linked in 1498 ms	 
-diagnostics: 0	129	Project 'main v1.0.mcppi' completed: 2980 ms	 
-diagnostics: 0	103	Finished successfully: 07 Sep 2012, 16:26:30	main v1.0.mcppi
+diagnostics: 0	128	Linked in 1513 ms	 
+diagnostics: 0	129	Project 'main v1.0.mcppi' completed: 3151 ms	 
+diagnostics: 0	103	Finished successfully: 11 Sep 2012, 04:30:51	main v1.0.mcppi

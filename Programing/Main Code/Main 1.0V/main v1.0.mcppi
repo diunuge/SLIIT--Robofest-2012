@@ -6,7 +6,7 @@ Value=0
 [BUILD_TYPE]
 Value=0
 [ACTIVE_TAB]
-Value=main v1.0.c
+Value=..\Main 3.0V\Main 3.0V.c
 [USE_EEPROM]
 Value=0
 [EEPROM_DEFINITION]
@@ -21,9 +21,9 @@ Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
 Count=3
-File0=main v1.0.c
-File1=E:\Electronic\Pic\brainstorm\analog\test\test_1\voltage_lcd_1.c
-File2=E:\Electronic\Pic\brainstorm\analog\test\Vidda\test_adc\test_adc.c
+File0=E:\Electronic\Pic\brainstorm\analog\test\test_1\voltage_lcd_1.c
+File1=E:\Electronic\Pic\brainstorm\analog\test\Vidda\test_adc\test_adc.c
+File2=P:\code.c
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -94,5 +94,4 @@ File47=Trigonometry
 File48=UART
 [EXPANDED NODES]
 Node1=Sources
-Node2=Output Files
-Count=2
+Count=1

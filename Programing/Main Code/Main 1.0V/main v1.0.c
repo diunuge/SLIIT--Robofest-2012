@@ -60,14 +60,15 @@ void countInc(){
 void main() {
        configureation();
 
-       for(counter=1; counter<128; counter++){
+       /*for(counter=1; counter<128; counter++){
          UART1_Write(counter);
          delay_ms(100);
-     }
+       }*/
+       UART1_Write_Text("Connected!.. ");
      temp_res = 'Z';
 
   do {
-    temp_res = ADC_Read(0);   // Get 10-bit results of AD conversion
+    temp_res = ADC_Read(1);   // Get 10-bit results of AD conversion
     PORTB = temp_res;         // Send lower 8 bits to PORTB
     PORTC = temp_res >> 8;    // Send 2 most significant bits to RC1, RC0
 

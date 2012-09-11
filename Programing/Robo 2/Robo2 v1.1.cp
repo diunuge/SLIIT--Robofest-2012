@@ -356,7 +356,7 @@ void setPID(){
 }
 
 void lineFollowPID(){
- while( !( PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0) ){
+ while( ( PORTD.B4 ==1 ||  PORTD.B5 ==1 ||  PORTD.B6 ==1 ||  PORTD.B7 ==1 ||  PORTB.B2 ==1) &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0 ){
 
  if( ( PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1) || ( PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1)){
 
@@ -473,7 +473,7 @@ void main() {
  debugText = "Test Sensors   ";
  UART1_Write_Text(debugText);
 
- for(count=0; count<5; count++){
+ for(count=0; count<1; count++){
  receiveCommand = UART1_Read();
  sendSensorStatus();
  delay_ms(1000);
@@ -482,5 +482,27 @@ void main() {
  debugText = "Start Line follow..   ";
  UART1_Write_Text(debugText);
 
- lineFollow();
+
+
+ testPIC();
+
+ while(1){
+
+ debugText = " Rotate Clockwise ";
+ UART1_Write_Text(debugText);
+ rotateClockwise(255);
+ delay_ms(220);
+ stop();
+
+ delay_ms(2000);
+
+ debugText = " Rotate Anti Clockwise ";
+ UART1_Write_Text(debugText);
+ rotateAntiClockwise(255);
+ delay_ms(220);
+ stop();
+
+ delay_ms(2000);
+
+ }
 }

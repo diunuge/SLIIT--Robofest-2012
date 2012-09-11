@@ -46,18 +46,18 @@ _countInc:
 	MOVWF       R0 
 	XORLW       0
 	BTFSS       STATUS+0, 2 
-	GOTO        L__countInc22
+	GOTO        L__countInc18
 	MOVF        R0, 0 
 	XORLW       15
 	BTFSS       STATUS+0, 2 
-	GOTO        L__countInc22
+	GOTO        L__countInc18
 	MOVF        _count+1, 0 
 	XORLW       66
 	BTFSS       STATUS+0, 2 
-	GOTO        L__countInc22
+	GOTO        L__countInc18
 	MOVLW       64
 	XORWF       _count+0, 0 
-L__countInc22:
+L__countInc18:
 	BTFSS       STATUS+0, 2 
 	GOTO        L_countInc0
 ;main v1.0.c,53 :: 		count = 0;
@@ -78,170 +78,133 @@ _main:
 ;main v1.0.c,60 :: 		void main() {
 ;main v1.0.c,61 :: 		configureation();
 	CALL        _configureation+0, 0
-;main v1.0.c,63 :: 		for(counter=1; counter<128; counter++){
-	MOVLW       1
-	MOVWF       _counter+0 
-	MOVLW       0
-	MOVWF       _counter+1 
-L_main2:
-	MOVLW       128
-	XORWF       _counter+1, 0 
-	MOVWF       R0 
-	MOVLW       128
-	SUBWF       R0, 0 
-	BTFSS       STATUS+0, 2 
-	GOTO        L__main23
-	MOVLW       128
-	SUBWF       _counter+0, 0 
-L__main23:
-	BTFSC       STATUS+0, 0 
-	GOTO        L_main3
-;main v1.0.c,64 :: 		UART1_Write(counter);
-	MOVF        _counter+0, 0 
-	MOVWF       FARG_UART1_Write_data_+0 
-	CALL        _UART1_Write+0, 0
-;main v1.0.c,65 :: 		delay_ms(100);
-	MOVLW       3
-	MOVWF       R11, 0
-	MOVLW       138
-	MOVWF       R12, 0
-	MOVLW       85
-	MOVWF       R13, 0
-L_main5:
-	DECFSZ      R13, 1, 0
-	BRA         L_main5
-	DECFSZ      R12, 1, 0
-	BRA         L_main5
-	DECFSZ      R11, 1, 0
-	BRA         L_main5
-	NOP
-	NOP
-;main v1.0.c,63 :: 		for(counter=1; counter<128; counter++){
-	INFSNZ      _counter+0, 1 
-	INCF        _counter+1, 1 
-;main v1.0.c,66 :: 		}
-	GOTO        L_main2
-L_main3:
-;main v1.0.c,67 :: 		temp_res = 'Z';
+;main v1.0.c,67 :: 		UART1_Write_Text("Connected!.. ");
+	MOVLW       ?lstr1_main_32v1.0+0
+	MOVWF       FARG_UART1_Write_Text_uart_text+0 
+	MOVLW       hi_addr(?lstr1_main_32v1.0+0)
+	MOVWF       FARG_UART1_Write_Text_uart_text+1 
+	CALL        _UART1_Write_Text+0, 0
+;main v1.0.c,68 :: 		temp_res = 'Z';
 	MOVLW       90
 	MOVWF       _temp_res+0 
 	MOVLW       0
 	MOVWF       _temp_res+1 
-;main v1.0.c,69 :: 		do {
-L_main6:
-;main v1.0.c,70 :: 		temp_res = ADC_Read(0);   // Get 10-bit results of AD conversion
-	CLRF        FARG_ADC_Read_channel+0 
+;main v1.0.c,70 :: 		do {
+L_main2:
+;main v1.0.c,71 :: 		temp_res = ADC_Read(1);   // Get 10-bit results of AD conversion
+	MOVLW       1
+	MOVWF       FARG_ADC_Read_channel+0 
 	CALL        _ADC_Read+0, 0
 	MOVF        R0, 0 
 	MOVWF       _temp_res+0 
 	MOVF        R1, 0 
 	MOVWF       _temp_res+1 
-;main v1.0.c,71 :: 		PORTB = temp_res;         // Send lower 8 bits to PORTB
+;main v1.0.c,72 :: 		PORTB = temp_res;         // Send lower 8 bits to PORTB
 	MOVF        R0, 0 
 	MOVWF       PORTB+0 
-;main v1.0.c,72 :: 		PORTC = temp_res >> 8;    // Send 2 most significant bits to RC1, RC0
+;main v1.0.c,73 :: 		PORTC = temp_res >> 8;    // Send 2 most significant bits to RC1, RC0
 	MOVF        R1, 0 
 	MOVWF       R2 
 	CLRF        R3 
 	MOVF        R2, 0 
 	MOVWF       PORTC+0 
-;main v1.0.c,75 :: 		if(temp_res<500 && temp_res >=400){
+;main v1.0.c,76 :: 		if(temp_res<500 && temp_res >=400){
 	MOVLW       1
 	SUBWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__main24
+	GOTO        L__main19
 	MOVLW       244
 	SUBWF       R0, 0 
-L__main24:
+L__main19:
 	BTFSC       STATUS+0, 0 
-	GOTO        L_main11
+	GOTO        L_main7
 	MOVLW       1
 	SUBWF       _temp_res+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__main25
+	GOTO        L__main20
 	MOVLW       144
 	SUBWF       _temp_res+0, 0 
-L__main25:
+L__main20:
 	BTFSS       STATUS+0, 0 
-	GOTO        L_main11
-L__main21:
-;main v1.0.c,76 :: 		command = 'A';
+	GOTO        L_main7
+L__main17:
+;main v1.0.c,77 :: 		command = 'A';
 	MOVLW       65
 	MOVWF       _command+0 
-;main v1.0.c,78 :: 		}
-L_main11:
-;main v1.0.c,81 :: 		if(temp_res<400 && temp_res >=300){
+;main v1.0.c,79 :: 		}
+L_main7:
+;main v1.0.c,82 :: 		if(temp_res<400 && temp_res >=300){
 	MOVLW       1
 	SUBWF       _temp_res+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__main26
+	GOTO        L__main21
 	MOVLW       144
 	SUBWF       _temp_res+0, 0 
-L__main26:
+L__main21:
 	BTFSC       STATUS+0, 0 
-	GOTO        L_main14
+	GOTO        L_main10
 	MOVLW       1
 	SUBWF       _temp_res+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__main27
+	GOTO        L__main22
 	MOVLW       44
 	SUBWF       _temp_res+0, 0 
-L__main27:
+L__main22:
 	BTFSS       STATUS+0, 0 
-	GOTO        L_main14
-L__main20:
-;main v1.0.c,82 :: 		command = 'B';
+	GOTO        L_main10
+L__main16:
+;main v1.0.c,83 :: 		command = 'B';
 	MOVLW       66
 	MOVWF       _command+0 
-;main v1.0.c,83 :: 		}
-L_main14:
-;main v1.0.c,86 :: 		if(temp_res<300 && temp_res >=200){
+;main v1.0.c,84 :: 		}
+L_main10:
+;main v1.0.c,87 :: 		if(temp_res<300 && temp_res >=200){
 	MOVLW       1
 	SUBWF       _temp_res+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__main28
+	GOTO        L__main23
 	MOVLW       44
 	SUBWF       _temp_res+0, 0 
-L__main28:
+L__main23:
 	BTFSC       STATUS+0, 0 
-	GOTO        L_main17
+	GOTO        L_main13
 	MOVLW       0
 	SUBWF       _temp_res+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__main29
+	GOTO        L__main24
 	MOVLW       200
 	SUBWF       _temp_res+0, 0 
-L__main29:
+L__main24:
 	BTFSS       STATUS+0, 0 
-	GOTO        L_main17
-L__main19:
-;main v1.0.c,87 :: 		command = 'C';
+	GOTO        L_main13
+L__main15:
+;main v1.0.c,88 :: 		command = 'C';
 	MOVLW       67
 	MOVWF       _command+0 
-;main v1.0.c,88 :: 		}
-L_main17:
-;main v1.0.c,90 :: 		UART1_Write(command);
+;main v1.0.c,89 :: 		}
+L_main13:
+;main v1.0.c,91 :: 		UART1_Write(command);
 	MOVF        _command+0, 0 
 	MOVWF       FARG_UART1_Write_data_+0 
 	CALL        _UART1_Write+0, 0
-;main v1.0.c,91 :: 		delay_ms(100);
+;main v1.0.c,92 :: 		delay_ms(100);
 	MOVLW       3
 	MOVWF       R11, 0
 	MOVLW       138
 	MOVWF       R12, 0
 	MOVLW       85
 	MOVWF       R13, 0
-L_main18:
+L_main14:
 	DECFSZ      R13, 1, 0
-	BRA         L_main18
+	BRA         L_main14
 	DECFSZ      R12, 1, 0
-	BRA         L_main18
+	BRA         L_main14
 	DECFSZ      R11, 1, 0
-	BRA         L_main18
+	BRA         L_main14
 	NOP
 	NOP
 ;main v1.0.c,108 :: 		} while(1);
-	GOTO        L_main6
+	GOTO        L_main2
 ;main v1.0.c,110 :: 		}
 	GOTO        $+0
 ; end of _main
