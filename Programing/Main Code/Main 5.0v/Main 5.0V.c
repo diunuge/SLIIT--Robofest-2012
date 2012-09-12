@@ -5,6 +5,7 @@
 
 
 unsigned short distanceSonar;
+float distanceIR;
 int distanceInt;
 int DIRECTION = 0;
 
@@ -12,14 +13,39 @@ int isRightSafe();
 int isMiddleSafe();
 int isLeftSafe();
 void moveStraightSlow();
+void moveStraightFast();
 void goThroughObstacles();
+void goThroughObstaclesJay();
+void level3Aligning();
+int isPathClearSonar();
+void checkSonar(char Sensor);
 
-
+void checkSonar(char Sensor){
+      if(Sensor == 'L'){
+            distanceSonar = getDistanceSonar2('L');
+            if(distanceSonar < 10)
+                  sendText("Obstacle" );
+      }
+      else if(Sensor == 'M'){
+            distanceSonar = getDistanceSonar2('M');
+            if(distanceSonar < 10)
+                  sendText("Obstacle" );
+      }
+      else if(Sensor == 'R'){
+            distanceSonar = getDistanceSonar2('R');
+            if(distanceSonar < 10)
+                  sendText("Obstacle" );
+      }
+      delay_ms(500);
+}
 
 void main() {
       configure();
       setPID();
       sendText("Starting...");
+      
+      //while(1)
+      //     checkSonar('L');
 
       /***********************     Starting Point    ***************************/
 
@@ -38,9 +64,13 @@ void main() {
 
       moveForward(205,200);
       delay_ms(100);
-      while(!isAllBlack())
-            lineFollowNormalWorked();
-            //lineFollowPID();
+      while(!isAllBlack()){
+            //lineFollowNormalWorked();
+            if( Scout==1 &&(Sensor3==1 || Sensor4==1 || Sensor5==1 || Sensor6==1 || Sensor7==1) && Sensor1==0 && Sensor2==0 && Sensor8==0 && Sensor9==0)
+                  lineFollowPID();
+            else
+                  lineFollowNormalWorked();
+      }
       stop();
       sendText("  End of Level 1. Level 2 Starting  ");
       LEVEL1_STATE = COMPLETED;
@@ -49,30 +79,25 @@ void main() {
 
       /***********************     Level 2 Starting    ***************************/
 
-      while(1)
-              stop();
-
       while(!isAllWhite()){
-             if(isLeftSafe() && isMiddleSafe() && isRightSafe()){
-                    moveStraightSlow();
-             }
-             if(!isLeftSafe() && isMiddleSafe() && isRightSafe()){
-                    stop();
-             }
-             if(isLeftSafe() && !isMiddleSafe() && isRightSafe()){
-                    stop();
-             }
-             if(isLeftSafe() && isMiddleSafe() && !isRightSafe()){
-                    stop();
-             }
+             goThroughObstaclesJay();
       }
-
 
       stop();
       sendText("  End of Level 2. Level 3 Starting  ");
       LEVEL2_STATE = COMPLETED;
       LEVEL3_STATE = REACHED;
       LEVEL = 3;
+      
+      /***********************     Level 3 Starting    ***************************/
+
+      level3Aligning();
+
+      while(!isAllBlack()){
+            stop();
+      }
+      
+      /***********************          Complete       ***************************/
 }
 
 int isRightSafe(){
@@ -103,21 +128,82 @@ void moveStraightSlow(){
       moveForward(205,200);
 }
 
+void moveStraightFast(){
+      moveForward(255,250);
+}
+
 void goThroughObstacles(){
-       distanceSonar = getDistanceSonar2('L');
-       if( distanceSonar < 20 ){
-             if( DIRECTION >= 0 ){
-                   sendText(" rotateByDegree -30  ");
-                   rotateByDegree(-30);
-                   DIRECTION -= 30;
+       if(getDistanceSonar2('M') < 10 ){
+             stop();
+             if(DIRECTION<0){
+                   rotateByDegree(45);
+                   DIRECTION +=45;
+                   if(getDistanceSonar2('M') < 10 ){
+                         rotateByDegree(-45);
+                         rotateByDegree(-45);
+                         DIRECTION -=90;
+                   }
              }
              else{
-                   sendText(" rotateByDegree +30  ");
-                   rotateByDegree(30);
-                   DIRECTION += 30;
+                   rotateByDegree(-45);
+                   DIRECTION -=45;
+                   if(getDistanceSonar2('M') < 10 ){
+                         rotateByDegree(45);
+                         rotateByDegree(45);
+                         DIRECTION +=90;
+                   }
              }
        }
        else{
-             moveForward(220,220);
+             moveStraightFast();
        }
+       delay_ms(10);
+}
+
+void goThroughObstaclesJay(){
+       if(isPathClearSonar() == 0) {
+            rotateByDegree(30);
+            if(isPathClearSonar() == 0) {
+                 rotateByDegree(-60);
+                 if(isPathClearSonar() == 0) {
+                      rotateByDegree(90);
+                      if(isPathClearSonar() == 0) {
+                          rotateByDegree(-90);
+                          rotateByDegree(-30);
+                          if(isPathClearSonar() == 0) {
+                               rotateByDegree(90);
+                               rotateByDegree(60);
+                               if(isPathClearSonar() == 0) {
+                                    rotateByDegree(-90);
+                                    rotateByDegree(-90);
+                               }
+                          }
+                      }
+                 }
+            }
+       }
+       moveStraightSlow();
+       delay_ms(10);
+}
+
+void level3Aligning(){
+       while(Sensor5 == 1)
+             reverse(255,255);
+       stop();
+       delay_ms(500);
+       while(!isAllBlack()){
+             if(Sensor9 == 1)
+                   rotateAntiClockwise(220);
+             else if(Sensor1 == 1)
+                   rotateClockwise(220);
+       }
+
+}
+
+int isPathClearSonar() {
+    if(getDistanceSonar2('L') < 10 || getDistanceSonar2('M') < 15 || getDistanceSonar2('R') < 10) {
+       return 0;     // Not Clear
+    } else {
+       return 1;
+    }
 }

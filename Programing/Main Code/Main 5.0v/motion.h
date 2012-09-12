@@ -21,6 +21,7 @@ void turnRight(int pwmLeft);
 void turnLeft(int pwmRight);
 void rotateClockwise(int pwm);
 void rotateAntiClockwise(int pwm);
+void reverse(int pwmLeft, int pwmRight);
 void stop();
 
 void rotateByDegree(int degree);
@@ -67,6 +68,11 @@ void moveForward(int pwmLeft, int pwmRight){
       motorRight_foward(pwmRight);
 }
 
+void reverse(int pwmLeft, int pwmRight){
+      motorLeft_reverse(pwmLeft);
+      motorRight_reverse(pwmRight);
+}
+
 void turnRight(int pwmLeft){
       motorLeft_foward(pwmLeft);
       motorRight_stop();
@@ -102,6 +108,42 @@ void rotateByDegree(int degree){
             rotateClockwise(255);
             delay_ms(220);
             stop();
+      }
+      else if( degree == -30 ){
+            rotateAntiClockwise(255);
+            delay_ms(100);
+            stop();
+            delay_ms(200);
+      }
+      else if( degree == 30 ){
+            rotateClockwise(255);
+            delay_ms(100);
+            stop();
+            delay_ms(200);
+      }
+      else if( degree == -60 ){
+            rotateAntiClockwise(255);
+            delay_ms(155);
+            stop();
+            delay_ms(200);
+      }
+      else if( degree == 60 ){
+            rotateClockwise(255);
+            delay_ms(155);
+            stop();
+            delay_ms(200);
+      }
+      else if( degree == -45 ){
+            rotateAntiClockwise(255);
+            delay_ms(135);
+            stop();
+            delay_ms(200);
+      }
+      else if( degree == 45 ){
+            rotateClockwise(255);
+            delay_ms(135);
+            stop();
+            delay_ms(200);
       }
 }
 

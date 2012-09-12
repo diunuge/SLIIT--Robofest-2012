@@ -3,11 +3,24 @@
 #define  IRSensorLeft    PORTA.B2
 
 unsigned int ir_value;
+float voltage;
 
-int getDistanceIR_GP2D120(unsigned int ir_value);
+int getDistanceIR_GP2D120(char sensor);
 
-float getDistanceIR_GP2D120(unsigned int ir_value){           //10-bit results
-      float voltage = ir_value/1024*5;
+float getDistanceIR_GP2D120(char sensor){           //10-bit results
+      if (sensor == 'M'){
+            ir_value = ADC_Read(IRSensorCenter);
+      }
+      else if(sensor == 'R'){
+            ir_value = ADC_Read(IRSensorRight);
+      }
+      else if(sensor == 'L'){
+            ir_value = ADC_Read(IRSensorLeft);
+      }
+      else
+            ir_value = 0;
+            
+      voltage = (float)ir_value/1024*5;
       if( 610<=ir_value && ir_value<623)         //3cm - 3.75cm
             return 3.0 - 12.5*(voltage - 3.04);
             
@@ -61,3 +74,33 @@ float getDistanceIR_GP2D120(unsigned int ir_value){           //10-bit results
       else
             return 50;
 }
+
+/*while(1){
+            distanceIR = getDistanceIR_GP2D120('M');
+            if( distanceIR < 3.0 )
+                  sendText(" 3");
+            else if(distanceIR < 4.0)
+                  sendText(" 4");
+            else if(distanceIR < 5.0)
+                  sendText(" 5");
+            else if(distanceIR < 6.0)
+                  sendText(" 6");
+            else if(distanceIR < 7.0)
+                  sendText(" 7");
+            else if(distanceIR < 8.0)
+                  sendText(" 8");
+            else if(distanceIR < 9.0)
+                  sendText(" 9");
+            else if(distanceIR < 10.0)
+                  sendText(" 10");
+            else if(distanceIR < 11.0)
+                  sendText(" 11");
+            else if(distanceIR < 12.0)
+                  sendText(" 12");
+            else if(distanceIR < 13.0)
+                  sendText(" 13<");
+            else{
+                  sendText(" A");
+            }
+            delay_ms(500);
+      }*/

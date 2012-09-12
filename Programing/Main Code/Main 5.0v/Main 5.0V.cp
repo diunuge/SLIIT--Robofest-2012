@@ -34,6 +34,7 @@ void turnRight(int pwmLeft);
 void turnLeft(int pwmRight);
 void rotateClockwise(int pwm);
 void rotateAntiClockwise(int pwm);
+void reverse(int pwmLeft, int pwmRight);
 void stop();
 
 void rotateByDegree(int degree);
@@ -80,6 +81,11 @@ void moveForward(int pwmLeft, int pwmRight){
  motorRight_foward(pwmRight);
 }
 
+void reverse(int pwmLeft, int pwmRight){
+ motorLeft_reverse(pwmLeft);
+ motorRight_reverse(pwmRight);
+}
+
 void turnRight(int pwmLeft){
  motorLeft_foward(pwmLeft);
  motorRight_stop();
@@ -115,6 +121,42 @@ void rotateByDegree(int degree){
  rotateClockwise(255);
  delay_ms(220);
  stop();
+ }
+ else if( degree == -30 ){
+ rotateAntiClockwise(255);
+ delay_ms(100);
+ stop();
+ delay_ms(200);
+ }
+ else if( degree == 30 ){
+ rotateClockwise(255);
+ delay_ms(100);
+ stop();
+ delay_ms(200);
+ }
+ else if( degree == -60 ){
+ rotateAntiClockwise(255);
+ delay_ms(155);
+ stop();
+ delay_ms(200);
+ }
+ else if( degree == 60 ){
+ rotateClockwise(255);
+ delay_ms(155);
+ stop();
+ delay_ms(200);
+ }
+ else if( degree == -45 ){
+ rotateAntiClockwise(255);
+ delay_ms(135);
+ stop();
+ delay_ms(200);
+ }
+ else if( degree == 45 ){
+ rotateClockwise(255);
+ delay_ms(135);
+ stop();
+ delay_ms(200);
  }
 }
 
@@ -282,6 +324,74 @@ void lineFollowNormalWorked();
 void lineFollowPID();
 void lineFollow();
 
+void setPID(){
+ MIN_RPM = 215;
+ MID_RPM = 235;
+ MAX_RPM = 255;
+ TEST_RPM = 200;
+
+
+ SLOW_PWM = 255;
+ MID_PWM = 200;
+ FAST_PWM = 255;
+
+ Kp = 2;
+ Ki = 0;
+ Kd = 0;
+
+ totalError = 0;
+ previousDeviation = 0;
+ PID_LeftRPM = 0;
+ PID_RightRPM = 0;
+
+ Pwm1_Set_Duty(MID_RPM);
+ Pwm2_Set_Duty(MID_RPM);
+}
+
+void lineFollowPID(){
+#line 65 "d:/robotics/sliit- robofest 2012/programing/main code/main 5.0v/linefollow.h"
+ if(  PORTD.B4 ==1 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 15;
+ if(  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 10;
+ if(  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 4;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 1;
+
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 0;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0)
+ deviation = 0;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
+ deviation = 0;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0)
+ deviation = 0;
+
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0)
+ deviation = -1;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1)
+ deviation = -4;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1)
+ deviation = -10;
+ if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==1)
+ deviation = -15;
+
+ correction = Kp*deviation + Ki*totalError + Kd*(deviation-previousDeviation);
+ totalError += correction;
+ previousDeviation = deviation;
+
+ PID_LeftRPM = MID_RPM + correction;
+ PID_RightRPM = MID_RPM - correction;
+
+ moveForward(PID_LeftRPM, PID_RightRPM);
+
+
+
+
+
+}
+
 void lineFollowNormalWorked(){
  if( PORTB.B5  == 1){
 
@@ -336,7 +446,8 @@ void lineFollowNormalWorked(){
  sendSensorStatus();
  }
  else{
- stop();
+
+ reverse(220,220);
  sendSensorStatus();
 
  }
@@ -397,6 +508,9 @@ void lineFollowNormalWorked(){
  moveForward(SLOW_PWM,FAST_PWM);
  else if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1)
  moveForward(FAST_PWM,SLOW_PWM);
+ else if(  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==0 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1)
+ while( PORTB.B5 ==0)
+ rotateAntiClockwise(255);
 
 
  else if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
@@ -415,7 +529,8 @@ void lineFollowNormalWorked(){
  sendSensorStatus();
  }
  else{
- stop();
+
+ reverse(220,220);
  sendSensorStatus();
 
  }
@@ -526,95 +641,6 @@ void lineFollowNormal(){
  }
 
 }
-
-void setPID(){
- MIN_RPM = 185;
- MID_RPM = 200;
- MAX_RPM = 255;
- TEST_RPM = 200;
-
-
- SLOW_PWM = 240;
- MID_PWM = 200;
- FAST_PWM = 255;
-
- Kp = 6;
- Ki = 0;
- Kd = 0;
-
- totalError = 0;
- previousDeviation = 0;
- PID_LeftRPM = 0;
- PID_RightRPM = 0;
-
- Pwm1_Set_Duty(MID_RPM);
- Pwm2_Set_Duty(MID_RPM);
-}
-
-void lineFollowPID(){
-
-
- if( ( PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1) || ( PORTB.B5 ==0 &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1 &&  PORTB.B6 ==1 &&  PORTB.B7 ==1)){
-
- debugText = "90 to right..   ";
- UART1_Write_Text(debugText);
- sendSensorStatus();
- while( PORTB.B5 ==0){
- rotateClockwise(TEST_RPM);
- }
- }
- else if( ( PORTB.B5 ==0 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0) && ( PORTB.B5 ==0 &&  PORTB.B4 ==1 &&  PORTB.B3 ==1 &&  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTB.B2 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)){
-
- debugText = "90 to left..   ";
- UART1_Write_Text(debugText);
- sendSensorStatus();
- while( PORTB.B5 ==0){
- rotateAntiClockwise(TEST_RPM);
- }
- }
-
-
- if(  PORTD.B4 ==1 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
- deviation = 4;
- if(  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
- deviation = 3;
- if(  PORTD.B4 ==1 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
- deviation = 2;
- if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
- deviation = 1;
-
- if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
- deviation = 0;
- if(  PORTD.B4 ==0 &&  PORTD.B5 ==1 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0)
- deviation = 0;
- if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==0 &&  PORTB.B2 ==0)
- deviation = 0;
- if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0)
- deviation = 0;
-
- if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==1 &&  PORTB.B2 ==0)
- deviation = -1;
- if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==1 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1)
- deviation = -2;
- if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==1 &&  PORTB.B2 ==1)
- deviation = -3;
- if(  PORTD.B4 ==0 &&  PORTD.B5 ==0 &&  PORTD.B6 ==0 &&  PORTD.B7 ==0 &&  PORTB.B2 ==1)
- deviation = -4;
-
- correction = Kp*deviation + Ki*totalError + Kd*(deviation-previousDeviation);
- totalError += correction;
- previousDeviation = deviation;
-
- PID_LeftRPM = MID_RPM - correction;
- PID_RightRPM = MID_RPM + correction;
-
- moveForward(PID_LeftRPM, PID_RightRPM);
-
-
-
-
-
-}
 #line 1 "d:/robotics/sliit- robofest 2012/programing/main code/main 5.0v/configuration.h"
 
 
@@ -627,17 +653,17 @@ int LEVEL, LEVEL1_STATE, LEVEL2_STATE, LEVEL3_STATE;
 void configure(){
 
 
- TRISA = 0b11111111;
+ TRISA = 0b11001010;
  TRISB = 0b11111111;
  TRISC = 0b00000000;
  TRISD = 0b11110010;
-
+ TRISE = 0b00000101;
 
  PORTA = 0;
  PORTB = 0;
  PORTC = 0;
  PORTD = 0;
-
+ PORTE = 0;
 
  PWM1_Init(5000);
  PWM2_Init(5000);
@@ -652,7 +678,7 @@ void configure(){
 
 
  ADCON0 = 0b11000001;
- ADCON1 = 0b00000000;
+ ADCON1 = 0b00000110;
 
 
 
@@ -680,11 +706,24 @@ void configure(){
 
 
 unsigned int ir_value;
+float voltage;
 
-int getDistanceIR_GP2D120(unsigned int ir_value);
+int getDistanceIR_GP2D120(char sensor);
 
-float getDistanceIR_GP2D120(unsigned int ir_value){
- float voltage = ir_value/1024*5;
+float getDistanceIR_GP2D120(char sensor){
+ if (sensor == 'M'){
+ ir_value = ADC_Read( PORTA.B0 );
+ }
+ else if(sensor == 'R'){
+ ir_value = ADC_Read( PORTA.B1 );
+ }
+ else if(sensor == 'L'){
+ ir_value = ADC_Read( PORTA.B2 );
+ }
+ else
+ ir_value = 0;
+
+ voltage = (float)ir_value/1024*5;
  if( 610<=ir_value && ir_value<623)
  return 3.0 - 12.5*(voltage - 3.04);
 
@@ -742,20 +781,27 @@ float getDistanceIR_GP2D120(unsigned int ir_value){
 
 
 
-int _counter;
+
+
+
+
+int _counter, _distanceSonar;
 float _responseTime, _distance;
+float getSonarDistance();
+unsigned short getDistanceSonar2(char Sensor);
+
 
 float getSonarDistance(){
-  PORTD.B0  = 0;
+  PORTA.B5  = 0;
  delay_us(10);
-  PORTD.B0  = 1;
+  PORTA.B5  = 1;
  delay_us(10);
-  PORTD.B0  = 0;
+  PORTA.B5  = 0;
 
- while( PORTD.B1 ==0);
+ while( PORTE.B0 ==0);
  _counter = 0;
 
- while( PORTD.B1 ==1){
+ while( PORTE.B0 ==1){
  _counter++;
  }
  _responseTime = _counter * 0.2 * 0.000001;
@@ -763,21 +809,21 @@ float getSonarDistance(){
  return _distance;
 }
 
-unsigned short getDistanceSonar2(char c){
+unsigned short getDistanceSonar2(char Sensor){
  unsigned double x,y;
  unsigned int L;
  unsigned int H;
  TMR1H=0x00;
  TMR1L=0x00;
- if(c=='L'){
+ if(Sensor=='M'){
 
-  PORTD.B0  = 0;
+  PORTA.B5  = 0;
  delay_us(2);
-  PORTD.B0  = 1;
+  PORTA.B5  = 1;
  delay_us(5);
-  PORTD.B0  =0;
+  PORTA.B5  =0;
 
- while(! PORTD.B1 )
+ while(! PORTE.B0 )
  {
  L=(TMR1L);
  H=(TMR1H);
@@ -787,7 +833,7 @@ unsigned short getDistanceSonar2(char c){
  TMR1H=0;
  TMR1L=0;
  T1CON.TMR1ON=1;
- while( PORTD.B1 )
+ while( PORTE.B0 )
  {
  L=(TMR1L);
  H=(TMR1H);
@@ -799,11 +845,71 @@ unsigned short getDistanceSonar2(char c){
  x=(H*256 + L)*0.2;
  y= (x/2)/29.1;
  return (int)y;
-#line 90 "d:/robotics/sliit- robofest 2012/programing/main code/main 5.0v/sonar.h"
+ }
+ else if(Sensor == 'R'){
+  PORTA.B0  = 0;
+ delay_us(2);
+  PORTA.B0  = 1;
+ delay_us(5);
+  PORTA.B0  =0;
+
+ while(! PORTA.B1 )
+ {
+ L=(TMR1L);
+ H=(TMR1H);
+ if(H>0xF0)
+ break;
+ }
+ TMR1H=0;
+ TMR1L=0;
+ T1CON.TMR1ON=1;
+ while( PORTA.B1 )
+ {
+ L=(TMR1L);
+ H=(TMR1H);
+ if(H>0xF0)
+ break;
+ }
+ L=(TMR1L);
+ H=(TMR1H);
+ x=(H*256 + L)*0.2;
+ y= (x/2)/29.1;
+ return (int)y;
+ }
+ else if(Sensor == 'L'){
+  PORTA.B2  = 0;
+ delay_us(2);
+  PORTA.B2  = 1;
+ delay_us(5);
+  PORTA.B2  =0;
+
+ while(! PORTA.B3 )
+ {
+ L=(TMR1L);
+ H=(TMR1H);
+ if(H>0xF0)
+ break;
+ }
+ TMR1H=0;
+ TMR1L=0;
+ T1CON.TMR1ON=1;
+ while( PORTA.B3 )
+ {
+ L=(TMR1L);
+ H=(TMR1H);
+ if(H>0xF0)
+ break;
+ }
+ L=(TMR1L);
+ H=(TMR1H);
+ x=(H*256 + L)*0.2;
+ y= (x/2)/29.1;
+ return (int)y;
  }
 }
 #line 7 "D:/Robotics/SLIIT- Robofest 2012/Programing/Main Code/Main 5.0v/Main 5.0V.c"
 unsigned short distanceSonar;
+float distanceIR;
 int distanceInt;
 int DIRECTION = 0;
 
@@ -811,14 +917,39 @@ int isRightSafe();
 int isMiddleSafe();
 int isLeftSafe();
 void moveStraightSlow();
+void moveStraightFast();
 void goThroughObstacles();
+void goThroughObstaclesJay();
+void level3Aligning();
+int isPathClearSonar();
+void checkSonar(char Sensor);
 
-
+void checkSonar(char Sensor){
+ if(Sensor == 'L'){
+ distanceSonar = getDistanceSonar2('L');
+ if(distanceSonar < 10)
+ sendText("Obstacle" );
+ }
+ else if(Sensor == 'M'){
+ distanceSonar = getDistanceSonar2('M');
+ if(distanceSonar < 10)
+ sendText("Obstacle" );
+ }
+ else if(Sensor == 'R'){
+ distanceSonar = getDistanceSonar2('R');
+ if(distanceSonar < 10)
+ sendText("Obstacle" );
+ }
+ delay_ms(500);
+}
 
 void main() {
  configure();
  setPID();
  sendText("Starting...");
+
+
+
 
 
 
@@ -837,9 +968,13 @@ void main() {
 
  moveForward(205,200);
  delay_ms(100);
- while(!isAllBlack())
- lineFollowNormalWorked();
+ while(!isAllBlack()){
 
+ if(  PORTB.B5 ==1 &&( PORTD.B4 ==1 ||  PORTD.B5 ==1 ||  PORTD.B6 ==1 ||  PORTD.B7 ==1 ||  PORTB.B2 ==1) &&  PORTB.B4 ==0 &&  PORTB.B3 ==0 &&  PORTB.B6 ==0 &&  PORTB.B7 ==0)
+ lineFollowPID();
+ else
+ lineFollowNormalWorked();
+ }
  stop();
  sendText("  End of Level 1. Level 2 Starting  ");
  LEVEL1_STATE =  2 ;
@@ -848,30 +983,25 @@ void main() {
 
 
 
- while(1)
- stop();
-
  while(!isAllWhite()){
- if(isLeftSafe() && isMiddleSafe() && isRightSafe()){
- moveStraightSlow();
+ goThroughObstaclesJay();
  }
- if(!isLeftSafe() && isMiddleSafe() && isRightSafe()){
- stop();
- }
- if(isLeftSafe() && !isMiddleSafe() && isRightSafe()){
- stop();
- }
- if(isLeftSafe() && isMiddleSafe() && !isRightSafe()){
- stop();
- }
- }
-
 
  stop();
  sendText("  End of Level 2. Level 3 Starting  ");
  LEVEL2_STATE =  2 ;
  LEVEL3_STATE =  1 ;
  LEVEL = 3;
+
+
+
+ level3Aligning();
+
+ while(!isAllBlack()){
+ stop();
+ }
+
+
 }
 
 int isRightSafe(){
@@ -902,21 +1032,82 @@ void moveStraightSlow(){
  moveForward(205,200);
 }
 
+void moveStraightFast(){
+ moveForward(255,250);
+}
+
 void goThroughObstacles(){
- distanceSonar = getDistanceSonar2('L');
- if( distanceSonar < 20 ){
- if( DIRECTION >= 0 ){
- sendText(" rotateByDegree -30  ");
- rotateByDegree(-30);
- DIRECTION -= 30;
+ if(getDistanceSonar2('M') < 10 ){
+ stop();
+ if(DIRECTION<0){
+ rotateByDegree(45);
+ DIRECTION +=45;
+ if(getDistanceSonar2('M') < 10 ){
+ rotateByDegree(-45);
+ rotateByDegree(-45);
+ DIRECTION -=90;
+ }
  }
  else{
- sendText(" rotateByDegree +30  ");
+ rotateByDegree(-45);
+ DIRECTION -=45;
+ if(getDistanceSonar2('M') < 10 ){
+ rotateByDegree(45);
+ rotateByDegree(45);
+ DIRECTION +=90;
+ }
+ }
+ }
+ else{
+ moveStraightFast();
+ }
+ delay_ms(10);
+}
+
+void goThroughObstaclesJay(){
+ if(isPathClearSonar() == 0) {
  rotateByDegree(30);
- DIRECTION += 30;
+ if(isPathClearSonar() == 0) {
+ rotateByDegree(-60);
+ if(isPathClearSonar() == 0) {
+ rotateByDegree(90);
+ if(isPathClearSonar() == 0) {
+ rotateByDegree(-90);
+ rotateByDegree(-30);
+ if(isPathClearSonar() == 0) {
+ rotateByDegree(90);
+ rotateByDegree(60);
+ if(isPathClearSonar() == 0) {
+ rotateByDegree(-90);
+ rotateByDegree(-90);
  }
  }
- else{
- moveForward(220,220);
+ }
+ }
+ }
+ }
+ moveStraightSlow();
+ delay_ms(10);
+}
+
+void level3Aligning(){
+ while( PORTD.B6  == 1)
+ reverse(255,255);
+ stop();
+ delay_ms(500);
+ while(!isAllBlack()){
+ if( PORTB.B7  == 1)
+ rotateAntiClockwise(220);
+ else if( PORTB.B4  == 1)
+ rotateClockwise(220);
+ }
+
+}
+
+int isPathClearSonar() {
+ if(getDistanceSonar2('L') < 10 || getDistanceSonar2('M') < 15 || getDistanceSonar2('R') < 10) {
+ return 0;
+ } else {
+ return 1;
  }
 }

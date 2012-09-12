@@ -34,6 +34,40 @@ main
 			PWM1_Set_Duty
 				Mul_16x16_U
 	isAllBlack
+	lineFollowPID
+		Int2Double
+			NRM3232
+				RES032
+				SETFUN32
+				FIXSIGN32
+		Mul_32x32_FP
+			RES032
+			SETFOV32
+			SETFUN32
+		Add_32x32_FP
+			NRM4032
+				SETFUN32
+				FIXSIGN32
+				SETFOV32
+				RES032
+			SETFOV32
+		Double2Int
+			SETIOV3224
+		Sub_32x32_FP
+			Add_32x32_FP
+				NRM4032
+					SETFUN32
+					FIXSIGN32
+					SETFOV32
+					RES032
+				SETFOV32
+		moveForward
+			motorLeft_foward
+				PWM2_Set_Duty
+					Mul_16x16_U
+			motorRight_foward
+				PWM1_Set_Duty
+					Mul_16x16_U
 	lineFollowNormalWorked
 		moveForward
 			motorLeft_foward
@@ -56,9 +90,13 @@ main
 		sendSensorStatus
 			UART1_Write_Text
 				UART1_Write
-		stop
-			motorLeft_stop
-			motorRight_stop
+		reverse
+			motorLeft_reverse
+				PWM2_Set_Duty
+					Mul_16x16_U
+			motorRight_reverse
+				PWM1_Set_Duty
+					Mul_16x16_U
 		rotateByDegree
 			rotateAntiClockwise
 				motorLeft_reverse
@@ -77,4 +115,82 @@ main
 				motorRight_reverse
 					PWM1_Set_Duty
 						Mul_16x16_U
+		rotateAntiClockwise
+			motorLeft_reverse
+				PWM2_Set_Duty
+					Mul_16x16_U
+			motorRight_foward
+				PWM1_Set_Duty
+					Mul_16x16_U
 		isAllWhite
+	goThroughObstaclesJay
+		isPathClearSonar
+			getDistanceSonar2
+				Word2Double
+					NRM3232
+						RES032
+						SETFUN32
+						FIXSIGN32
+				Mul_32x32_FP
+					RES032
+					SETFOV32
+					SETFUN32
+				Div_32x32_FP
+					SETFDZ32
+					RES032
+					SETFOV32
+					SETFUN32
+				Double2Int
+					SETIOV3224
+		rotateByDegree
+			rotateAntiClockwise
+				motorLeft_reverse
+					PWM2_Set_Duty
+						Mul_16x16_U
+				motorRight_foward
+					PWM1_Set_Duty
+						Mul_16x16_U
+			stop
+				motorLeft_stop
+				motorRight_stop
+			rotateClockwise
+				motorLeft_foward
+					PWM2_Set_Duty
+						Mul_16x16_U
+				motorRight_reverse
+					PWM1_Set_Duty
+						Mul_16x16_U
+		moveStraightSlow
+			moveForward
+				motorLeft_foward
+					PWM2_Set_Duty
+						Mul_16x16_U
+				motorRight_foward
+					PWM1_Set_Duty
+						Mul_16x16_U
+	level3Aligning
+		reverse
+			motorLeft_reverse
+				PWM2_Set_Duty
+					Mul_16x16_U
+			motorRight_reverse
+				PWM1_Set_Duty
+					Mul_16x16_U
+		stop
+			motorLeft_stop
+			motorRight_stop
+		isAllBlack
+		rotateAntiClockwise
+			motorLeft_reverse
+				PWM2_Set_Duty
+					Mul_16x16_U
+			motorRight_foward
+				PWM1_Set_Duty
+					Mul_16x16_U
+		rotateClockwise
+			motorLeft_foward
+				PWM2_Set_Duty
+					Mul_16x16_U
+			motorRight_reverse
+				PWM1_Set_Duty
+					Mul_16x16_U

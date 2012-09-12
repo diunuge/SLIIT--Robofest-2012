@@ -9,17 +9,17 @@ int LEVEL, LEVEL1_STATE, LEVEL2_STATE, LEVEL3_STATE;
 void configure(){
 
 
-      TRISA = 0b11111111;
+      TRISA = 0b11001010;
       TRISB = 0b11111111;
       TRISC = 0b00000000;
       TRISD = 0b11110010;
-      //TRISE = 0b000;
+      TRISE = 0b00000101;
 
       PORTA = 0;
       PORTB = 0;
       PORTC = 0;
       PORTD = 0;
-      //PORTE = 0;
+      PORTE = 0;
       
       PWM1_Init(5000);
       PWM2_Init(5000);
@@ -34,7 +34,7 @@ void configure(){
       //ADCON1=0;
 
       ADCON0 = 0b11000001;
-      ADCON1 = 0b00000000;
+      ADCON1 = 0b00000110;   //ADCON1 = 0b00000000;
 
       //T0CON = 0b00000111;
       //T0CON.B7 = 1;

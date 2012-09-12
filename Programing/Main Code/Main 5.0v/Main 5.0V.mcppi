@@ -20,12 +20,15 @@ Count=0
 Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
-Count=5
+Count=8
 File0=Main 5.0V.c
 File1=lineFollow.h
 File2=Configuration.h
 File3=Sonar.h
 File4=IR.h
+File5=motion.h
+File6=E:\Electronic\Pic\brainstorm\analog\test\test_1\voltage_lcd_1.c
+File7=E:\Electronic\Pic\brainstorm\analog\test\Vidda\test_adc\test_adc.c
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]

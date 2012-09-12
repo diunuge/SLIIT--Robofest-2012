@@ -65,7 +65,7 @@ void main() {
  temp_res = 'Z';
 
  do {
- temp_res = ADC_Read(1);
+ temp_res = ADC_Read(0);
  PORTB = temp_res;
  PORTC = temp_res >> 8;
 
@@ -89,5 +89,4 @@ void main() {
  delay_ms(100);
 #line 108 "D:/Robotics/SLIIT- Robofest 2012/Programing/Main Code/Main 1.0V/main v1.0.c"
  } while(1);
-
 }

@@ -15,6 +15,95 @@ void lineFollowNormalWorked();
 void lineFollowPID();
 void lineFollow();
 
+void setPID(){
+      MIN_RPM = 215;       //155
+      MID_RPM = 235;
+      MAX_RPM = 255;
+      TEST_RPM = 200;
+
+      //for normal line follwing
+      SLOW_PWM = 255;
+      MID_PWM = 200;
+      FAST_PWM = 255;
+
+      Kp = 2;
+      Ki = 0;
+      Kd = 0;
+
+      totalError = 0;
+      previousDeviation = 0;
+      PID_LeftRPM = 0;
+      PID_RightRPM = 0;
+
+      Pwm1_Set_Duty(MID_RPM);
+      Pwm2_Set_Duty(MID_RPM);
+}
+
+void lineFollowPID(){
+      //while( !(Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0) ){
+
+            /*if( (Scout==0 && Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1) || (Scout==0 && Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1)){
+                  //90 turn to right
+                  debugText = "90 to right..   ";
+                  UART1_Write_Text(debugText);
+                  sendSensorStatus();
+                  while(Scout==0){
+                        rotateClockwise(TEST_RPM);
+                  }
+            }
+            else if( (Scout==0 && Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor7==0 && Sensor8==0 && Sensor9==0) && (Scout==0 && Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor7==0 && Sensor8==0 && Sensor9==0)){
+                  //90 turn to left
+                  debugText = "90 to left..   ";
+                  UART1_Write_Text(debugText);
+                  sendSensorStatus();
+                  while(Scout==0){
+                        rotateAntiClockwise(TEST_RPM);
+                  }
+            }*/
+
+      //calculate daviation
+      if( Sensor3==1 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0)
+          deviation = 15;
+      if( Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
+          deviation = 10;
+      if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+          deviation = 4;
+      if( Sensor3==0 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
+          deviation = 1;
+
+      if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+          deviation = 0;
+      if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+          deviation = 0;
+      if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+          deviation = 0;
+      if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+          deviation = 0;
+
+      if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==0)
+          deviation = -1;
+      if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1)
+          deviation = -4;
+      if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==1)
+          deviation = -10;
+      if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==1)
+          deviation = -15;
+
+      correction =  Kp*deviation + Ki*totalError + Kd*(deviation-previousDeviation);
+      totalError += correction;
+      previousDeviation = deviation;
+
+      PID_LeftRPM = MID_RPM + correction;
+      PID_RightRPM = MID_RPM - correction;
+
+      moveForward(PID_LeftRPM, PID_RightRPM);
+
+      //}
+      //correction = 0;
+      //totalError = 0;
+      //sendSensorStatus();
+}
+
 void lineFollowNormalWorked(){
       if(Scout == 1){
                   //on the path
@@ -69,7 +158,8 @@ void lineFollowNormalWorked(){
                   sendSensorStatus();
             }
             else{
-                  stop();
+                  //stop();
+                  reverse(220,220);
                   sendSensorStatus();
                   //delay_ms(1000);
             }
@@ -130,6 +220,9 @@ void lineFollowNormalWorked(){
                         moveForward(SLOW_PWM,FAST_PWM);
                   else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1)
                         moveForward(FAST_PWM,SLOW_PWM);
+                  else if( Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==1 && Sensor7==1 && Sensor8==1)
+                        while(Scout==0)
+                              rotateAntiClockwise(255);
 
                   //on the path
                   else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
@@ -148,7 +241,8 @@ void lineFollowNormalWorked(){
                   sendSensorStatus();
             }
             else{
-                  stop();
+                  //stop();
+                  reverse(220,220);
                   sendSensorStatus();
                   //delay_ms(1000);
             }
@@ -260,91 +354,4 @@ void lineFollowNormal(){
       //sendSensorStatus();
 }
 
-void setPID(){
-      MIN_RPM = 185;       //155
-      MID_RPM = 200;
-      MAX_RPM = 255;
-      TEST_RPM = 200;
-      
-      //for normal line follwing
-      SLOW_PWM = 240;
-      MID_PWM = 200;
-      FAST_PWM = 255;
 
-      Kp = 6;
-      Ki = 0;
-      Kd = 0;
-
-      totalError = 0;
-      previousDeviation = 0;
-      PID_LeftRPM = 0;
-      PID_RightRPM = 0;
-
-      Pwm1_Set_Duty(MID_RPM);
-      Pwm2_Set_Duty(MID_RPM);
-}
-
-void lineFollowPID(){
-      //while( !(Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0) ){
-      
-            if( (Scout==0 && Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1) || (Scout==0 && Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1)){
-                  //90 turn to right
-                  debugText = "90 to right..   ";
-                  UART1_Write_Text(debugText);
-                  sendSensorStatus();
-                  while(Scout==0){
-                        rotateClockwise(TEST_RPM);
-                  }
-            }
-            else if( (Scout==0 && Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor7==0 && Sensor8==0 && Sensor9==0) && (Scout==0 && Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor7==0 && Sensor8==0 && Sensor9==0)){
-                  //90 turn to left
-                  debugText = "90 to left..   ";
-                  UART1_Write_Text(debugText);
-                  sendSensorStatus();
-                  while(Scout==0){
-                        rotateAntiClockwise(TEST_RPM);
-                  }
-            }
-
-      //calculate daviation
-      if( Sensor3==1 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-          deviation = 4;
-      if( Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-          deviation = 3;
-      if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
-          deviation = 2;
-      if( Sensor3==0 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-          deviation = 1;
-
-      if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
-          deviation = 0;
-      if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
-          deviation = 0;
-      if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==0 && Sensor7==0)
-          deviation = 0;
-      if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==0)
-          deviation = 0;
-
-      if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==0)
-          deviation = -1;
-      if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1)
-          deviation = -2;
-      if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==1)
-          deviation = -3;
-      if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==1)
-          deviation = -4;
-
-      correction =  Kp*deviation + Ki*totalError + Kd*(deviation-previousDeviation);
-      totalError += correction;
-      previousDeviation = deviation;
-
-      PID_LeftRPM = MID_RPM - correction;
-      PID_RightRPM = MID_RPM + correction;
-
-      moveForward(PID_LeftRPM, PID_RightRPM);
-
-      //}
-      //correction = 0;
-      //totalError = 0;
-      //sendSensorStatus();
-}
