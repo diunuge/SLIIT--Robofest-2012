@@ -182,8 +182,8 @@ void lineFollowPID(){
       totalError += correction;
       previousDeviation = deviation;
 
-      PID_LeftRPM = MID_RPM - correction;
-      PID_RightRPM = MID_RPM + correction;
+      PID_LeftRPM = MID_RPM + correction;
+      PID_RightRPM = MID_RPM - correction;
 
       moveForward(PID_LeftRPM, PID_RightRPM);
 

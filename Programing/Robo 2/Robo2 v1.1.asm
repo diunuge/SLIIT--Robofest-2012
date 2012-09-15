@@ -1933,7 +1933,7 @@ L_lineFollowPID184:
 	MOVWF       _previousDeviation+0 
 	MOVF        _deviation+1, 0 
 	MOVWF       _previousDeviation+1 
-;linefollow.h,185 :: 		PID_LeftRPM = MID_RPM - correction;
+;linefollow.h,185 :: 		PID_LeftRPM = MID_RPM + correction;
 	MOVF        _MID_RPM+0, 0 
 	MOVWF       R0 
 	MOVF        _MID_RPM+1, 0 
@@ -1947,33 +1947,6 @@ L_lineFollowPID184:
 	MOVWF       FLOC__lineFollowPID+6 
 	MOVF        R3, 0 
 	MOVWF       FLOC__lineFollowPID+7 
-	MOVF        FLOC__lineFollowPID+8, 0 
-	MOVWF       R4 
-	MOVF        FLOC__lineFollowPID+9, 0 
-	MOVWF       R5 
-	MOVF        FLOC__lineFollowPID+10, 0 
-	MOVWF       R6 
-	MOVF        FLOC__lineFollowPID+11, 0 
-	MOVWF       R7 
-	MOVF        FLOC__lineFollowPID+4, 0 
-	MOVWF       R0 
-	MOVF        FLOC__lineFollowPID+5, 0 
-	MOVWF       R1 
-	MOVF        FLOC__lineFollowPID+6, 0 
-	MOVWF       R2 
-	MOVF        FLOC__lineFollowPID+7, 0 
-	MOVWF       R3 
-	CALL        _Sub_32x32_FP+0, 0
-	CALL        _Double2Int+0, 0
-	MOVF        R0, 0 
-	MOVWF       FLOC__lineFollowPID+0 
-	MOVF        R1, 0 
-	MOVWF       FLOC__lineFollowPID+1 
-	MOVF        FLOC__lineFollowPID+0, 0 
-	MOVWF       _PID_LeftRPM+0 
-	MOVF        FLOC__lineFollowPID+1, 0 
-	MOVWF       _PID_LeftRPM+1 
-;linefollow.h,186 :: 		PID_RightRPM = MID_RPM + correction;
 	MOVF        FLOC__lineFollowPID+4, 0 
 	MOVWF       R0 
 	MOVF        FLOC__lineFollowPID+5, 0 
@@ -1991,6 +1964,33 @@ L_lineFollowPID184:
 	MOVF        FLOC__lineFollowPID+11, 0 
 	MOVWF       R7 
 	CALL        _Add_32x32_FP+0, 0
+	CALL        _Double2Int+0, 0
+	MOVF        R0, 0 
+	MOVWF       FLOC__lineFollowPID+0 
+	MOVF        R1, 0 
+	MOVWF       FLOC__lineFollowPID+1 
+	MOVF        FLOC__lineFollowPID+0, 0 
+	MOVWF       _PID_LeftRPM+0 
+	MOVF        FLOC__lineFollowPID+1, 0 
+	MOVWF       _PID_LeftRPM+1 
+;linefollow.h,186 :: 		PID_RightRPM = MID_RPM - correction;
+	MOVF        FLOC__lineFollowPID+8, 0 
+	MOVWF       R4 
+	MOVF        FLOC__lineFollowPID+9, 0 
+	MOVWF       R5 
+	MOVF        FLOC__lineFollowPID+10, 0 
+	MOVWF       R6 
+	MOVF        FLOC__lineFollowPID+11, 0 
+	MOVWF       R7 
+	MOVF        FLOC__lineFollowPID+4, 0 
+	MOVWF       R0 
+	MOVF        FLOC__lineFollowPID+5, 0 
+	MOVWF       R1 
+	MOVF        FLOC__lineFollowPID+6, 0 
+	MOVWF       R2 
+	MOVF        FLOC__lineFollowPID+7, 0 
+	MOVWF       R3 
+	CALL        _Sub_32x32_FP+0, 0
 	CALL        _Double2Int+0, 0
 	MOVF        R0, 0 
 	MOVWF       _PID_RightRPM+0 
@@ -2179,28 +2179,30 @@ L_main187:
 	MOVF        _debugText+1, 0 
 	MOVWF       FARG_UART1_Write_Text_uart_text+1 
 	CALL        _UART1_Write_Text+0, 0
-;Robo2 v1.1.c,33 :: 		testPIC();
+;Robo2 v1.1.c,32 :: 		lineFollowPID();
+	CALL        _lineFollowPID+0, 0
+;Robo2 v1.1.c,34 :: 		testPIC();
 	CALL        _testPIC+0, 0
-;Robo2 v1.1.c,35 :: 		while(1){
+;Robo2 v1.1.c,36 :: 		while(1){
 L_main190:
-;Robo2 v1.1.c,37 :: 		debugText = " Rotate Clockwise ";
+;Robo2 v1.1.c,38 :: 		debugText = " Rotate Clockwise ";
 	MOVLW       ?lstr37_Robo2_32v1.1+0
 	MOVWF       _debugText+0 
 	MOVLW       hi_addr(?lstr37_Robo2_32v1.1+0)
 	MOVWF       _debugText+1 
-;Robo2 v1.1.c,38 :: 		UART1_Write_Text(debugText);
+;Robo2 v1.1.c,39 :: 		UART1_Write_Text(debugText);
 	MOVF        _debugText+0, 0 
 	MOVWF       FARG_UART1_Write_Text_uart_text+0 
 	MOVF        _debugText+1, 0 
 	MOVWF       FARG_UART1_Write_Text_uart_text+1 
 	CALL        _UART1_Write_Text+0, 0
-;Robo2 v1.1.c,39 :: 		rotateClockwise(255);
+;Robo2 v1.1.c,40 :: 		rotateClockwise(255);
 	MOVLW       255
 	MOVWF       FARG_rotateClockwise_pwm+0 
 	MOVLW       0
 	MOVWF       FARG_rotateClockwise_pwm+1 
 	CALL        _rotateClockwise+0, 0
-;Robo2 v1.1.c,40 :: 		delay_ms(220);
+;Robo2 v1.1.c,41 :: 		delay_ms(220);
 	MOVLW       6
 	MOVWF       R11, 0
 	MOVLW       149
@@ -2215,9 +2217,9 @@ L_main192:
 	DECFSZ      R11, 1, 0
 	BRA         L_main192
 	NOP
-;Robo2 v1.1.c,41 :: 		stop();
+;Robo2 v1.1.c,42 :: 		stop();
 	CALL        _stop+0, 0
-;Robo2 v1.1.c,43 :: 		delay_ms(2000);
+;Robo2 v1.1.c,44 :: 		delay_ms(2000);
 	MOVLW       51
 	MOVWF       R11, 0
 	MOVLW       187
@@ -2233,24 +2235,24 @@ L_main193:
 	BRA         L_main193
 	NOP
 	NOP
-;Robo2 v1.1.c,45 :: 		debugText = " Rotate Anti Clockwise ";
+;Robo2 v1.1.c,46 :: 		debugText = " Rotate Anti Clockwise ";
 	MOVLW       ?lstr38_Robo2_32v1.1+0
 	MOVWF       _debugText+0 
 	MOVLW       hi_addr(?lstr38_Robo2_32v1.1+0)
 	MOVWF       _debugText+1 
-;Robo2 v1.1.c,46 :: 		UART1_Write_Text(debugText);
+;Robo2 v1.1.c,47 :: 		UART1_Write_Text(debugText);
 	MOVF        _debugText+0, 0 
 	MOVWF       FARG_UART1_Write_Text_uart_text+0 
 	MOVF        _debugText+1, 0 
 	MOVWF       FARG_UART1_Write_Text_uart_text+1 
 	CALL        _UART1_Write_Text+0, 0
-;Robo2 v1.1.c,47 :: 		rotateAntiClockwise(255);
+;Robo2 v1.1.c,48 :: 		rotateAntiClockwise(255);
 	MOVLW       255
 	MOVWF       FARG_rotateAntiClockwise_pwm+0 
 	MOVLW       0
 	MOVWF       FARG_rotateAntiClockwise_pwm+1 
 	CALL        _rotateAntiClockwise+0, 0
-;Robo2 v1.1.c,48 :: 		delay_ms(220);
+;Robo2 v1.1.c,49 :: 		delay_ms(220);
 	MOVLW       6
 	MOVWF       R11, 0
 	MOVLW       149
@@ -2265,9 +2267,9 @@ L_main194:
 	DECFSZ      R11, 1, 0
 	BRA         L_main194
 	NOP
-;Robo2 v1.1.c,49 :: 		stop();
+;Robo2 v1.1.c,50 :: 		stop();
 	CALL        _stop+0, 0
-;Robo2 v1.1.c,51 :: 		delay_ms(2000);
+;Robo2 v1.1.c,52 :: 		delay_ms(2000);
 	MOVLW       51
 	MOVWF       R11, 0
 	MOVLW       187
@@ -2283,8 +2285,8 @@ L_main195:
 	BRA         L_main195
 	NOP
 	NOP
-;Robo2 v1.1.c,53 :: 		}
-	GOTO        L_main190
 ;Robo2 v1.1.c,54 :: 		}
+	GOTO        L_main190
+;Robo2 v1.1.c,55 :: 		}
 	GOTO        $+0
 ; end of _main

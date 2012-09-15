@@ -65,7 +65,7 @@ void main() {
  temp_res = 'Z';
 
  do {
- temp_res = ADC_Read(0);
+ temp_res = ADC_Read(2);
  PORTB = temp_res;
  PORTC = temp_res >> 8;
 

@@ -91,8 +91,9 @@ _main:
 	MOVWF       _temp_res+1 
 ;main v1.0.c,70 :: 		do {
 L_main2:
-;main v1.0.c,71 :: 		temp_res = ADC_Read(0);   // Get 10-bit results of AD conversion
-	CLRF        FARG_ADC_Read_channel+0 
+;main v1.0.c,71 :: 		temp_res = ADC_Read(2);   // Get 10-bit results of AD conversion
+	MOVLW       2
+	MOVWF       FARG_ADC_Read_channel+0 
 	CALL        _ADC_Read+0, 0
 	MOVF        R0, 0 
 	MOVWF       _temp_res+0 

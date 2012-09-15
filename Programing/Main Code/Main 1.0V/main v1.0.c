@@ -68,7 +68,7 @@ void main() {
      temp_res = 'Z';
 
   do {
-    temp_res = ADC_Read(0);   // Get 10-bit results of AD conversion
+    temp_res = ADC_Read(2);   // Get 10-bit results of AD conversion
     PORTB = temp_res;         // Send lower 8 bits to PORTB
     PORTC = temp_res >> 8;    // Send 2 most significant bits to RC1, RC0
 

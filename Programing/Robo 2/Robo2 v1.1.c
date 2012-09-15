@@ -29,6 +29,7 @@ void main() {
       UART1_Write_Text(debugText);
       //lineFollowNormal();
       //lineFollow();
+      lineFollowPID();
       
       testPIC();
       

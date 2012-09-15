@@ -18,6 +18,12 @@ void main() {
       configure();
       setPID();
       sendText("Starting...");
+      
+      
+      while(1){
+            sendSensorStatus();
+            delay_ms(300);
+      }
 
       /***********************     Starting Point    ***************************/
       if(isAllBlack()){

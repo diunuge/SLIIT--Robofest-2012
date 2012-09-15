@@ -23,7 +23,7 @@ _isAllBlack:
 	GOTO        L_isAllBlack2
 	BTFSS       PORTB+0, 7 
 	GOTO        L_isAllBlack2
-L__isAllBlack578:
+L__isAllBlack581:
 ;sensorpanel.h,17 :: 		return 1;
 	MOVLW       1
 	MOVWF       R0 
@@ -63,7 +63,7 @@ _isAllWhite:
 	GOTO        L_isAllWhite6
 	BTFSC       PORTB+0, 7 
 	GOTO        L_isAllWhite6
-L__isAllWhite579:
+L__isAllWhite582:
 ;sensorpanel.h,25 :: 		return 1;
 	MOVLW       1
 	MOVWF       R0 
@@ -266,10 +266,10 @@ _rotateByDegree:
 	MOVLW       255
 	XORWF       FARG_rotateByDegree_degree+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__rotateByDegree700
+	GOTO        L__rotateByDegree703
 	MOVLW       166
 	XORWF       FARG_rotateByDegree_degree+0, 0 
-L__rotateByDegree700:
+L__rotateByDegree703:
 	BTFSS       STATUS+0, 2 
 	GOTO        L_rotateByDegree8
 ;motion.h,97 :: 		rotateAntiClockwise(255);
@@ -302,10 +302,10 @@ L_rotateByDegree8:
 	MOVLW       0
 	XORWF       FARG_rotateByDegree_degree+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__rotateByDegree701
+	GOTO        L__rotateByDegree704
 	MOVLW       90
 	XORWF       FARG_rotateByDegree_degree+0, 0 
-L__rotateByDegree701:
+L__rotateByDegree704:
 	BTFSS       STATUS+0, 2 
 	GOTO        L_rotateByDegree11
 ;motion.h,102 :: 		rotateClockwise(255);
@@ -918,10 +918,10 @@ L_testPIC49:
 	XORWF       _count+1, 0 
 	SUBWF       R0, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__testPIC702
+	GOTO        L__testPIC705
 	MOVF        _count+0, 0 
 	SUBLW       0
-L__testPIC702:
+L__testPIC705:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_testPIC50
 ;debug.h,135 :: 		moveForward(count,count);
@@ -969,17 +969,17 @@ _lineFollow:
 L_lineFollow53:
 ;linefollow.h,17 :: 		if( (Sensor3==1 || Sensor4==1 || Sensor5==1 || Sensor6==1 || Sensor7==1) && Sensor1==0 && Sensor2==0 && Sensor8==0 && Sensor9==0 ){
 	BTFSC       PORTD+0, 4 
-	GOTO        L__lineFollow584
+	GOTO        L__lineFollow587
 	BTFSC       PORTD+0, 5 
-	GOTO        L__lineFollow584
+	GOTO        L__lineFollow587
 	BTFSC       PORTD+0, 6 
-	GOTO        L__lineFollow584
+	GOTO        L__lineFollow587
 	BTFSC       PORTD+0, 7 
-	GOTO        L__lineFollow584
+	GOTO        L__lineFollow587
 	BTFSC       PORTB+0, 2 
-	GOTO        L__lineFollow584
+	GOTO        L__lineFollow587
 	GOTO        L_lineFollow59
-L__lineFollow584:
+L__lineFollow587:
 	BTFSC       PORTB+0, 4 
 	GOTO        L_lineFollow59
 	BTFSC       PORTB+0, 3 
@@ -988,7 +988,7 @@ L__lineFollow584:
 	GOTO        L_lineFollow59
 	BTFSC       PORTB+0, 7 
 	GOTO        L_lineFollow59
-L__lineFollow583:
+L__lineFollow586:
 ;linefollow.h,19 :: 		debugText = "Line follow PID..   ";
 	MOVLW       ?lstr28_Main_323.0V+0
 	MOVWF       _debugText+0 
@@ -1036,7 +1036,7 @@ L_lineFollow62:
 L_lineFollow61:
 	MOVF        R0, 1 
 	BTFSC       STATUS+0, 2 
-	GOTO        L__lineFollow582
+	GOTO        L__lineFollow585
 	BTFSC       PORTB+0, 5 
 	GOTO        L_lineFollow64
 	BTFSC       PORTB+0, 4 
@@ -1065,9 +1065,9 @@ L_lineFollow64:
 L_lineFollow63:
 	MOVF        R0, 1 
 	BTFSC       STATUS+0, 2 
-	GOTO        L__lineFollow582
+	GOTO        L__lineFollow585
 	GOTO        L_lineFollow67
-L__lineFollow582:
+L__lineFollow585:
 ;linefollow.h,26 :: 		debugText = "Line follow Normal..   ";
 	MOVLW       ?lstr29_Main_323.0V+0
 	MOVWF       _debugText+0 
@@ -1088,27 +1088,27 @@ L__lineFollow582:
 L_lineFollow67:
 ;linefollow.h,31 :: 		else if(( Scout==1 && Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1) || !( Scout==0 && Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0 && Sensor8==0 && Sensor9==0)){
 	BTFSS       PORTB+0, 5 
-	GOTO        L__lineFollow581
+	GOTO        L__lineFollow584
 	BTFSS       PORTB+0, 4 
-	GOTO        L__lineFollow581
+	GOTO        L__lineFollow584
 	BTFSS       PORTB+0, 3 
-	GOTO        L__lineFollow581
+	GOTO        L__lineFollow584
 	BTFSS       PORTD+0, 4 
-	GOTO        L__lineFollow581
+	GOTO        L__lineFollow584
 	BTFSS       PORTD+0, 5 
-	GOTO        L__lineFollow581
+	GOTO        L__lineFollow584
 	BTFSS       PORTD+0, 6 
-	GOTO        L__lineFollow581
+	GOTO        L__lineFollow584
 	BTFSS       PORTD+0, 7 
-	GOTO        L__lineFollow581
+	GOTO        L__lineFollow584
 	BTFSS       PORTB+0, 2 
-	GOTO        L__lineFollow581
+	GOTO        L__lineFollow584
 	BTFSS       PORTB+0, 6 
-	GOTO        L__lineFollow581
+	GOTO        L__lineFollow584
 	BTFSS       PORTB+0, 7 
-	GOTO        L__lineFollow581
-	GOTO        L__lineFollow580
-L__lineFollow581:
+	GOTO        L__lineFollow584
+	GOTO        L__lineFollow583
+L__lineFollow584:
 	BTFSC       PORTB+0, 5 
 	GOTO        L_lineFollow72
 	BTFSC       PORTB+0, 4 
@@ -1137,9 +1137,9 @@ L_lineFollow72:
 L_lineFollow71:
 	MOVF        R0, 1 
 	BTFSC       STATUS+0, 2 
-	GOTO        L__lineFollow580
+	GOTO        L__lineFollow583
 	GOTO        L_lineFollow75
-L__lineFollow580:
+L__lineFollow583:
 ;linefollow.h,33 :: 		stop();
 	CALL        _stop+0, 0
 ;linefollow.h,34 :: 		sendSensorStatus();
@@ -1180,7 +1180,7 @@ L_lineFollowNormal76:
 	GOTO        L_lineFollowNormal80
 	BTFSS       PORTB+0, 7 
 	GOTO        L_lineFollowNormal80
-L__lineFollowNormal597:
+L__lineFollowNormal600:
 ;linefollow.h,43 :: 		stop();
 	CALL        _stop+0, 0
 ;linefollow.h,44 :: 		}
@@ -1188,51 +1188,51 @@ L__lineFollowNormal597:
 L_lineFollowNormal80:
 ;linefollow.h,45 :: 		else if( (Scout==0 && Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1) || (Scout==0 && Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1)){
 	BTFSC       PORTB+0, 5 
-	GOTO        L__lineFollowNormal596
+	GOTO        L__lineFollowNormal599
 	BTFSC       PORTB+0, 4 
-	GOTO        L__lineFollowNormal596
+	GOTO        L__lineFollowNormal599
 	BTFSC       PORTB+0, 3 
-	GOTO        L__lineFollowNormal596
+	GOTO        L__lineFollowNormal599
 	BTFSC       PORTD+0, 4 
-	GOTO        L__lineFollowNormal596
+	GOTO        L__lineFollowNormal599
 	BTFSS       PORTD+0, 5 
-	GOTO        L__lineFollowNormal596
+	GOTO        L__lineFollowNormal599
 	BTFSS       PORTD+0, 6 
-	GOTO        L__lineFollowNormal596
+	GOTO        L__lineFollowNormal599
 	BTFSS       PORTD+0, 7 
-	GOTO        L__lineFollowNormal596
+	GOTO        L__lineFollowNormal599
 	BTFSS       PORTB+0, 2 
-	GOTO        L__lineFollowNormal596
+	GOTO        L__lineFollowNormal599
 	BTFSS       PORTB+0, 6 
-	GOTO        L__lineFollowNormal596
+	GOTO        L__lineFollowNormal599
 	BTFSS       PORTB+0, 7 
-	GOTO        L__lineFollowNormal596
-	GOTO        L__lineFollowNormal594
-L__lineFollowNormal596:
+	GOTO        L__lineFollowNormal599
+	GOTO        L__lineFollowNormal597
+L__lineFollowNormal599:
 	BTFSC       PORTB+0, 5 
-	GOTO        L__lineFollowNormal595
+	GOTO        L__lineFollowNormal598
 	BTFSC       PORTB+0, 4 
-	GOTO        L__lineFollowNormal595
+	GOTO        L__lineFollowNormal598
 	BTFSC       PORTB+0, 3 
-	GOTO        L__lineFollowNormal595
+	GOTO        L__lineFollowNormal598
 	BTFSC       PORTD+0, 4 
-	GOTO        L__lineFollowNormal595
+	GOTO        L__lineFollowNormal598
 	BTFSC       PORTD+0, 5 
-	GOTO        L__lineFollowNormal595
+	GOTO        L__lineFollowNormal598
 	BTFSS       PORTD+0, 6 
-	GOTO        L__lineFollowNormal595
+	GOTO        L__lineFollowNormal598
 	BTFSS       PORTD+0, 7 
-	GOTO        L__lineFollowNormal595
+	GOTO        L__lineFollowNormal598
 	BTFSS       PORTB+0, 2 
-	GOTO        L__lineFollowNormal595
+	GOTO        L__lineFollowNormal598
 	BTFSS       PORTB+0, 6 
-	GOTO        L__lineFollowNormal595
+	GOTO        L__lineFollowNormal598
 	BTFSS       PORTB+0, 7 
-	GOTO        L__lineFollowNormal595
-	GOTO        L__lineFollowNormal594
-L__lineFollowNormal595:
+	GOTO        L__lineFollowNormal598
+	GOTO        L__lineFollowNormal597
+L__lineFollowNormal598:
 	GOTO        L_lineFollowNormal88
-L__lineFollowNormal594:
+L__lineFollowNormal597:
 ;linefollow.h,47 :: 		debugText = "90 to right..   ";
 	MOVLW       ?lstr30_Main_323.0V+0
 	MOVWF       _debugText+0 
@@ -1283,7 +1283,7 @@ L_lineFollowNormal88:
 	GOTO        L_lineFollowNormal98
 	BTFSC       PORTB+0, 7 
 	GOTO        L_lineFollowNormal98
-L__lineFollowNormal593:
+L__lineFollowNormal596:
 	BTFSC       PORTB+0, 5 
 	GOTO        L_lineFollowNormal98
 	BTFSS       PORTB+0, 4 
@@ -1304,8 +1304,8 @@ L__lineFollowNormal593:
 	GOTO        L_lineFollowNormal98
 	BTFSC       PORTB+0, 7 
 	GOTO        L_lineFollowNormal98
-L__lineFollowNormal592:
-L__lineFollowNormal591:
+L__lineFollowNormal595:
+L__lineFollowNormal594:
 ;linefollow.h,56 :: 		debugText = "90 to left..   ";
 	MOVLW       ?lstr31_Main_323.0V+0
 	MOVWF       _debugText+0 
@@ -1340,7 +1340,7 @@ L_lineFollowNormal98:
 	GOTO        L_lineFollowNormal104
 	BTFSS       PORTD+0, 6 
 	GOTO        L_lineFollowNormal104
-L__lineFollowNormal590:
+L__lineFollowNormal593:
 ;linefollow.h,65 :: 		moveForward(TEST_RPM,TEST_RPM);
 	MOVF        _TEST_RPM+0, 0 
 	MOVWF       FARG_moveForward_pwmLeft+0 
@@ -1361,7 +1361,7 @@ L_lineFollowNormal104:
 	GOTO        L_lineFollowNormal108
 	BTFSS       PORTB+0, 5 
 	GOTO        L_lineFollowNormal108
-L__lineFollowNormal589:
+L__lineFollowNormal592:
 ;linefollow.h,69 :: 		turnLeft(TEST_RPM);
 	MOVF        _TEST_RPM+0, 0 
 	MOVWF       FARG_turnLeft_pwmRight+0 
@@ -1378,7 +1378,7 @@ L_lineFollowNormal108:
 	GOTO        L_lineFollowNormal112
 	BTFSS       PORTB+0, 5 
 	GOTO        L_lineFollowNormal112
-L__lineFollowNormal588:
+L__lineFollowNormal591:
 ;linefollow.h,73 :: 		turnRight(TEST_RPM);
 	MOVF        _TEST_RPM+0, 0 
 	MOVWF       FARG_turnRight_pwmLeft+0 
@@ -1395,7 +1395,7 @@ L_lineFollowNormal112:
 	GOTO        L_lineFollowNormal116
 	BTFSC       PORTB+0, 5 
 	GOTO        L_lineFollowNormal116
-L__lineFollowNormal587:
+L__lineFollowNormal590:
 ;linefollow.h,77 :: 		stop();
 	CALL        _stop+0, 0
 ;linefollow.h,79 :: 		rotateAntiClockwise(TEST_RPM);
@@ -1414,7 +1414,7 @@ L_lineFollowNormal116:
 	GOTO        L_lineFollowNormal120
 	BTFSC       PORTB+0, 5 
 	GOTO        L_lineFollowNormal120
-L__lineFollowNormal586:
+L__lineFollowNormal589:
 ;linefollow.h,83 :: 		stop();
 	CALL        _stop+0, 0
 ;linefollow.h,85 :: 		rotateClockwise(TEST_RPM);
@@ -1431,7 +1431,7 @@ L_lineFollowNormal120:
 	GOTO        L_lineFollowNormal124
 	BTFSC       PORTD+0, 6 
 	GOTO        L_lineFollowNormal124
-L__lineFollowNormal585:
+L__lineFollowNormal588:
 ;linefollow.h,88 :: 		if(Sensor3 ==1){
 	BTFSS       PORTD+0, 4 
 	GOTO        L_lineFollowNormal125
@@ -1576,51 +1576,51 @@ _lineFollowPID:
 ;linefollow.h,131 :: 		void lineFollowPID(){
 ;linefollow.h,134 :: 		if( (Scout==0 && Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1) || (Scout==0 && Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1)){
 	BTFSC       PORTB+0, 5 
-	GOTO        L__lineFollowPID615
+	GOTO        L__lineFollowPID618
 	BTFSC       PORTB+0, 4 
-	GOTO        L__lineFollowPID615
+	GOTO        L__lineFollowPID618
 	BTFSC       PORTB+0, 3 
-	GOTO        L__lineFollowPID615
+	GOTO        L__lineFollowPID618
 	BTFSC       PORTD+0, 4 
-	GOTO        L__lineFollowPID615
+	GOTO        L__lineFollowPID618
 	BTFSS       PORTD+0, 5 
-	GOTO        L__lineFollowPID615
+	GOTO        L__lineFollowPID618
 	BTFSS       PORTD+0, 6 
-	GOTO        L__lineFollowPID615
+	GOTO        L__lineFollowPID618
 	BTFSS       PORTD+0, 7 
-	GOTO        L__lineFollowPID615
+	GOTO        L__lineFollowPID618
 	BTFSS       PORTB+0, 2 
-	GOTO        L__lineFollowPID615
+	GOTO        L__lineFollowPID618
 	BTFSS       PORTB+0, 6 
-	GOTO        L__lineFollowPID615
+	GOTO        L__lineFollowPID618
 	BTFSS       PORTB+0, 7 
-	GOTO        L__lineFollowPID615
-	GOTO        L__lineFollowPID613
-L__lineFollowPID615:
+	GOTO        L__lineFollowPID618
+	GOTO        L__lineFollowPID616
+L__lineFollowPID618:
 	BTFSC       PORTB+0, 5 
-	GOTO        L__lineFollowPID614
+	GOTO        L__lineFollowPID617
 	BTFSC       PORTB+0, 4 
-	GOTO        L__lineFollowPID614
+	GOTO        L__lineFollowPID617
 	BTFSC       PORTB+0, 3 
-	GOTO        L__lineFollowPID614
+	GOTO        L__lineFollowPID617
 	BTFSC       PORTD+0, 4 
-	GOTO        L__lineFollowPID614
+	GOTO        L__lineFollowPID617
 	BTFSC       PORTD+0, 5 
-	GOTO        L__lineFollowPID614
+	GOTO        L__lineFollowPID617
 	BTFSS       PORTD+0, 6 
-	GOTO        L__lineFollowPID614
+	GOTO        L__lineFollowPID617
 	BTFSS       PORTD+0, 7 
-	GOTO        L__lineFollowPID614
+	GOTO        L__lineFollowPID617
 	BTFSS       PORTB+0, 2 
-	GOTO        L__lineFollowPID614
+	GOTO        L__lineFollowPID617
 	BTFSS       PORTB+0, 6 
-	GOTO        L__lineFollowPID614
+	GOTO        L__lineFollowPID617
 	BTFSS       PORTB+0, 7 
-	GOTO        L__lineFollowPID614
-	GOTO        L__lineFollowPID613
-L__lineFollowPID614:
+	GOTO        L__lineFollowPID617
+	GOTO        L__lineFollowPID616
+L__lineFollowPID617:
 	GOTO        L_lineFollowPID139
-L__lineFollowPID613:
+L__lineFollowPID616:
 ;linefollow.h,136 :: 		debugText = "90 to right..   ";
 	MOVLW       ?lstr32_Main_323.0V+0
 	MOVWF       _debugText+0 
@@ -1667,7 +1667,7 @@ L_lineFollowPID139:
 	GOTO        L_lineFollowPID149
 	BTFSC       PORTB+0, 7 
 	GOTO        L_lineFollowPID149
-L__lineFollowPID612:
+L__lineFollowPID615:
 	BTFSC       PORTB+0, 5 
 	GOTO        L_lineFollowPID149
 	BTFSS       PORTB+0, 4 
@@ -1684,8 +1684,8 @@ L__lineFollowPID612:
 	GOTO        L_lineFollowPID149
 	BTFSC       PORTB+0, 7 
 	GOTO        L_lineFollowPID149
-L__lineFollowPID611:
-L__lineFollowPID610:
+L__lineFollowPID614:
+L__lineFollowPID613:
 ;linefollow.h,145 :: 		debugText = "90 to left..   ";
 	MOVLW       ?lstr33_Main_323.0V+0
 	MOVWF       _debugText+0 
@@ -1726,7 +1726,7 @@ L_lineFollowPID142:
 	GOTO        L_lineFollowPID154
 	BTFSC       PORTB+0, 2 
 	GOTO        L_lineFollowPID154
-L__lineFollowPID609:
+L__lineFollowPID612:
 ;linefollow.h,155 :: 		deviation = 4;
 	MOVLW       4
 	MOVWF       _deviation+0 
@@ -1744,7 +1744,7 @@ L_lineFollowPID154:
 	GOTO        L_lineFollowPID157
 	BTFSC       PORTB+0, 2 
 	GOTO        L_lineFollowPID157
-L__lineFollowPID608:
+L__lineFollowPID611:
 ;linefollow.h,157 :: 		deviation = 3;
 	MOVLW       3
 	MOVWF       _deviation+0 
@@ -1762,7 +1762,7 @@ L_lineFollowPID157:
 	GOTO        L_lineFollowPID160
 	BTFSC       PORTB+0, 2 
 	GOTO        L_lineFollowPID160
-L__lineFollowPID607:
+L__lineFollowPID610:
 ;linefollow.h,159 :: 		deviation = 2;
 	MOVLW       2
 	MOVWF       _deviation+0 
@@ -1780,7 +1780,7 @@ L_lineFollowPID160:
 	GOTO        L_lineFollowPID163
 	BTFSC       PORTB+0, 2 
 	GOTO        L_lineFollowPID163
-L__lineFollowPID606:
+L__lineFollowPID609:
 ;linefollow.h,161 :: 		deviation = 1;
 	MOVLW       1
 	MOVWF       _deviation+0 
@@ -1798,7 +1798,7 @@ L_lineFollowPID163:
 	GOTO        L_lineFollowPID166
 	BTFSC       PORTB+0, 2 
 	GOTO        L_lineFollowPID166
-L__lineFollowPID605:
+L__lineFollowPID608:
 ;linefollow.h,164 :: 		deviation = 0;
 	CLRF        _deviation+0 
 	CLRF        _deviation+1 
@@ -1814,7 +1814,7 @@ L_lineFollowPID166:
 	GOTO        L_lineFollowPID169
 	BTFSC       PORTB+0, 2 
 	GOTO        L_lineFollowPID169
-L__lineFollowPID604:
+L__lineFollowPID607:
 ;linefollow.h,166 :: 		deviation = 0;
 	CLRF        _deviation+0 
 	CLRF        _deviation+1 
@@ -1830,7 +1830,7 @@ L_lineFollowPID169:
 	GOTO        L_lineFollowPID172
 	BTFSC       PORTB+0, 2 
 	GOTO        L_lineFollowPID172
-L__lineFollowPID603:
+L__lineFollowPID606:
 ;linefollow.h,168 :: 		deviation = 0;
 	CLRF        _deviation+0 
 	CLRF        _deviation+1 
@@ -1846,7 +1846,7 @@ L_lineFollowPID172:
 	GOTO        L_lineFollowPID175
 	BTFSC       PORTB+0, 2 
 	GOTO        L_lineFollowPID175
-L__lineFollowPID602:
+L__lineFollowPID605:
 ;linefollow.h,170 :: 		deviation = 0;
 	CLRF        _deviation+0 
 	CLRF        _deviation+1 
@@ -1862,7 +1862,7 @@ L_lineFollowPID175:
 	GOTO        L_lineFollowPID178
 	BTFSC       PORTB+0, 2 
 	GOTO        L_lineFollowPID178
-L__lineFollowPID601:
+L__lineFollowPID604:
 ;linefollow.h,173 :: 		deviation = -1;
 	MOVLW       255
 	MOVWF       _deviation+0 
@@ -1880,7 +1880,7 @@ L_lineFollowPID178:
 	GOTO        L_lineFollowPID181
 	BTFSS       PORTB+0, 2 
 	GOTO        L_lineFollowPID181
-L__lineFollowPID600:
+L__lineFollowPID603:
 ;linefollow.h,175 :: 		deviation = -2;
 	MOVLW       254
 	MOVWF       _deviation+0 
@@ -1898,7 +1898,7 @@ L_lineFollowPID181:
 	GOTO        L_lineFollowPID184
 	BTFSS       PORTB+0, 2 
 	GOTO        L_lineFollowPID184
-L__lineFollowPID599:
+L__lineFollowPID602:
 ;linefollow.h,177 :: 		deviation = -3;
 	MOVLW       253
 	MOVWF       _deviation+0 
@@ -1916,7 +1916,7 @@ L_lineFollowPID184:
 	GOTO        L_lineFollowPID187
 	BTFSS       PORTB+0, 2 
 	GOTO        L_lineFollowPID187
-L__lineFollowPID598:
+L__lineFollowPID601:
 ;linefollow.h,179 :: 		deviation = -4;
 	MOVLW       252
 	MOVWF       _deviation+0 
@@ -2234,22 +2234,22 @@ _getDistanceIR_GP2D120:
 	MOVLW       2
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120703
+	GOTO        L__getDistanceIR_GP2D120706
 	MOVLW       98
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120703:
+L__getDistanceIR_GP2D120706:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120190
 	MOVLW       2
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120704
+	GOTO        L__getDistanceIR_GP2D120707
 	MOVLW       111
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120704:
+L__getDistanceIR_GP2D120707:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120190
-L__getDistanceIR_GP2D120632:
+L__getDistanceIR_GP2D120635:
 ;ir.h,12 :: 		return 3.0 - 12.5*(voltage - 3.04);
 	MOVLW       92
 	MOVWF       R4 
@@ -2300,22 +2300,22 @@ L_getDistanceIR_GP2D120190:
 	MOVLW       2
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120705
+	GOTO        L__getDistanceIR_GP2D120708
 	MOVLW       45
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120705:
+L__getDistanceIR_GP2D120708:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120194
 	MOVLW       2
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120706
+	GOTO        L__getDistanceIR_GP2D120709
 	MOVLW       98
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120706:
+L__getDistanceIR_GP2D120709:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120194
-L__getDistanceIR_GP2D120631:
+L__getDistanceIR_GP2D120634:
 ;ir.h,15 :: 		return 3.75 - 1.04*(voltage - 2.98);  //3.75 - 4cm
 	MOVLW       82
 	MOVWF       R4 
@@ -2366,22 +2366,22 @@ L_getDistanceIR_GP2D120194:
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120707
+	GOTO        L__getDistanceIR_GP2D120710
 	MOVLW       225
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120707:
+L__getDistanceIR_GP2D120710:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120198
 	MOVLW       2
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120708
+	GOTO        L__getDistanceIR_GP2D120711
 	MOVLW       45
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120708:
+L__getDistanceIR_GP2D120711:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120198
-L__getDistanceIR_GP2D120630:
+L__getDistanceIR_GP2D120633:
 ;ir.h,18 :: 		return 5 - 2.5*(voltage - 2.75);       //4cm - 5cm
 	MOVLW       0
 	MOVWF       R4 
@@ -2432,22 +2432,22 @@ L_getDistanceIR_GP2D120198:
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120709
+	GOTO        L__getDistanceIR_GP2D120712
 	MOVLW       153
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120709:
+L__getDistanceIR_GP2D120712:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120202
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120710
+	GOTO        L__getDistanceIR_GP2D120713
 	MOVLW       225
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120710:
+L__getDistanceIR_GP2D120713:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120202
-L__getDistanceIR_GP2D120629:
+L__getDistanceIR_GP2D120632:
 ;ir.h,21 :: 		return 6 - 2.85*(voltage - 2.35);       //5cm - 6cm
 	MOVLW       102
 	MOVWF       R4 
@@ -2498,22 +2498,22 @@ L_getDistanceIR_GP2D120202:
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120711
+	GOTO        L__getDistanceIR_GP2D120714
 	MOVLW       108
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120711:
+L__getDistanceIR_GP2D120714:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120206
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120712
+	GOTO        L__getDistanceIR_GP2D120715
 	MOVLW       153
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120712:
+L__getDistanceIR_GP2D120715:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120206
-L__getDistanceIR_GP2D120628:
+L__getDistanceIR_GP2D120631:
 ;ir.h,24 :: 		return 7 - 4*(voltage - 2);             //6cm - 7cm
 	MOVLW       0
 	MOVWF       R4 
@@ -2564,22 +2564,22 @@ L_getDistanceIR_GP2D120206:
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120713
+	GOTO        L__getDistanceIR_GP2D120716
 	MOVLW       61
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120713:
+L__getDistanceIR_GP2D120716:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120210
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120714
+	GOTO        L__getDistanceIR_GP2D120717
 	MOVLW       108
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120714:
+L__getDistanceIR_GP2D120717:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120210
-L__getDistanceIR_GP2D120627:
+L__getDistanceIR_GP2D120630:
 ;ir.h,27 :: 		return 8 - 5*(voltage - 1.75);          //7cm - 8cm
 	MOVLW       0
 	MOVWF       R4 
@@ -2630,22 +2630,22 @@ L_getDistanceIR_GP2D120210:
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120715
+	GOTO        L__getDistanceIR_GP2D120718
 	MOVLW       30
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120715:
+L__getDistanceIR_GP2D120718:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120214
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120716
+	GOTO        L__getDistanceIR_GP2D120719
 	MOVLW       61
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120716:
+L__getDistanceIR_GP2D120719:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120214
-L__getDistanceIR_GP2D120626:
+L__getDistanceIR_GP2D120629:
 ;ir.h,30 :: 		return 9 - 6.667*(voltage - 1.55);      //8cm - 9cm
 	MOVLW       102
 	MOVWF       R4 
@@ -2696,22 +2696,22 @@ L_getDistanceIR_GP2D120214:
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120717
+	GOTO        L__getDistanceIR_GP2D120720
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120717:
+L__getDistanceIR_GP2D120720:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120218
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120718
+	GOTO        L__getDistanceIR_GP2D120721
 	MOVLW       30
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120718:
+L__getDistanceIR_GP2D120721:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120218
-L__getDistanceIR_GP2D120625:
+L__getDistanceIR_GP2D120628:
 ;ir.h,33 :: 		return 10 - 6.667*(voltage - 1.4);       //9cm - 10cm
 	MOVLW       51
 	MOVWF       R4 
@@ -2762,22 +2762,22 @@ L_getDistanceIR_GP2D120218:
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120719
+	GOTO        L__getDistanceIR_GP2D120722
 	MOVLW       215
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120719:
+L__getDistanceIR_GP2D120722:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120222
 	MOVLW       1
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120720
+	GOTO        L__getDistanceIR_GP2D120723
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120720:
+L__getDistanceIR_GP2D120723:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120222
-L__getDistanceIR_GP2D120624:
+L__getDistanceIR_GP2D120627:
 ;ir.h,36 :: 		return 12 - 10*(voltage - 1.25);         //10cm - 12cm
 	MOVLW       0
 	MOVWF       R4 
@@ -2828,22 +2828,22 @@ L_getDistanceIR_GP2D120222:
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120721
+	GOTO        L__getDistanceIR_GP2D120724
 	MOVLW       186
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120721:
+L__getDistanceIR_GP2D120724:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120226
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120722
+	GOTO        L__getDistanceIR_GP2D120725
 	MOVLW       215
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120722:
+L__getDistanceIR_GP2D120725:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120226
-L__getDistanceIR_GP2D120623:
+L__getDistanceIR_GP2D120626:
 ;ir.h,39 :: 		return 14 - 15.38*(voltage - 1.05);      //12cm - 14cm
 	MOVLW       102
 	MOVWF       R4 
@@ -2894,22 +2894,22 @@ L_getDistanceIR_GP2D120226:
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120723
+	GOTO        L__getDistanceIR_GP2D120726
 	MOVLW       166
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120723:
+L__getDistanceIR_GP2D120726:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120230
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120724
+	GOTO        L__getDistanceIR_GP2D120727
 	MOVLW       186
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120724:
+L__getDistanceIR_GP2D120727:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120230
-L__getDistanceIR_GP2D120622:
+L__getDistanceIR_GP2D120625:
 ;ir.h,42 :: 		return 16 - 20*(voltage - 0.94);         //14cm - 16cm
 	MOVLW       215
 	MOVWF       R4 
@@ -2960,22 +2960,22 @@ L_getDistanceIR_GP2D120230:
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120725
+	GOTO        L__getDistanceIR_GP2D120728
 	MOVLW       147
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120725:
+L__getDistanceIR_GP2D120728:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120234
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120726
+	GOTO        L__getDistanceIR_GP2D120729
 	MOVLW       166
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120726:
+L__getDistanceIR_GP2D120729:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120234
-L__getDistanceIR_GP2D120621:
+L__getDistanceIR_GP2D120624:
 ;ir.h,45 :: 		return 18 - 22.23*(voltage - 0.81);      //16cm - 18cm
 	MOVLW       41
 	MOVWF       R4 
@@ -3026,22 +3026,22 @@ L_getDistanceIR_GP2D120234:
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120727
+	GOTO        L__getDistanceIR_GP2D120730
 	MOVLW       133
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120727:
+L__getDistanceIR_GP2D120730:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120238
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120728
+	GOTO        L__getDistanceIR_GP2D120731
 	MOVLW       147
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120728:
+L__getDistanceIR_GP2D120731:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120238
-L__getDistanceIR_GP2D120620:
+L__getDistanceIR_GP2D120623:
 ;ir.h,48 :: 		return 20 - 28.57*(voltage - 0.65);       //18cm - 20cm
 	MOVLW       102
 	MOVWF       R4 
@@ -3092,22 +3092,22 @@ L_getDistanceIR_GP2D120238:
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120729
+	GOTO        L__getDistanceIR_GP2D120732
 	MOVLW       106
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120729:
+L__getDistanceIR_GP2D120732:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120242
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120730
+	GOTO        L__getDistanceIR_GP2D120733
 	MOVLW       133
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120730:
+L__getDistanceIR_GP2D120733:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120242
-L__getDistanceIR_GP2D120619:
+L__getDistanceIR_GP2D120622:
 ;ir.h,51 :: 		return 25 - 45.45*(voltage - 0.52);       //20cm - 25cm
 	MOVLW       184
 	MOVWF       R4 
@@ -3158,22 +3158,22 @@ L_getDistanceIR_GP2D120242:
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120731
+	GOTO        L__getDistanceIR_GP2D120734
 	MOVLW       88
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120731:
+L__getDistanceIR_GP2D120734:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120246
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120732
+	GOTO        L__getDistanceIR_GP2D120735
 	MOVLW       106
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120732:
+L__getDistanceIR_GP2D120735:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120246
-L__getDistanceIR_GP2D120618:
+L__getDistanceIR_GP2D120621:
 ;ir.h,54 :: 		return 30 - 55*(voltage - 0.43);           //25cm - 30cm
 	MOVLW       246
 	MOVWF       R4 
@@ -3224,22 +3224,22 @@ L_getDistanceIR_GP2D120246:
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120733
+	GOTO        L__getDistanceIR_GP2D120736
 	MOVLW       78
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120733:
+L__getDistanceIR_GP2D120736:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120250
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120734
+	GOTO        L__getDistanceIR_GP2D120737
 	MOVLW       88
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120734:
+L__getDistanceIR_GP2D120737:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120250
-L__getDistanceIR_GP2D120617:
+L__getDistanceIR_GP2D120620:
 ;ir.h,57 :: 		return 35 - 100*(voltage - 0.38);         //30cm - 35cm
 	MOVLW       92
 	MOVWF       R4 
@@ -3290,22 +3290,22 @@ L_getDistanceIR_GP2D120250:
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120735
+	GOTO        L__getDistanceIR_GP2D120738
 	MOVLW       65
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120735:
+L__getDistanceIR_GP2D120738:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120254
 	MOVLW       0
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceIR_GP2D120736
+	GOTO        L__getDistanceIR_GP2D120739
 	MOVLW       78
 	SUBWF       FARG_getDistanceIR_GP2D120_ir_value+0, 0 
-L__getDistanceIR_GP2D120736:
+L__getDistanceIR_GP2D120739:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceIR_GP2D120254
-L__getDistanceIR_GP2D120616:
+L__getDistanceIR_GP2D120619:
 ;ir.h,60 :: 		return 40 - 83.33*(voltage - 0.32);       //35cm - 40cm
 	MOVLW       10
 	MOVWF       R4 
@@ -3530,10 +3530,10 @@ L_getDistanceSonar2265:
 	MOVF        getDistanceSonar2_H_L0+1, 0 
 	SUBWF       R0, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceSonar2737
+	GOTO        L__getDistanceSonar2740
 	MOVF        getDistanceSonar2_H_L0+0, 0 
 	SUBLW       240
-L__getDistanceSonar2737:
+L__getDistanceSonar2740:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceSonar2267
 ;sonar.h,44 :: 		break;
@@ -3568,10 +3568,10 @@ L_getDistanceSonar2268:
 	MOVF        getDistanceSonar2_H_L0+1, 0 
 	SUBWF       R0, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__getDistanceSonar2738
+	GOTO        L__getDistanceSonar2741
 	MOVF        getDistanceSonar2_H_L0+0, 0 
 	SUBLW       240
-L__getDistanceSonar2738:
+L__getDistanceSonar2741:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_getDistanceSonar2270
 ;sonar.h,54 :: 		break;
@@ -3649,145 +3649,46 @@ _main:
 	MOVLW       hi_addr(?lstr34_Main_323.0V+0)
 	MOVWF       FARG_sendText_aText+1 
 	CALL        _sendText+0, 0
-;Main 3.0V.c,23 :: 		if(isAllBlack()){
-	CALL        _isAllBlack+0, 0
-	MOVF        R0, 0 
-	IORWF       R1, 0 
-	BTFSC       STATUS+0, 2 
-	GOTO        L_main271
-;Main 3.0V.c,24 :: 		LEVEL1_STATE = NOT_REACHED;
-	CLRF        _LEVEL1_STATE+0 
-	CLRF        _LEVEL1_STATE+1 
-;Main 3.0V.c,25 :: 		sendText("Starting Block  ");
-	MOVLW       ?lstr35_Main_323.0V+0
-	MOVWF       FARG_sendText_aText+0 
-	MOVLW       hi_addr(?lstr35_Main_323.0V+0)
-	MOVWF       FARG_sendText_aText+1 
-	CALL        _sendText+0, 0
-;Main 3.0V.c,26 :: 		LEVEL = 0;
-	CLRF        _LEVEL+0 
-	CLRF        _LEVEL+1 
-;Main 3.0V.c,28 :: 		rotateByDegree(-90);
-	MOVLW       166
-	MOVWF       FARG_rotateByDegree_degree+0 
-	MOVLW       255
-	MOVWF       FARG_rotateByDegree_degree+1 
-	CALL        _rotateByDegree+0, 0
-;Main 3.0V.c,29 :: 		while(!isAllWhite())
-L_main272:
-	CALL        _isAllWhite+0, 0
-	MOVF        R0, 0 
-	IORWF       R1, 0 
-	BTFSS       STATUS+0, 2 
-	GOTO        L_main273
-;Main 3.0V.c,30 :: 		moveStraightSlow();
-	CALL        _moveStraightSlow+0, 0
-	GOTO        L_main272
-L_main273:
-;Main 3.0V.c,31 :: 		while(isAllWhite())
-L_main274:
-	CALL        _isAllWhite+0, 0
-	MOVF        R0, 0 
-	IORWF       R1, 0 
-	BTFSC       STATUS+0, 2 
-	GOTO        L_main275
-;Main 3.0V.c,32 :: 		moveStraightSlow();
-	CALL        _moveStraightSlow+0, 0
-	GOTO        L_main274
-L_main275:
-;Main 3.0V.c,33 :: 		LEVEL = 1;
-	MOVLW       1
-	MOVWF       _LEVEL+0 
-	MOVLW       0
-	MOVWF       _LEVEL+1 
-;Main 3.0V.c,34 :: 		sendText("Level 1 Starting  ");
-	MOVLW       ?lstr36_Main_323.0V+0
-	MOVWF       FARG_sendText_aText+0 
-	MOVLW       hi_addr(?lstr36_Main_323.0V+0)
-	MOVWF       FARG_sendText_aText+1 
-	CALL        _sendText+0, 0
-;Main 3.0V.c,35 :: 		LEVEL1_STATE = REACHED;
-	MOVLW       1
-	MOVWF       _LEVEL1_STATE+0 
-	MOVLW       0
-	MOVWF       _LEVEL1_STATE+1 
-;Main 3.0V.c,36 :: 		stop();
-	CALL        _stop+0, 0
-;Main 3.0V.c,37 :: 		}
+;Main 3.0V.c,23 :: 		while(1){
 L_main271:
-;Main 3.0V.c,41 :: 		moveForward(205,200);
-	MOVLW       205
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVLW       0
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVLW       200
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVLW       0
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-;Main 3.0V.c,42 :: 		delay_ms(100);
-	MOVLW       3
+;Main 3.0V.c,24 :: 		sendSensorStatus();
+	CALL        _sendSensorStatus+0, 0
+;Main 3.0V.c,25 :: 		delay_ms(300);
+	MOVLW       8
 	MOVWF       R11, 0
-	MOVLW       138
+	MOVLW       157
 	MOVWF       R12, 0
-	MOVLW       85
+	MOVLW       5
 	MOVWF       R13, 0
-L_main276:
+L_main273:
 	DECFSZ      R13, 1, 0
-	BRA         L_main276
+	BRA         L_main273
 	DECFSZ      R12, 1, 0
-	BRA         L_main276
+	BRA         L_main273
 	DECFSZ      R11, 1, 0
-	BRA         L_main276
+	BRA         L_main273
 	NOP
 	NOP
-;Main 3.0V.c,43 :: 		while(!isAllBlack())
-L_main277:
-	CALL        _isAllBlack+0, 0
-	MOVF        R0, 0 
-	IORWF       R1, 0 
-	BTFSS       STATUS+0, 2 
-	GOTO        L_main278
-;Main 3.0V.c,44 :: 		lineFollowNormal3();
-	CALL        _lineFollowNormal3+0, 0
-	GOTO        L_main277
-L_main278:
-;Main 3.0V.c,46 :: 		stop();
-	CALL        _stop+0, 0
-;Main 3.0V.c,47 :: 		sendText("  End of Level 1. Level 2 Starting  ");
-	MOVLW       ?lstr37_Main_323.0V+0
-	MOVWF       FARG_sendText_aText+0 
-	MOVLW       hi_addr(?lstr37_Main_323.0V+0)
-	MOVWF       FARG_sendText_aText+1 
-	CALL        _sendText+0, 0
-;Main 3.0V.c,48 :: 		LEVEL1_STATE = COMPLETED;
-	MOVLW       2
-	MOVWF       _LEVEL1_STATE+0 
-	MOVLW       0
-	MOVWF       _LEVEL1_STATE+1 
-;Main 3.0V.c,49 :: 		LEVEL2_STATE = REACHED;
-	MOVLW       1
-	MOVWF       _LEVEL2_STATE+0 
-	MOVLW       0
-	MOVWF       _LEVEL2_STATE+1 
-;Main 3.0V.c,50 :: 		LEVEL = 2;
-	MOVLW       2
-	MOVWF       _LEVEL+0 
-	MOVLW       0
-	MOVWF       _LEVEL+1 
-;Main 3.0V.c,54 :: 		while(1)
+;Main 3.0V.c,26 :: 		}
+	GOTO        L_main271
+;Main 3.0V.c,48 :: 		delay_ms(100);
 L_main279:
-;Main 3.0V.c,55 :: 		stop();
-	CALL        _stop+0, 0
-	GOTO        L_main279
-;Main 3.0V.c,78 :: 		}
+	DECFSZ      R13, 1, 0
+	BRA         L_main279
+	DECFSZ      R12, 1, 0
+	BRA         L_main279
+	DECFSZ      R11, 1, 0
+	BRA         L_main279
+	NOP
+	NOP
+;Main 3.0V.c,84 :: 		}
 	GOTO        $+0
 ; end of _main
 
 _isRightSafe:
 
-;Main 3.0V.c,80 :: 		int isRightSafe(){
-;Main 3.0V.c,81 :: 		ir_value = ADC_Read(IRSensorRight);
+;Main 3.0V.c,86 :: 		int isRightSafe(){
+;Main 3.0V.c,87 :: 		ir_value = ADC_Read(IRSensorRight);
 	MOVLW       0
 	BTFSC       PORTA+0, 1 
 	MOVLW       1
@@ -3797,45 +3698,45 @@ _isRightSafe:
 	MOVWF       _ir_value+0 
 	MOVF        R1, 0 
 	MOVWF       _ir_value+1 
-;Main 3.0V.c,82 :: 		if(250<=ir_value && ir_value<800){                         // ~5cm
+;Main 3.0V.c,88 :: 		if(250<=ir_value && ir_value<800){                         // ~5cm
 	MOVLW       0
 	SUBWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__isRightSafe739
+	GOTO        L__isRightSafe742
 	MOVLW       250
 	SUBWF       R0, 0 
-L__isRightSafe739:
+L__isRightSafe742:
 	BTFSS       STATUS+0, 0 
-	GOTO        L_isRightSafe297
+	GOTO        L_isRightSafe300
 	MOVLW       3
 	SUBWF       _ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__isRightSafe740
+	GOTO        L__isRightSafe743
 	MOVLW       32
 	SUBWF       _ir_value+0, 0 
-L__isRightSafe740:
+L__isRightSafe743:
 	BTFSC       STATUS+0, 0 
-	GOTO        L_isRightSafe297
-L__isRightSafe637:
-;Main 3.0V.c,83 :: 		return FALSE;
+	GOTO        L_isRightSafe300
+L__isRightSafe640:
+;Main 3.0V.c,89 :: 		return FALSE;
 	CLRF        R0 
 	CLRF        R1 
 	RETURN      0
-;Main 3.0V.c,84 :: 		}
-L_isRightSafe297:
-;Main 3.0V.c,85 :: 		return TRUE;
+;Main 3.0V.c,90 :: 		}
+L_isRightSafe300:
+;Main 3.0V.c,91 :: 		return TRUE;
 	MOVLW       1
 	MOVWF       R0 
 	MOVLW       0
 	MOVWF       R1 
-;Main 3.0V.c,86 :: 		}
+;Main 3.0V.c,92 :: 		}
 	RETURN      0
 ; end of _isRightSafe
 
 _isMiddleSafe:
 
-;Main 3.0V.c,88 :: 		int isMiddleSafe(){
-;Main 3.0V.c,89 :: 		ir_value = ADC_Read(IRSensorCenter);
+;Main 3.0V.c,94 :: 		int isMiddleSafe(){
+;Main 3.0V.c,95 :: 		ir_value = ADC_Read(IRSensorCenter);
 	MOVLW       0
 	BTFSC       PORTA+0, 0 
 	MOVLW       1
@@ -3845,45 +3746,45 @@ _isMiddleSafe:
 	MOVWF       _ir_value+0 
 	MOVF        R1, 0 
 	MOVWF       _ir_value+1 
-;Main 3.0V.c,90 :: 		if(250<=ir_value && ir_value<800){                         // ~5cm
+;Main 3.0V.c,96 :: 		if(250<=ir_value && ir_value<800){                         // ~5cm
 	MOVLW       0
 	SUBWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__isMiddleSafe741
+	GOTO        L__isMiddleSafe744
 	MOVLW       250
 	SUBWF       R0, 0 
-L__isMiddleSafe741:
+L__isMiddleSafe744:
 	BTFSS       STATUS+0, 0 
-	GOTO        L_isMiddleSafe300
+	GOTO        L_isMiddleSafe303
 	MOVLW       3
 	SUBWF       _ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__isMiddleSafe742
+	GOTO        L__isMiddleSafe745
 	MOVLW       32
 	SUBWF       _ir_value+0, 0 
-L__isMiddleSafe742:
+L__isMiddleSafe745:
 	BTFSC       STATUS+0, 0 
-	GOTO        L_isMiddleSafe300
-L__isMiddleSafe638:
-;Main 3.0V.c,91 :: 		return FALSE;
+	GOTO        L_isMiddleSafe303
+L__isMiddleSafe641:
+;Main 3.0V.c,97 :: 		return FALSE;
 	CLRF        R0 
 	CLRF        R1 
 	RETURN      0
-;Main 3.0V.c,92 :: 		}
-L_isMiddleSafe300:
-;Main 3.0V.c,93 :: 		return TRUE;
+;Main 3.0V.c,98 :: 		}
+L_isMiddleSafe303:
+;Main 3.0V.c,99 :: 		return TRUE;
 	MOVLW       1
 	MOVWF       R0 
 	MOVLW       0
 	MOVWF       R1 
-;Main 3.0V.c,94 :: 		}
+;Main 3.0V.c,100 :: 		}
 	RETURN      0
 ; end of _isMiddleSafe
 
 _isLeftSafe:
 
-;Main 3.0V.c,96 :: 		int isLeftSafe(){
-;Main 3.0V.c,97 :: 		ir_value = ADC_Read(IRSensorLeft);
+;Main 3.0V.c,102 :: 		int isLeftSafe(){
+;Main 3.0V.c,103 :: 		ir_value = ADC_Read(IRSensorLeft);
 	MOVLW       0
 	BTFSC       PORTA+0, 2 
 	MOVLW       1
@@ -3893,45 +3794,45 @@ _isLeftSafe:
 	MOVWF       _ir_value+0 
 	MOVF        R1, 0 
 	MOVWF       _ir_value+1 
-;Main 3.0V.c,98 :: 		if(250<=ir_value && ir_value<800){                         // ~5cm
+;Main 3.0V.c,104 :: 		if(250<=ir_value && ir_value<800){                         // ~5cm
 	MOVLW       0
 	SUBWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__isLeftSafe743
+	GOTO        L__isLeftSafe746
 	MOVLW       250
 	SUBWF       R0, 0 
-L__isLeftSafe743:
+L__isLeftSafe746:
 	BTFSS       STATUS+0, 0 
-	GOTO        L_isLeftSafe303
+	GOTO        L_isLeftSafe306
 	MOVLW       3
 	SUBWF       _ir_value+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__isLeftSafe744
+	GOTO        L__isLeftSafe747
 	MOVLW       32
 	SUBWF       _ir_value+0, 0 
-L__isLeftSafe744:
+L__isLeftSafe747:
 	BTFSC       STATUS+0, 0 
-	GOTO        L_isLeftSafe303
-L__isLeftSafe639:
-;Main 3.0V.c,99 :: 		return FALSE;
+	GOTO        L_isLeftSafe306
+L__isLeftSafe642:
+;Main 3.0V.c,105 :: 		return FALSE;
 	CLRF        R0 
 	CLRF        R1 
 	RETURN      0
-;Main 3.0V.c,100 :: 		}
-L_isLeftSafe303:
-;Main 3.0V.c,101 :: 		return TRUE;
+;Main 3.0V.c,106 :: 		}
+L_isLeftSafe306:
+;Main 3.0V.c,107 :: 		return TRUE;
 	MOVLW       1
 	MOVWF       R0 
 	MOVLW       0
 	MOVWF       R1 
-;Main 3.0V.c,102 :: 		}
+;Main 3.0V.c,108 :: 		}
 	RETURN      0
 ; end of _isLeftSafe
 
 _moveStraightSlow:
 
-;Main 3.0V.c,104 :: 		void moveStraightSlow(){
-;Main 3.0V.c,105 :: 		moveForward(205,200);
+;Main 3.0V.c,110 :: 		void moveStraightSlow(){
+;Main 3.0V.c,111 :: 		moveForward(205,200);
 	MOVLW       205
 	MOVWF       FARG_moveForward_pwmLeft+0 
 	MOVLW       0
@@ -3941,101 +3842,101 @@ _moveStraightSlow:
 	MOVLW       0
 	MOVWF       FARG_moveForward_pwmRight+1 
 	CALL        _moveForward+0, 0
-;Main 3.0V.c,106 :: 		}
+;Main 3.0V.c,112 :: 		}
 	RETURN      0
 ; end of _moveStraightSlow
 
 _lineFollowNormal2:
 
-;Main 3.0V.c,108 :: 		void lineFollowNormal2(){
-;Main 3.0V.c,109 :: 		if(Scout == 1){
+;Main 3.0V.c,114 :: 		void lineFollowNormal2(){
+;Main 3.0V.c,115 :: 		if(Scout == 1){
 	BTFSS       PORTB+0, 5 
-	GOTO        L_lineFollowNormal2304
-;Main 3.0V.c,111 :: 		if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	GOTO        L_lineFollowNormal2307
+;Main 3.0V.c,117 :: 		if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2307
+	GOTO        L_lineFollowNormal2310
 	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2307
+	GOTO        L_lineFollowNormal2310
 	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2307
+	GOTO        L_lineFollowNormal2310
 	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2307
+	GOTO        L_lineFollowNormal2310
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2307
+	GOTO        L_lineFollowNormal2310
+L__lineFollowNormal2662:
+;Main 3.0V.c,118 :: 		moveForward(SLOW_PWM,FAST_PWM);
+	MOVF        _SLOW_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _SLOW_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal2311
+L_lineFollowNormal2310:
+;Main 3.0V.c,119 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2314
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2314
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2314
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2314
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2314
+L__lineFollowNormal2661:
+;Main 3.0V.c,120 :: 		moveForward(FAST_PWM,FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal2315
+L_lineFollowNormal2314:
+;Main 3.0V.c,121 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2318
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2318
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2318
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2318
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2318
+L__lineFollowNormal2660:
+;Main 3.0V.c,122 :: 		moveForward(FAST_PWM,FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal2319
+L_lineFollowNormal2318:
+;Main 3.0V.c,123 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2322
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2322
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2322
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2322
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2322
 L__lineFollowNormal2659:
-;Main 3.0V.c,112 :: 		moveForward(SLOW_PWM,FAST_PWM);
-	MOVF        _SLOW_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _SLOW_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal2308
-L_lineFollowNormal2307:
-;Main 3.0V.c,113 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2311
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2311
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2311
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2311
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2311
-L__lineFollowNormal2658:
-;Main 3.0V.c,114 :: 		moveForward(FAST_PWM,FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal2312
-L_lineFollowNormal2311:
-;Main 3.0V.c,115 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==0 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2315
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2315
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2315
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2315
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2315
-L__lineFollowNormal2657:
-;Main 3.0V.c,116 :: 		moveForward(FAST_PWM,FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal2316
-L_lineFollowNormal2315:
-;Main 3.0V.c,117 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2319
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2319
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2319
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2319
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2319
-L__lineFollowNormal2656:
-;Main 3.0V.c,118 :: 		moveForward(FAST_PWM,SLOW_PWM);
+;Main 3.0V.c,124 :: 		moveForward(FAST_PWM,SLOW_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_moveForward_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
@@ -4045,828 +3946,804 @@ L__lineFollowNormal2656:
 	MOVF        _SLOW_PWM+1, 0 
 	MOVWF       FARG_moveForward_pwmRight+1 
 	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal2320
-L_lineFollowNormal2319:
-;Main 3.0V.c,123 :: 		else if( Sensor3==1 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0)
+	GOTO        L_lineFollowNormal2323
+L_lineFollowNormal2322:
+;Main 3.0V.c,129 :: 		else if( Sensor3==1 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0)
 	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2323
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2323
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2323
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2323
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2323
-L__lineFollowNormal2655:
-;Main 3.0V.c,124 :: 		while(!isOnThePath())
-L_lineFollowNormal2324:
-	CALL        _isOnThePath+0, 0
-	MOVF        R0, 0 
-	IORWF       R1, 0 
-	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2325
-;Main 3.0V.c,125 :: 		turnLeft(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnLeft_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnLeft_pwmRight+1 
-	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal2324
-L_lineFollowNormal2325:
 	GOTO        L_lineFollowNormal2326
-L_lineFollowNormal2323:
-;Main 3.0V.c,126 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2329
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2329
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2326
 	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2329
+	GOTO        L_lineFollowNormal2326
 	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2329
+	GOTO        L_lineFollowNormal2326
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2329
-L__lineFollowNormal2654:
-;Main 3.0V.c,127 :: 		while(!isOnThePath())
-L_lineFollowNormal2330:
-	CALL        _isOnThePath+0, 0
-	MOVF        R0, 0 
-	IORWF       R1, 0 
-	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2331
-;Main 3.0V.c,128 :: 		turnLeft(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnLeft_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnLeft_pwmRight+1 
-	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal2330
-L_lineFollowNormal2331:
-	GOTO        L_lineFollowNormal2332
-L_lineFollowNormal2329:
-;Main 3.0V.c,129 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2335
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2335
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2335
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2335
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2335
-L__lineFollowNormal2653:
+	GOTO        L_lineFollowNormal2326
+L__lineFollowNormal2658:
 ;Main 3.0V.c,130 :: 		while(!isOnThePath())
-L_lineFollowNormal2336:
+L_lineFollowNormal2327:
 	CALL        _isOnThePath+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2337
+	GOTO        L_lineFollowNormal2328
 ;Main 3.0V.c,131 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnLeft_pwmRight+1 
 	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal2336
-L_lineFollowNormal2337:
-	GOTO        L_lineFollowNormal2338
-L_lineFollowNormal2335:
-;Main 3.0V.c,132 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2341
+	GOTO        L_lineFollowNormal2327
+L_lineFollowNormal2328:
+	GOTO        L_lineFollowNormal2329
+L_lineFollowNormal2326:
+;Main 3.0V.c,132 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2332
 	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2341
+	GOTO        L_lineFollowNormal2332
 	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2341
+	GOTO        L_lineFollowNormal2332
 	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2341
+	GOTO        L_lineFollowNormal2332
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2341
-L__lineFollowNormal2652:
+	GOTO        L_lineFollowNormal2332
+L__lineFollowNormal2657:
 ;Main 3.0V.c,133 :: 		while(!isOnThePath())
-L_lineFollowNormal2342:
+L_lineFollowNormal2333:
 	CALL        _isOnThePath+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2343
+	GOTO        L_lineFollowNormal2334
 ;Main 3.0V.c,134 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnLeft_pwmRight+1 
 	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal2342
-L_lineFollowNormal2343:
-	GOTO        L_lineFollowNormal2344
-L_lineFollowNormal2341:
-;Main 3.0V.c,137 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2347
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2347
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2347
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2347
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2347
-L__lineFollowNormal2651:
-;Main 3.0V.c,138 :: 		while(!isOnThePath())
-L_lineFollowNormal2348:
-	CALL        _isOnThePath+0, 0
-	MOVF        R0, 0 
-	IORWF       R1, 0 
-	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2349
-;Main 3.0V.c,139 :: 		turnRight(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnRight_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnRight_pwmLeft+1 
-	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal2348
-L_lineFollowNormal2349:
-	GOTO        L_lineFollowNormal2350
-L_lineFollowNormal2347:
-;Main 3.0V.c,140 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2353
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2353
+	GOTO        L_lineFollowNormal2333
+L_lineFollowNormal2334:
+	GOTO        L_lineFollowNormal2335
+L_lineFollowNormal2332:
+;Main 3.0V.c,135 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2338
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2338
 	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2353
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2353
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2353
-L__lineFollowNormal2650:
-;Main 3.0V.c,141 :: 		while(!isOnThePath())
-L_lineFollowNormal2354:
+	GOTO        L_lineFollowNormal2338
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2338
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2338
+L__lineFollowNormal2656:
+;Main 3.0V.c,136 :: 		while(!isOnThePath())
+L_lineFollowNormal2339:
 	CALL        _isOnThePath+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2355
-;Main 3.0V.c,142 :: 		turnRight(FAST_PWM);
+	GOTO        L_lineFollowNormal2340
+;Main 3.0V.c,137 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnRight_pwmLeft+1 
-	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal2354
-L_lineFollowNormal2355:
-	GOTO        L_lineFollowNormal2356
-L_lineFollowNormal2353:
-;Main 3.0V.c,143 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==1)
+	MOVWF       FARG_turnLeft_pwmRight+1 
+	CALL        _turnLeft+0, 0
+	GOTO        L_lineFollowNormal2339
+L_lineFollowNormal2340:
+	GOTO        L_lineFollowNormal2341
+L_lineFollowNormal2338:
+;Main 3.0V.c,138 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2359
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2359
+	GOTO        L_lineFollowNormal2344
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2344
 	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2359
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2359
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2359
-L__lineFollowNormal2649:
-;Main 3.0V.c,144 :: 		while(!isOnThePath())
-L_lineFollowNormal2360:
+	GOTO        L_lineFollowNormal2344
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2344
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2344
+L__lineFollowNormal2655:
+;Main 3.0V.c,139 :: 		while(!isOnThePath())
+L_lineFollowNormal2345:
 	CALL        _isOnThePath+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2361
+	GOTO        L_lineFollowNormal2346
+;Main 3.0V.c,140 :: 		turnLeft(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnLeft_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnLeft_pwmRight+1 
+	CALL        _turnLeft+0, 0
+	GOTO        L_lineFollowNormal2345
+L_lineFollowNormal2346:
+	GOTO        L_lineFollowNormal2347
+L_lineFollowNormal2344:
+;Main 3.0V.c,143 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2350
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2350
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2350
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2350
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2350
+L__lineFollowNormal2654:
+;Main 3.0V.c,144 :: 		while(!isOnThePath())
+L_lineFollowNormal2351:
+	CALL        _isOnThePath+0, 0
+	MOVF        R0, 0 
+	IORWF       R1, 0 
+	BTFSS       STATUS+0, 2 
+	GOTO        L_lineFollowNormal2352
 ;Main 3.0V.c,145 :: 		turnRight(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnRight_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnRight_pwmLeft+1 
 	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal2360
-L_lineFollowNormal2361:
-	GOTO        L_lineFollowNormal2362
-L_lineFollowNormal2359:
-;Main 3.0V.c,146 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==1)
+	GOTO        L_lineFollowNormal2351
+L_lineFollowNormal2352:
+	GOTO        L_lineFollowNormal2353
+L_lineFollowNormal2350:
+;Main 3.0V.c,146 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2365
+	GOTO        L_lineFollowNormal2356
 	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2365
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2365
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2365
+	GOTO        L_lineFollowNormal2356
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2356
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2356
 	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2365
-L__lineFollowNormal2648:
+	GOTO        L_lineFollowNormal2356
+L__lineFollowNormal2653:
 ;Main 3.0V.c,147 :: 		while(!isOnThePath())
-L_lineFollowNormal2366:
+L_lineFollowNormal2357:
 	CALL        _isOnThePath+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2367
+	GOTO        L_lineFollowNormal2358
 ;Main 3.0V.c,148 :: 		turnRight(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnRight_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnRight_pwmLeft+1 
 	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal2366
-L_lineFollowNormal2367:
+	GOTO        L_lineFollowNormal2357
+L_lineFollowNormal2358:
+	GOTO        L_lineFollowNormal2359
+L_lineFollowNormal2356:
+;Main 3.0V.c,149 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==1)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2362
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2362
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2362
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2362
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2362
+L__lineFollowNormal2652:
+;Main 3.0V.c,150 :: 		while(!isOnThePath())
+L_lineFollowNormal2363:
+	CALL        _isOnThePath+0, 0
+	MOVF        R0, 0 
+	IORWF       R1, 0 
+	BTFSS       STATUS+0, 2 
+	GOTO        L_lineFollowNormal2364
+;Main 3.0V.c,151 :: 		turnRight(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnRight_pwmLeft+1 
+	CALL        _turnRight+0, 0
+	GOTO        L_lineFollowNormal2363
+L_lineFollowNormal2364:
+	GOTO        L_lineFollowNormal2365
+L_lineFollowNormal2362:
+;Main 3.0V.c,152 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==1)
+	BTFSC       PORTD+0, 4 
 	GOTO        L_lineFollowNormal2368
-L_lineFollowNormal2365:
-;Main 3.0V.c,150 :: 		else if(isAllBlack()){
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2368
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2368
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2368
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2368
+L__lineFollowNormal2651:
+;Main 3.0V.c,153 :: 		while(!isOnThePath())
+L_lineFollowNormal2369:
+	CALL        _isOnThePath+0, 0
+	MOVF        R0, 0 
+	IORWF       R1, 0 
+	BTFSS       STATUS+0, 2 
+	GOTO        L_lineFollowNormal2370
+;Main 3.0V.c,154 :: 		turnRight(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnRight_pwmLeft+1 
+	CALL        _turnRight+0, 0
+	GOTO        L_lineFollowNormal2369
+L_lineFollowNormal2370:
+	GOTO        L_lineFollowNormal2371
+L_lineFollowNormal2368:
+;Main 3.0V.c,156 :: 		else if(isAllBlack()){
 	CALL        _isAllBlack+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSC       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2369
-;Main 3.0V.c,152 :: 		stop();
+	GOTO        L_lineFollowNormal2372
+;Main 3.0V.c,158 :: 		stop();
 	CALL        _stop+0, 0
-;Main 3.0V.c,153 :: 		}
-	GOTO        L_lineFollowNormal2370
-L_lineFollowNormal2369:
-;Main 3.0V.c,155 :: 		stop();
+;Main 3.0V.c,159 :: 		}
+	GOTO        L_lineFollowNormal2373
+L_lineFollowNormal2372:
+;Main 3.0V.c,161 :: 		stop();
 	CALL        _stop+0, 0
-L_lineFollowNormal2370:
-L_lineFollowNormal2368:
-L_lineFollowNormal2362:
-L_lineFollowNormal2356:
-L_lineFollowNormal2350:
-L_lineFollowNormal2344:
-L_lineFollowNormal2338:
-L_lineFollowNormal2332:
-L_lineFollowNormal2326:
-L_lineFollowNormal2320:
-L_lineFollowNormal2316:
-L_lineFollowNormal2312:
-L_lineFollowNormal2308:
-;Main 3.0V.c,156 :: 		}
-	GOTO        L_lineFollowNormal2371
-L_lineFollowNormal2304:
-;Main 3.0V.c,162 :: 		if( Sensor3==1 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0)
+L_lineFollowNormal2373:
+L_lineFollowNormal2371:
+L_lineFollowNormal2365:
+L_lineFollowNormal2359:
+L_lineFollowNormal2353:
+L_lineFollowNormal2347:
+L_lineFollowNormal2341:
+L_lineFollowNormal2335:
+L_lineFollowNormal2329:
+L_lineFollowNormal2323:
+L_lineFollowNormal2319:
+L_lineFollowNormal2315:
+L_lineFollowNormal2311:
+;Main 3.0V.c,162 :: 		}
+	GOTO        L_lineFollowNormal2374
+L_lineFollowNormal2307:
+;Main 3.0V.c,168 :: 		if( Sensor3==1 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0)
 	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2374
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2374
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2374
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2374
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2374
-L__lineFollowNormal2647:
-;Main 3.0V.c,163 :: 		while(!isOnThePath())
-L_lineFollowNormal2375:
-	CALL        _isOnThePath+0, 0
-	MOVF        R0, 0 
-	IORWF       R1, 0 
-	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2376
-;Main 3.0V.c,164 :: 		turnLeft(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnLeft_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnLeft_pwmRight+1 
-	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal2375
-L_lineFollowNormal2376:
 	GOTO        L_lineFollowNormal2377
-L_lineFollowNormal2374:
-;Main 3.0V.c,165 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2380
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2380
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2377
 	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2380
+	GOTO        L_lineFollowNormal2377
 	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2380
+	GOTO        L_lineFollowNormal2377
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2380
-L__lineFollowNormal2646:
-;Main 3.0V.c,166 :: 		while(!isOnThePath())
-L_lineFollowNormal2381:
-	CALL        _isOnThePath+0, 0
-	MOVF        R0, 0 
-	IORWF       R1, 0 
-	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2382
-;Main 3.0V.c,167 :: 		turnLeft(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnLeft_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnLeft_pwmRight+1 
-	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal2381
-L_lineFollowNormal2382:
-	GOTO        L_lineFollowNormal2383
-L_lineFollowNormal2380:
-;Main 3.0V.c,168 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2386
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2386
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2386
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2386
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2386
-L__lineFollowNormal2645:
+	GOTO        L_lineFollowNormal2377
+L__lineFollowNormal2650:
 ;Main 3.0V.c,169 :: 		while(!isOnThePath())
-L_lineFollowNormal2387:
+L_lineFollowNormal2378:
 	CALL        _isOnThePath+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2388
+	GOTO        L_lineFollowNormal2379
 ;Main 3.0V.c,170 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnLeft_pwmRight+1 
 	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal2387
-L_lineFollowNormal2388:
-	GOTO        L_lineFollowNormal2389
-L_lineFollowNormal2386:
-;Main 3.0V.c,171 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2392
+	GOTO        L_lineFollowNormal2378
+L_lineFollowNormal2379:
+	GOTO        L_lineFollowNormal2380
+L_lineFollowNormal2377:
+;Main 3.0V.c,171 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2383
 	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2392
+	GOTO        L_lineFollowNormal2383
 	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2392
+	GOTO        L_lineFollowNormal2383
 	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2392
+	GOTO        L_lineFollowNormal2383
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2392
-L__lineFollowNormal2644:
+	GOTO        L_lineFollowNormal2383
+L__lineFollowNormal2649:
 ;Main 3.0V.c,172 :: 		while(!isOnThePath())
-L_lineFollowNormal2393:
+L_lineFollowNormal2384:
 	CALL        _isOnThePath+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2394
+	GOTO        L_lineFollowNormal2385
 ;Main 3.0V.c,173 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnLeft_pwmRight+1 
 	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal2393
-L_lineFollowNormal2394:
-	GOTO        L_lineFollowNormal2395
-L_lineFollowNormal2392:
-;Main 3.0V.c,176 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2398
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2398
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2398
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2398
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2398
-L__lineFollowNormal2643:
-;Main 3.0V.c,177 :: 		while(!isOnThePath())
-L_lineFollowNormal2399:
-	CALL        _isOnThePath+0, 0
-	MOVF        R0, 0 
-	IORWF       R1, 0 
-	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2400
-;Main 3.0V.c,178 :: 		turnRight(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnRight_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnRight_pwmLeft+1 
-	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal2399
-L_lineFollowNormal2400:
-	GOTO        L_lineFollowNormal2401
-L_lineFollowNormal2398:
-;Main 3.0V.c,179 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2404
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2404
+	GOTO        L_lineFollowNormal2384
+L_lineFollowNormal2385:
+	GOTO        L_lineFollowNormal2386
+L_lineFollowNormal2383:
+;Main 3.0V.c,174 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2389
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2389
 	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2404
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2404
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2404
-L__lineFollowNormal2642:
-;Main 3.0V.c,180 :: 		while(!isOnThePath())
-L_lineFollowNormal2405:
+	GOTO        L_lineFollowNormal2389
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2389
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2389
+L__lineFollowNormal2648:
+;Main 3.0V.c,175 :: 		while(!isOnThePath())
+L_lineFollowNormal2390:
 	CALL        _isOnThePath+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2406
-;Main 3.0V.c,181 :: 		turnRight(FAST_PWM);
+	GOTO        L_lineFollowNormal2391
+;Main 3.0V.c,176 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnRight_pwmLeft+1 
-	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal2405
-L_lineFollowNormal2406:
-	GOTO        L_lineFollowNormal2407
-L_lineFollowNormal2404:
-;Main 3.0V.c,182 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==1)
+	MOVWF       FARG_turnLeft_pwmRight+1 
+	CALL        _turnLeft+0, 0
+	GOTO        L_lineFollowNormal2390
+L_lineFollowNormal2391:
+	GOTO        L_lineFollowNormal2392
+L_lineFollowNormal2389:
+;Main 3.0V.c,177 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2410
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2410
+	GOTO        L_lineFollowNormal2395
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2395
 	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2410
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2410
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2410
-L__lineFollowNormal2641:
-;Main 3.0V.c,183 :: 		while(!isOnThePath())
-L_lineFollowNormal2411:
+	GOTO        L_lineFollowNormal2395
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2395
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2395
+L__lineFollowNormal2647:
+;Main 3.0V.c,178 :: 		while(!isOnThePath())
+L_lineFollowNormal2396:
 	CALL        _isOnThePath+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2412
+	GOTO        L_lineFollowNormal2397
+;Main 3.0V.c,179 :: 		turnLeft(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnLeft_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnLeft_pwmRight+1 
+	CALL        _turnLeft+0, 0
+	GOTO        L_lineFollowNormal2396
+L_lineFollowNormal2397:
+	GOTO        L_lineFollowNormal2398
+L_lineFollowNormal2395:
+;Main 3.0V.c,182 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2401
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2401
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2401
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2401
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2401
+L__lineFollowNormal2646:
+;Main 3.0V.c,183 :: 		while(!isOnThePath())
+L_lineFollowNormal2402:
+	CALL        _isOnThePath+0, 0
+	MOVF        R0, 0 
+	IORWF       R1, 0 
+	BTFSS       STATUS+0, 2 
+	GOTO        L_lineFollowNormal2403
 ;Main 3.0V.c,184 :: 		turnRight(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnRight_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnRight_pwmLeft+1 
 	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal2411
-L_lineFollowNormal2412:
-	GOTO        L_lineFollowNormal2413
-L_lineFollowNormal2410:
-;Main 3.0V.c,185 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==1)
+	GOTO        L_lineFollowNormal2402
+L_lineFollowNormal2403:
+	GOTO        L_lineFollowNormal2404
+L_lineFollowNormal2401:
+;Main 3.0V.c,185 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal2416
+	GOTO        L_lineFollowNormal2407
 	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal2416
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal2416
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal2416
+	GOTO        L_lineFollowNormal2407
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2407
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2407
 	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal2416
-L__lineFollowNormal2640:
+	GOTO        L_lineFollowNormal2407
+L__lineFollowNormal2645:
 ;Main 3.0V.c,186 :: 		while(!isOnThePath())
-L_lineFollowNormal2417:
+L_lineFollowNormal2408:
 	CALL        _isOnThePath+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2418
+	GOTO        L_lineFollowNormal2409
 ;Main 3.0V.c,187 :: 		turnRight(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnRight_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnRight_pwmLeft+1 
 	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal2417
-L_lineFollowNormal2418:
+	GOTO        L_lineFollowNormal2408
+L_lineFollowNormal2409:
+	GOTO        L_lineFollowNormal2410
+L_lineFollowNormal2407:
+;Main 3.0V.c,188 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==1)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal2413
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2413
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2413
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2413
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2413
+L__lineFollowNormal2644:
+;Main 3.0V.c,189 :: 		while(!isOnThePath())
+L_lineFollowNormal2414:
+	CALL        _isOnThePath+0, 0
+	MOVF        R0, 0 
+	IORWF       R1, 0 
+	BTFSS       STATUS+0, 2 
+	GOTO        L_lineFollowNormal2415
+;Main 3.0V.c,190 :: 		turnRight(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnRight_pwmLeft+1 
+	CALL        _turnRight+0, 0
+	GOTO        L_lineFollowNormal2414
+L_lineFollowNormal2415:
+	GOTO        L_lineFollowNormal2416
+L_lineFollowNormal2413:
+;Main 3.0V.c,191 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==1)
+	BTFSC       PORTD+0, 4 
 	GOTO        L_lineFollowNormal2419
-L_lineFollowNormal2416:
-;Main 3.0V.c,191 :: 		else if(isAllWhite()){
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal2419
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal2419
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal2419
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal2419
+L__lineFollowNormal2643:
+;Main 3.0V.c,192 :: 		while(!isOnThePath())
+L_lineFollowNormal2420:
+	CALL        _isOnThePath+0, 0
+	MOVF        R0, 0 
+	IORWF       R1, 0 
+	BTFSS       STATUS+0, 2 
+	GOTO        L_lineFollowNormal2421
+;Main 3.0V.c,193 :: 		turnRight(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnRight_pwmLeft+1 
+	CALL        _turnRight+0, 0
+	GOTO        L_lineFollowNormal2420
+L_lineFollowNormal2421:
+	GOTO        L_lineFollowNormal2422
+L_lineFollowNormal2419:
+;Main 3.0V.c,197 :: 		else if(isAllWhite()){
 	CALL        _isAllWhite+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSC       STATUS+0, 2 
-	GOTO        L_lineFollowNormal2420
-;Main 3.0V.c,193 :: 		stop();
+	GOTO        L_lineFollowNormal2423
+;Main 3.0V.c,199 :: 		stop();
 	CALL        _stop+0, 0
-;Main 3.0V.c,194 :: 		}
-	GOTO        L_lineFollowNormal2421
-L_lineFollowNormal2420:
-;Main 3.0V.c,196 :: 		stop();
+;Main 3.0V.c,200 :: 		}
+	GOTO        L_lineFollowNormal2424
+L_lineFollowNormal2423:
+;Main 3.0V.c,202 :: 		stop();
 	CALL        _stop+0, 0
-L_lineFollowNormal2421:
-L_lineFollowNormal2419:
-L_lineFollowNormal2413:
-L_lineFollowNormal2407:
-L_lineFollowNormal2401:
-L_lineFollowNormal2395:
-L_lineFollowNormal2389:
-L_lineFollowNormal2383:
-L_lineFollowNormal2377:
-;Main 3.0V.c,197 :: 		}
-L_lineFollowNormal2371:
-;Main 3.0V.c,198 :: 		}
+L_lineFollowNormal2424:
+L_lineFollowNormal2422:
+L_lineFollowNormal2416:
+L_lineFollowNormal2410:
+L_lineFollowNormal2404:
+L_lineFollowNormal2398:
+L_lineFollowNormal2392:
+L_lineFollowNormal2386:
+L_lineFollowNormal2380:
+;Main 3.0V.c,203 :: 		}
+L_lineFollowNormal2374:
+;Main 3.0V.c,204 :: 		}
 	RETURN      0
 ; end of _lineFollowNormal2
 
 _lineFollowNormal3:
 
-;Main 3.0V.c,200 :: 		void lineFollowNormal3(){
-;Main 3.0V.c,201 :: 		if(Scout == 1){
+;Main 3.0V.c,206 :: 		void lineFollowNormal3(){
+;Main 3.0V.c,207 :: 		if(Scout == 1){
 	BTFSS       PORTB+0, 5 
-	GOTO        L_lineFollowNormal3422
-;Main 3.0V.c,203 :: 		if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	GOTO        L_lineFollowNormal3425
+;Main 3.0V.c,209 :: 		if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3425
+	GOTO        L_lineFollowNormal3428
 	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3425
+	GOTO        L_lineFollowNormal3428
 	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3425
+	GOTO        L_lineFollowNormal3428
 	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3425
+	GOTO        L_lineFollowNormal3428
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3425
+	GOTO        L_lineFollowNormal3428
+L__lineFollowNormal3696:
+;Main 3.0V.c,210 :: 		moveForward(SLOW_PWM,FAST_PWM);
+	MOVF        _SLOW_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _SLOW_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal3429
+L_lineFollowNormal3428:
+;Main 3.0V.c,211 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3432
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3432
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3432
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3432
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3432
+L__lineFollowNormal3695:
+;Main 3.0V.c,212 :: 		moveForward(FAST_PWM,FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal3433
+L_lineFollowNormal3432:
+;Main 3.0V.c,213 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3436
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3436
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3436
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3436
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3436
+L__lineFollowNormal3694:
+;Main 3.0V.c,214 :: 		moveForward(FAST_PWM,FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal3437
+L_lineFollowNormal3436:
+;Main 3.0V.c,215 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3440
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3440
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3440
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3440
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3440
 L__lineFollowNormal3693:
-;Main 3.0V.c,204 :: 		moveForward(SLOW_PWM,FAST_PWM);
-	MOVF        _SLOW_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _SLOW_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
+;Main 3.0V.c,216 :: 		moveForward(FAST_PWM,SLOW_PWM);
 	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _SLOW_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _SLOW_PWM+1, 0 
 	MOVWF       FARG_moveForward_pwmRight+1 
 	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3426
-L_lineFollowNormal3425:
-;Main 3.0V.c,205 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3429
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3429
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3429
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3429
+	GOTO        L_lineFollowNormal3441
+L_lineFollowNormal3440:
+;Main 3.0V.c,221 :: 		else if( Sensor3==1 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3444
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3444
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3444
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3444
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3429
+	GOTO        L_lineFollowNormal3444
 L__lineFollowNormal3692:
-;Main 3.0V.c,206 :: 		moveForward(FAST_PWM,FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3430
-L_lineFollowNormal3429:
-;Main 3.0V.c,207 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==0 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3433
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3433
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3433
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3433
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3433
-L__lineFollowNormal3691:
-;Main 3.0V.c,208 :: 		moveForward(FAST_PWM,FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3434
-L_lineFollowNormal3433:
-;Main 3.0V.c,209 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3437
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3437
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3437
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3437
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3437
-L__lineFollowNormal3690:
-;Main 3.0V.c,210 :: 		moveForward(FAST_PWM,SLOW_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _SLOW_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _SLOW_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3438
-L_lineFollowNormal3437:
-;Main 3.0V.c,215 :: 		else if( Sensor3==1 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3441
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3441
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3441
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3441
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3441
-L__lineFollowNormal3689:
-;Main 3.0V.c,217 :: 		turnLeft(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnLeft_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnLeft_pwmRight+1 
-	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal3442
-L_lineFollowNormal3441:
-;Main 3.0V.c,218 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3445
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3445
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3445
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3445
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3445
-L__lineFollowNormal3688:
-;Main 3.0V.c,220 :: 		turnLeft(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnLeft_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnLeft_pwmRight+1 
-	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal3446
-L_lineFollowNormal3445:
-;Main 3.0V.c,221 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3449
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3449
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3449
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3449
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3449
-L__lineFollowNormal3687:
 ;Main 3.0V.c,223 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnLeft_pwmRight+1 
 	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal3450
-L_lineFollowNormal3449:
-;Main 3.0V.c,224 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3453
+	GOTO        L_lineFollowNormal3445
+L_lineFollowNormal3444:
+;Main 3.0V.c,224 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3448
 	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3453
+	GOTO        L_lineFollowNormal3448
 	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3453
+	GOTO        L_lineFollowNormal3448
 	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3453
+	GOTO        L_lineFollowNormal3448
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3453
-L__lineFollowNormal3686:
+	GOTO        L_lineFollowNormal3448
+L__lineFollowNormal3691:
 ;Main 3.0V.c,226 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnLeft_pwmRight+1 
 	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal3454
-L_lineFollowNormal3453:
-;Main 3.0V.c,229 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3457
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3457
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3457
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3457
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3457
-L__lineFollowNormal3685:
-;Main 3.0V.c,231 :: 		turnRight(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnRight_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnRight_pwmLeft+1 
-	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal3458
-L_lineFollowNormal3457:
-;Main 3.0V.c,232 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3461
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3461
+	GOTO        L_lineFollowNormal3449
+L_lineFollowNormal3448:
+;Main 3.0V.c,227 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3452
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3452
 	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3461
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3461
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3461
-L__lineFollowNormal3684:
-;Main 3.0V.c,234 :: 		turnRight(FAST_PWM);
+	GOTO        L_lineFollowNormal3452
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3452
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3452
+L__lineFollowNormal3690:
+;Main 3.0V.c,229 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnRight_pwmLeft+1 
-	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal3462
-L_lineFollowNormal3461:
-;Main 3.0V.c,235 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==1)
+	MOVWF       FARG_turnLeft_pwmRight+1 
+	CALL        _turnLeft+0, 0
+	GOTO        L_lineFollowNormal3453
+L_lineFollowNormal3452:
+;Main 3.0V.c,230 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3465
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3465
+	GOTO        L_lineFollowNormal3456
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3456
 	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3465
+	GOTO        L_lineFollowNormal3456
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3456
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3456
+L__lineFollowNormal3689:
+;Main 3.0V.c,232 :: 		turnLeft(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnLeft_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnLeft_pwmRight+1 
+	CALL        _turnLeft+0, 0
+	GOTO        L_lineFollowNormal3457
+L_lineFollowNormal3456:
+;Main 3.0V.c,235 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3460
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3460
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3460
 	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3465
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3465
-L__lineFollowNormal3683:
+	GOTO        L_lineFollowNormal3460
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3460
+L__lineFollowNormal3688:
 ;Main 3.0V.c,237 :: 		turnRight(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnRight_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnRight_pwmLeft+1 
 	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal3466
-L_lineFollowNormal3465:
-;Main 3.0V.c,238 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==1)
+	GOTO        L_lineFollowNormal3461
+L_lineFollowNormal3460:
+;Main 3.0V.c,238 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3469
+	GOTO        L_lineFollowNormal3464
 	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3469
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3469
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3469
+	GOTO        L_lineFollowNormal3464
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3464
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3464
 	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3469
-L__lineFollowNormal3682:
+	GOTO        L_lineFollowNormal3464
+L__lineFollowNormal3687:
 ;Main 3.0V.c,240 :: 		turnRight(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnRight_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnRight_pwmLeft+1 
 	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal3470
-L_lineFollowNormal3469:
-;Main 3.0V.c,243 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3473
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3473
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3473
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3473
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3473
-L__lineFollowNormal3681:
-;Main 3.0V.c,244 :: 		moveForward(FAST_PWM,FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3474
-L_lineFollowNormal3473:
-;Main 3.0V.c,245 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1)
+	GOTO        L_lineFollowNormal3465
+L_lineFollowNormal3464:
+;Main 3.0V.c,241 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==1)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3477
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3477
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3477
+	GOTO        L_lineFollowNormal3468
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3468
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3468
 	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3477
+	GOTO        L_lineFollowNormal3468
 	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3477
-L__lineFollowNormal3680:
-;Main 3.0V.c,246 :: 		moveForward(FAST_PWM,FAST_PWM);
+	GOTO        L_lineFollowNormal3468
+L__lineFollowNormal3686:
+;Main 3.0V.c,243 :: 		turnRight(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnRight_pwmLeft+1 
+	CALL        _turnRight+0, 0
+	GOTO        L_lineFollowNormal3469
+L_lineFollowNormal3468:
+;Main 3.0V.c,244 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==1)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3472
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3472
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3472
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3472
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3472
+L__lineFollowNormal3685:
+;Main 3.0V.c,246 :: 		turnRight(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnRight_pwmLeft+1 
+	CALL        _turnRight+0, 0
+	GOTO        L_lineFollowNormal3473
+L_lineFollowNormal3472:
+;Main 3.0V.c,249 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3476
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3476
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3476
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3476
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3476
+L__lineFollowNormal3684:
+;Main 3.0V.c,250 :: 		moveForward(FAST_PWM,FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_moveForward_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
@@ -4876,430 +4753,406 @@ L__lineFollowNormal3680:
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_moveForward_pwmRight+1 
 	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3478
-L_lineFollowNormal3477:
-;Main 3.0V.c,248 :: 		else if(isAllBlack()){
+	GOTO        L_lineFollowNormal3477
+L_lineFollowNormal3476:
+;Main 3.0V.c,251 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3480
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3480
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3480
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3480
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3480
+L__lineFollowNormal3683:
+;Main 3.0V.c,252 :: 		moveForward(FAST_PWM,FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal3481
+L_lineFollowNormal3480:
+;Main 3.0V.c,254 :: 		else if(isAllBlack()){
 	CALL        _isAllBlack+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSC       STATUS+0, 2 
-	GOTO        L_lineFollowNormal3479
-;Main 3.0V.c,251 :: 		sendSensorStatus();
+	GOTO        L_lineFollowNormal3482
+;Main 3.0V.c,257 :: 		sendSensorStatus();
 	CALL        _sendSensorStatus+0, 0
-;Main 3.0V.c,252 :: 		}
-	GOTO        L_lineFollowNormal3480
-L_lineFollowNormal3479:
-;Main 3.0V.c,254 :: 		stop();
-	CALL        _stop+0, 0
-;Main 3.0V.c,255 :: 		sendSensorStatus();
-	CALL        _sendSensorStatus+0, 0
-;Main 3.0V.c,257 :: 		}
-L_lineFollowNormal3480:
-L_lineFollowNormal3478:
-L_lineFollowNormal3474:
-L_lineFollowNormal3470:
-L_lineFollowNormal3466:
-L_lineFollowNormal3462:
-L_lineFollowNormal3458:
-L_lineFollowNormal3454:
-L_lineFollowNormal3450:
-L_lineFollowNormal3446:
-L_lineFollowNormal3442:
-L_lineFollowNormal3438:
-L_lineFollowNormal3434:
-L_lineFollowNormal3430:
-L_lineFollowNormal3426:
 ;Main 3.0V.c,258 :: 		}
-	GOTO        L_lineFollowNormal3481
-L_lineFollowNormal3422:
-;Main 3.0V.c,265 :: 		if( Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0 && Sensor8==0 && Sensor9==0)
+	GOTO        L_lineFollowNormal3483
+L_lineFollowNormal3482:
+;Main 3.0V.c,260 :: 		stop();
+	CALL        _stop+0, 0
+;Main 3.0V.c,261 :: 		sendSensorStatus();
+	CALL        _sendSensorStatus+0, 0
+;Main 3.0V.c,263 :: 		}
+L_lineFollowNormal3483:
+L_lineFollowNormal3481:
+L_lineFollowNormal3477:
+L_lineFollowNormal3473:
+L_lineFollowNormal3469:
+L_lineFollowNormal3465:
+L_lineFollowNormal3461:
+L_lineFollowNormal3457:
+L_lineFollowNormal3453:
+L_lineFollowNormal3449:
+L_lineFollowNormal3445:
+L_lineFollowNormal3441:
+L_lineFollowNormal3437:
+L_lineFollowNormal3433:
+L_lineFollowNormal3429:
+;Main 3.0V.c,264 :: 		}
+	GOTO        L_lineFollowNormal3484
+L_lineFollowNormal3425:
+;Main 3.0V.c,271 :: 		if( Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0 && Sensor8==0 && Sensor9==0)
 	BTFSS       PORTB+0, 4 
-	GOTO        L_lineFollowNormal3484
+	GOTO        L_lineFollowNormal3487
 	BTFSS       PORTB+0, 3 
-	GOTO        L_lineFollowNormal3484
+	GOTO        L_lineFollowNormal3487
 	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3484
+	GOTO        L_lineFollowNormal3487
 	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3484
+	GOTO        L_lineFollowNormal3487
 	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3484
+	GOTO        L_lineFollowNormal3487
 	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3484
+	GOTO        L_lineFollowNormal3487
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3484
+	GOTO        L_lineFollowNormal3487
 	BTFSC       PORTB+0, 6 
-	GOTO        L_lineFollowNormal3484
+	GOTO        L_lineFollowNormal3487
 	BTFSC       PORTB+0, 7 
-	GOTO        L_lineFollowNormal3484
+	GOTO        L_lineFollowNormal3487
+L__lineFollowNormal3682:
+;Main 3.0V.c,272 :: 		rotateByDegree(-90);
+	MOVLW       166
+	MOVWF       FARG_rotateByDegree_degree+0 
+	MOVLW       255
+	MOVWF       FARG_rotateByDegree_degree+1 
+	CALL        _rotateByDegree+0, 0
+	GOTO        L_lineFollowNormal3488
+L_lineFollowNormal3487:
+;Main 3.0V.c,273 :: 		else if( Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0 && Sensor8==0 && Sensor9==0)
+	BTFSS       PORTB+0, 4 
+	GOTO        L_lineFollowNormal3491
+	BTFSS       PORTB+0, 3 
+	GOTO        L_lineFollowNormal3491
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3491
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3491
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3491
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3491
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3491
+	BTFSC       PORTB+0, 6 
+	GOTO        L_lineFollowNormal3491
+	BTFSC       PORTB+0, 7 
+	GOTO        L_lineFollowNormal3491
+L__lineFollowNormal3681:
+;Main 3.0V.c,274 :: 		rotateByDegree(-90);
+	MOVLW       166
+	MOVWF       FARG_rotateByDegree_degree+0 
+	MOVLW       255
+	MOVWF       FARG_rotateByDegree_degree+1 
+	CALL        _rotateByDegree+0, 0
+	GOTO        L_lineFollowNormal3492
+L_lineFollowNormal3491:
+;Main 3.0V.c,275 :: 		else if( Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==0 && Sensor9==0)
+	BTFSS       PORTB+0, 4 
+	GOTO        L_lineFollowNormal3495
+	BTFSS       PORTB+0, 3 
+	GOTO        L_lineFollowNormal3495
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3495
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3495
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3495
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3495
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3495
+	BTFSC       PORTB+0, 6 
+	GOTO        L_lineFollowNormal3495
+	BTFSC       PORTB+0, 7 
+	GOTO        L_lineFollowNormal3495
+L__lineFollowNormal3680:
+;Main 3.0V.c,276 :: 		rotateByDegree(-90);
+	MOVLW       166
+	MOVWF       FARG_rotateByDegree_degree+0 
+	MOVLW       255
+	MOVWF       FARG_rotateByDegree_degree+1 
+	CALL        _rotateByDegree+0, 0
+	GOTO        L_lineFollowNormal3496
+L_lineFollowNormal3495:
+;Main 3.0V.c,279 :: 		else if( Sensor1==0 && Sensor2==0 && Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1)
+	BTFSC       PORTB+0, 4 
+	GOTO        L_lineFollowNormal3499
+	BTFSC       PORTB+0, 3 
+	GOTO        L_lineFollowNormal3499
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3499
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3499
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3499
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3499
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3499
+	BTFSS       PORTB+0, 6 
+	GOTO        L_lineFollowNormal3499
+	BTFSS       PORTB+0, 7 
+	GOTO        L_lineFollowNormal3499
 L__lineFollowNormal3679:
-;Main 3.0V.c,266 :: 		rotateByDegree(-90);
-	MOVLW       166
+;Main 3.0V.c,280 :: 		rotateByDegree(90);
+	MOVLW       90
 	MOVWF       FARG_rotateByDegree_degree+0 
-	MOVLW       255
+	MOVLW       0
 	MOVWF       FARG_rotateByDegree_degree+1 
 	CALL        _rotateByDegree+0, 0
-	GOTO        L_lineFollowNormal3485
-L_lineFollowNormal3484:
-;Main 3.0V.c,267 :: 		else if( Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0 && Sensor8==0 && Sensor9==0)
-	BTFSS       PORTB+0, 4 
-	GOTO        L_lineFollowNormal3488
-	BTFSS       PORTB+0, 3 
-	GOTO        L_lineFollowNormal3488
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3488
+	GOTO        L_lineFollowNormal3500
+L_lineFollowNormal3499:
+;Main 3.0V.c,281 :: 		else if( Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1)
+	BTFSC       PORTB+0, 4 
+	GOTO        L_lineFollowNormal3503
+	BTFSC       PORTB+0, 3 
+	GOTO        L_lineFollowNormal3503
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3503
 	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3488
+	GOTO        L_lineFollowNormal3503
 	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3488
+	GOTO        L_lineFollowNormal3503
 	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3488
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3488
-	BTFSC       PORTB+0, 6 
-	GOTO        L_lineFollowNormal3488
-	BTFSC       PORTB+0, 7 
-	GOTO        L_lineFollowNormal3488
+	GOTO        L_lineFollowNormal3503
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3503
+	BTFSS       PORTB+0, 6 
+	GOTO        L_lineFollowNormal3503
+	BTFSS       PORTB+0, 7 
+	GOTO        L_lineFollowNormal3503
 L__lineFollowNormal3678:
-;Main 3.0V.c,268 :: 		rotateByDegree(-90);
-	MOVLW       166
+;Main 3.0V.c,282 :: 		rotateByDegree(90);
+	MOVLW       90
 	MOVWF       FARG_rotateByDegree_degree+0 
-	MOVLW       255
+	MOVLW       0
 	MOVWF       FARG_rotateByDegree_degree+1 
 	CALL        _rotateByDegree+0, 0
-	GOTO        L_lineFollowNormal3489
-L_lineFollowNormal3488:
-;Main 3.0V.c,269 :: 		else if( Sensor1==1 && Sensor2==1 && Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==0 && Sensor9==0)
-	BTFSS       PORTB+0, 4 
-	GOTO        L_lineFollowNormal3492
-	BTFSS       PORTB+0, 3 
-	GOTO        L_lineFollowNormal3492
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3492
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3492
+	GOTO        L_lineFollowNormal3504
+L_lineFollowNormal3503:
+;Main 3.0V.c,283 :: 		else if( Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1)
+	BTFSC       PORTB+0, 4 
+	GOTO        L_lineFollowNormal3507
+	BTFSC       PORTB+0, 3 
+	GOTO        L_lineFollowNormal3507
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3507
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3507
 	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3492
+	GOTO        L_lineFollowNormal3507
 	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3492
+	GOTO        L_lineFollowNormal3507
 	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3492
-	BTFSC       PORTB+0, 6 
-	GOTO        L_lineFollowNormal3492
-	BTFSC       PORTB+0, 7 
-	GOTO        L_lineFollowNormal3492
+	GOTO        L_lineFollowNormal3507
+	BTFSS       PORTB+0, 6 
+	GOTO        L_lineFollowNormal3507
+	BTFSS       PORTB+0, 7 
+	GOTO        L_lineFollowNormal3507
 L__lineFollowNormal3677:
-;Main 3.0V.c,270 :: 		rotateByDegree(-90);
-	MOVLW       166
+;Main 3.0V.c,284 :: 		rotateByDegree(90);
+	MOVLW       90
 	MOVWF       FARG_rotateByDegree_degree+0 
-	MOVLW       255
+	MOVLW       0
 	MOVWF       FARG_rotateByDegree_degree+1 
 	CALL        _rotateByDegree+0, 0
-	GOTO        L_lineFollowNormal3493
-L_lineFollowNormal3492:
-;Main 3.0V.c,273 :: 		else if( Sensor1==0 && Sensor2==0 && Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1)
-	BTFSC       PORTB+0, 4 
-	GOTO        L_lineFollowNormal3496
-	BTFSC       PORTB+0, 3 
-	GOTO        L_lineFollowNormal3496
+	GOTO        L_lineFollowNormal3508
+L_lineFollowNormal3507:
+;Main 3.0V.c,289 :: 		else if( Sensor3==1 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0)
 	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3496
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3496
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3496
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3496
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3496
-	BTFSS       PORTB+0, 6 
-	GOTO        L_lineFollowNormal3496
-	BTFSS       PORTB+0, 7 
-	GOTO        L_lineFollowNormal3496
+	GOTO        L_lineFollowNormal3511
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3511
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3511
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3511
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3511
 L__lineFollowNormal3676:
-;Main 3.0V.c,274 :: 		rotateByDegree(90);
-	MOVLW       90
-	MOVWF       FARG_rotateByDegree_degree+0 
-	MOVLW       0
-	MOVWF       FARG_rotateByDegree_degree+1 
-	CALL        _rotateByDegree+0, 0
-	GOTO        L_lineFollowNormal3497
-L_lineFollowNormal3496:
-;Main 3.0V.c,275 :: 		else if( Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1)
-	BTFSC       PORTB+0, 4 
-	GOTO        L_lineFollowNormal3500
-	BTFSC       PORTB+0, 3 
-	GOTO        L_lineFollowNormal3500
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3500
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3500
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3500
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3500
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3500
-	BTFSS       PORTB+0, 6 
-	GOTO        L_lineFollowNormal3500
-	BTFSS       PORTB+0, 7 
-	GOTO        L_lineFollowNormal3500
-L__lineFollowNormal3675:
-;Main 3.0V.c,276 :: 		rotateByDegree(90);
-	MOVLW       90
-	MOVWF       FARG_rotateByDegree_degree+0 
-	MOVLW       0
-	MOVWF       FARG_rotateByDegree_degree+1 
-	CALL        _rotateByDegree+0, 0
-	GOTO        L_lineFollowNormal3501
-L_lineFollowNormal3500:
-;Main 3.0V.c,277 :: 		else if( Sensor1==0 && Sensor2==0 && Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1 && Sensor8==1 && Sensor9==1)
-	BTFSC       PORTB+0, 4 
-	GOTO        L_lineFollowNormal3504
-	BTFSC       PORTB+0, 3 
-	GOTO        L_lineFollowNormal3504
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3504
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3504
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3504
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3504
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3504
-	BTFSS       PORTB+0, 6 
-	GOTO        L_lineFollowNormal3504
-	BTFSS       PORTB+0, 7 
-	GOTO        L_lineFollowNormal3504
-L__lineFollowNormal3674:
-;Main 3.0V.c,278 :: 		rotateByDegree(90);
-	MOVLW       90
-	MOVWF       FARG_rotateByDegree_degree+0 
-	MOVLW       0
-	MOVWF       FARG_rotateByDegree_degree+1 
-	CALL        _rotateByDegree+0, 0
-	GOTO        L_lineFollowNormal3505
-L_lineFollowNormal3504:
-;Main 3.0V.c,283 :: 		else if( Sensor3==1 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3508
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3508
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3508
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3508
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3508
-L__lineFollowNormal3673:
-;Main 3.0V.c,285 :: 		turnLeft(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnLeft_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnLeft_pwmRight+1 
-	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal3509
-L_lineFollowNormal3508:
-;Main 3.0V.c,286 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3512
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3512
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3512
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3512
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3512
-L__lineFollowNormal3672:
-;Main 3.0V.c,288 :: 		turnLeft(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnLeft_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnLeft_pwmRight+1 
-	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal3513
-L_lineFollowNormal3512:
-;Main 3.0V.c,289 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3516
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3516
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3516
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3516
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3516
-L__lineFollowNormal3671:
 ;Main 3.0V.c,291 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnLeft_pwmRight+1 
 	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal3517
-L_lineFollowNormal3516:
-;Main 3.0V.c,292 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3520
+	GOTO        L_lineFollowNormal3512
+L_lineFollowNormal3511:
+;Main 3.0V.c,292 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3515
 	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3520
+	GOTO        L_lineFollowNormal3515
 	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3520
+	GOTO        L_lineFollowNormal3515
 	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3520
+	GOTO        L_lineFollowNormal3515
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3520
-L__lineFollowNormal3670:
+	GOTO        L_lineFollowNormal3515
+L__lineFollowNormal3675:
 ;Main 3.0V.c,294 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnLeft_pwmRight+1 
 	CALL        _turnLeft+0, 0
-	GOTO        L_lineFollowNormal3521
-L_lineFollowNormal3520:
-;Main 3.0V.c,297 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3524
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3524
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3524
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3524
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3524
-L__lineFollowNormal3669:
-;Main 3.0V.c,299 :: 		turnRight(FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnRight_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnRight_pwmLeft+1 
-	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal3525
-L_lineFollowNormal3524:
-;Main 3.0V.c,300 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3528
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3528
+	GOTO        L_lineFollowNormal3516
+L_lineFollowNormal3515:
+;Main 3.0V.c,295 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3519
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3519
 	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3528
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3528
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3528
-L__lineFollowNormal3668:
-;Main 3.0V.c,302 :: 		turnRight(FAST_PWM);
+	GOTO        L_lineFollowNormal3519
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3519
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3519
+L__lineFollowNormal3674:
+;Main 3.0V.c,297 :: 		turnLeft(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVWF       FARG_turnLeft_pwmRight+0 
 	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_turnRight_pwmLeft+1 
-	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal3529
-L_lineFollowNormal3528:
-;Main 3.0V.c,303 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==1)
+	MOVWF       FARG_turnLeft_pwmRight+1 
+	CALL        _turnLeft+0, 0
+	GOTO        L_lineFollowNormal3520
+L_lineFollowNormal3519:
+;Main 3.0V.c,298 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==0 && Sensor6==0 && Sensor7==0)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3532
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3532
+	GOTO        L_lineFollowNormal3523
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3523
 	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3532
+	GOTO        L_lineFollowNormal3523
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3523
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3523
+L__lineFollowNormal3673:
+;Main 3.0V.c,300 :: 		turnLeft(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnLeft_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnLeft_pwmRight+1 
+	CALL        _turnLeft+0, 0
+	GOTO        L_lineFollowNormal3524
+L_lineFollowNormal3523:
+;Main 3.0V.c,303 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3527
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3527
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3527
 	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3532
-	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3532
-L__lineFollowNormal3667:
+	GOTO        L_lineFollowNormal3527
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3527
+L__lineFollowNormal3672:
 ;Main 3.0V.c,305 :: 		turnRight(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnRight_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnRight_pwmLeft+1 
 	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal3533
-L_lineFollowNormal3532:
-;Main 3.0V.c,306 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==1)
+	GOTO        L_lineFollowNormal3528
+L_lineFollowNormal3527:
+;Main 3.0V.c,306 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==1)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3536
+	GOTO        L_lineFollowNormal3531
 	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3536
-	BTFSC       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3536
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3536
+	GOTO        L_lineFollowNormal3531
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3531
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3531
 	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3536
-L__lineFollowNormal3666:
+	GOTO        L_lineFollowNormal3531
+L__lineFollowNormal3671:
 ;Main 3.0V.c,308 :: 		turnRight(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_turnRight_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_turnRight_pwmLeft+1 
 	CALL        _turnRight+0, 0
-	GOTO        L_lineFollowNormal3537
-L_lineFollowNormal3536:
-;Main 3.0V.c,311 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
-	BTFSS       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3540
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3540
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3540
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3540
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3540
-L__lineFollowNormal3665:
-;Main 3.0V.c,312 :: 		moveForward(SLOW_PWM,FAST_PWM);
-	MOVF        _SLOW_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _SLOW_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3541
-L_lineFollowNormal3540:
-;Main 3.0V.c,313 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1)
+	GOTO        L_lineFollowNormal3532
+L_lineFollowNormal3531:
+;Main 3.0V.c,309 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==1 && Sensor7==1)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3544
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3544
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3544
+	GOTO        L_lineFollowNormal3535
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3535
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3535
 	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3544
+	GOTO        L_lineFollowNormal3535
 	BTFSS       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3544
-L__lineFollowNormal3664:
-;Main 3.0V.c,314 :: 		moveForward(FAST_PWM,SLOW_PWM);
+	GOTO        L_lineFollowNormal3535
+L__lineFollowNormal3670:
+;Main 3.0V.c,311 :: 		turnRight(FAST_PWM);
 	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVWF       FARG_turnRight_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _SLOW_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _SLOW_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3545
-L_lineFollowNormal3544:
-;Main 3.0V.c,317 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	MOVWF       FARG_turnRight_pwmLeft+1 
+	CALL        _turnRight+0, 0
+	GOTO        L_lineFollowNormal3536
+L_lineFollowNormal3535:
+;Main 3.0V.c,312 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==0 && Sensor6==0 && Sensor7==1)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3548
-	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3548
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3548
+	GOTO        L_lineFollowNormal3539
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3539
+	BTFSC       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3539
 	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3548
+	GOTO        L_lineFollowNormal3539
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3539
+L__lineFollowNormal3669:
+;Main 3.0V.c,314 :: 		turnRight(FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_turnRight_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_turnRight_pwmLeft+1 
+	CALL        _turnRight+0, 0
+	GOTO        L_lineFollowNormal3540
+L_lineFollowNormal3539:
+;Main 3.0V.c,317 :: 		else if( Sensor3==1 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+	BTFSS       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3543
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3543
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3543
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3543
 	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3548
-L__lineFollowNormal3663:
+	GOTO        L_lineFollowNormal3543
+L__lineFollowNormal3668:
 ;Main 3.0V.c,318 :: 		moveForward(SLOW_PWM,FAST_PWM);
 	MOVF        _SLOW_PWM+0, 0 
 	MOVWF       FARG_moveForward_pwmLeft+0 
@@ -5310,69 +5163,21 @@ L__lineFollowNormal3663:
 	MOVF        _FAST_PWM+1, 0 
 	MOVWF       FARG_moveForward_pwmRight+1 
 	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3549
-L_lineFollowNormal3548:
-;Main 3.0V.c,319 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+	GOTO        L_lineFollowNormal3544
+L_lineFollowNormal3543:
+;Main 3.0V.c,319 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==1)
 	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3552
+	GOTO        L_lineFollowNormal3547
 	BTFSS       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3552
+	GOTO        L_lineFollowNormal3547
 	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3552
+	GOTO        L_lineFollowNormal3547
 	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3552
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3552
-L__lineFollowNormal3662:
-;Main 3.0V.c,320 :: 		moveForward(FAST_PWM,FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3553
-L_lineFollowNormal3552:
-;Main 3.0V.c,321 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==0 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3556
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3556
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3556
-	BTFSC       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3556
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3556
-L__lineFollowNormal3661:
-;Main 3.0V.c,322 :: 		moveForward(FAST_PWM,FAST_PWM);
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmLeft+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmLeft+1 
-	MOVF        _FAST_PWM+0, 0 
-	MOVWF       FARG_moveForward_pwmRight+0 
-	MOVF        _FAST_PWM+1, 0 
-	MOVWF       FARG_moveForward_pwmRight+1 
-	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3557
-L_lineFollowNormal3556:
-;Main 3.0V.c,323 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==0)
-	BTFSC       PORTD+0, 4 
-	GOTO        L_lineFollowNormal3560
-	BTFSC       PORTD+0, 5 
-	GOTO        L_lineFollowNormal3560
-	BTFSS       PORTD+0, 6 
-	GOTO        L_lineFollowNormal3560
-	BTFSS       PORTD+0, 7 
-	GOTO        L_lineFollowNormal3560
-	BTFSC       PORTB+0, 2 
-	GOTO        L_lineFollowNormal3560
-L__lineFollowNormal3660:
-;Main 3.0V.c,324 :: 		moveForward(FAST_PWM,SLOW_PWM);
+	GOTO        L_lineFollowNormal3547
+	BTFSS       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3547
+L__lineFollowNormal3667:
+;Main 3.0V.c,320 :: 		moveForward(FAST_PWM,SLOW_PWM);
 	MOVF        _FAST_PWM+0, 0 
 	MOVWF       FARG_moveForward_pwmLeft+0 
 	MOVF        _FAST_PWM+1, 0 
@@ -5382,124 +5187,220 @@ L__lineFollowNormal3660:
 	MOVF        _SLOW_PWM+1, 0 
 	MOVWF       FARG_moveForward_pwmRight+1 
 	CALL        _moveForward+0, 0
-	GOTO        L_lineFollowNormal3561
-L_lineFollowNormal3560:
-;Main 3.0V.c,327 :: 		else if(isAllWhite()){
+	GOTO        L_lineFollowNormal3548
+L_lineFollowNormal3547:
+;Main 3.0V.c,323 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3551
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3551
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3551
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3551
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3551
+L__lineFollowNormal3666:
+;Main 3.0V.c,324 :: 		moveForward(SLOW_PWM,FAST_PWM);
+	MOVF        _SLOW_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _SLOW_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal3552
+L_lineFollowNormal3551:
+;Main 3.0V.c,325 :: 		else if( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3555
+	BTFSS       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3555
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3555
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3555
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3555
+L__lineFollowNormal3665:
+;Main 3.0V.c,326 :: 		moveForward(FAST_PWM,FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal3556
+L_lineFollowNormal3555:
+;Main 3.0V.c,327 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==0 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3559
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3559
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3559
+	BTFSC       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3559
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3559
+L__lineFollowNormal3664:
+;Main 3.0V.c,328 :: 		moveForward(FAST_PWM,FAST_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal3560
+L_lineFollowNormal3559:
+;Main 3.0V.c,329 :: 		else if( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L_lineFollowNormal3563
+	BTFSC       PORTD+0, 5 
+	GOTO        L_lineFollowNormal3563
+	BTFSS       PORTD+0, 6 
+	GOTO        L_lineFollowNormal3563
+	BTFSS       PORTD+0, 7 
+	GOTO        L_lineFollowNormal3563
+	BTFSC       PORTB+0, 2 
+	GOTO        L_lineFollowNormal3563
+L__lineFollowNormal3663:
+;Main 3.0V.c,330 :: 		moveForward(FAST_PWM,SLOW_PWM);
+	MOVF        _FAST_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmLeft+0 
+	MOVF        _FAST_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmLeft+1 
+	MOVF        _SLOW_PWM+0, 0 
+	MOVWF       FARG_moveForward_pwmRight+0 
+	MOVF        _SLOW_PWM+1, 0 
+	MOVWF       FARG_moveForward_pwmRight+1 
+	CALL        _moveForward+0, 0
+	GOTO        L_lineFollowNormal3564
+L_lineFollowNormal3563:
+;Main 3.0V.c,333 :: 		else if(isAllWhite()){
 	CALL        _isAllWhite+0, 0
 	MOVF        R0, 0 
 	IORWF       R1, 0 
 	BTFSC       STATUS+0, 2 
-	GOTO        L_lineFollowNormal3562
-;Main 3.0V.c,330 :: 		sendSensorStatus();
+	GOTO        L_lineFollowNormal3565
+;Main 3.0V.c,336 :: 		sendSensorStatus();
 	CALL        _sendSensorStatus+0, 0
-;Main 3.0V.c,331 :: 		}
-	GOTO        L_lineFollowNormal3563
-L_lineFollowNormal3562:
-;Main 3.0V.c,333 :: 		stop();
-	CALL        _stop+0, 0
-;Main 3.0V.c,334 :: 		sendSensorStatus();
-	CALL        _sendSensorStatus+0, 0
-;Main 3.0V.c,336 :: 		}
-L_lineFollowNormal3563:
-L_lineFollowNormal3561:
-L_lineFollowNormal3557:
-L_lineFollowNormal3553:
-L_lineFollowNormal3549:
-L_lineFollowNormal3545:
-L_lineFollowNormal3541:
-L_lineFollowNormal3537:
-L_lineFollowNormal3533:
-L_lineFollowNormal3529:
-L_lineFollowNormal3525:
-L_lineFollowNormal3521:
-L_lineFollowNormal3517:
-L_lineFollowNormal3513:
-L_lineFollowNormal3509:
-L_lineFollowNormal3505:
-L_lineFollowNormal3501:
-L_lineFollowNormal3497:
-L_lineFollowNormal3493:
-L_lineFollowNormal3489:
-L_lineFollowNormal3485:
 ;Main 3.0V.c,337 :: 		}
-L_lineFollowNormal3481:
-;Main 3.0V.c,338 :: 		}
+	GOTO        L_lineFollowNormal3566
+L_lineFollowNormal3565:
+;Main 3.0V.c,339 :: 		stop();
+	CALL        _stop+0, 0
+;Main 3.0V.c,340 :: 		sendSensorStatus();
+	CALL        _sendSensorStatus+0, 0
+;Main 3.0V.c,342 :: 		}
+L_lineFollowNormal3566:
+L_lineFollowNormal3564:
+L_lineFollowNormal3560:
+L_lineFollowNormal3556:
+L_lineFollowNormal3552:
+L_lineFollowNormal3548:
+L_lineFollowNormal3544:
+L_lineFollowNormal3540:
+L_lineFollowNormal3536:
+L_lineFollowNormal3532:
+L_lineFollowNormal3528:
+L_lineFollowNormal3524:
+L_lineFollowNormal3520:
+L_lineFollowNormal3516:
+L_lineFollowNormal3512:
+L_lineFollowNormal3508:
+L_lineFollowNormal3504:
+L_lineFollowNormal3500:
+L_lineFollowNormal3496:
+L_lineFollowNormal3492:
+L_lineFollowNormal3488:
+;Main 3.0V.c,343 :: 		}
+L_lineFollowNormal3484:
+;Main 3.0V.c,344 :: 		}
 	RETURN      0
 ; end of _lineFollowNormal3
 
 _isOnThePath:
 
-;Main 3.0V.c,340 :: 		int isOnThePath(){
-;Main 3.0V.c,341 :: 		if(((Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0) || ( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0) || ( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==0 && Sensor7==0) || ( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==0)) && Sensor1==0 && Sensor2==0 && Sensor8==0 && Sensor9==0)
+;Main 3.0V.c,346 :: 		int isOnThePath(){
+;Main 3.0V.c,347 :: 		if(((Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==0 && Sensor7==0) || ( Sensor3==0 && Sensor4==1 && Sensor5==1 && Sensor6==1 && Sensor7==0) || ( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==0 && Sensor7==0) || ( Sensor3==0 && Sensor4==0 && Sensor5==1 && Sensor6==1 && Sensor7==0)) && Sensor1==0 && Sensor2==0 && Sensor8==0 && Sensor9==0)
+	BTFSC       PORTD+0, 4 
+	GOTO        L__isOnThePath702
+	BTFSS       PORTD+0, 5 
+	GOTO        L__isOnThePath702
+	BTFSS       PORTD+0, 6 
+	GOTO        L__isOnThePath702
+	BTFSC       PORTD+0, 7 
+	GOTO        L__isOnThePath702
+	BTFSC       PORTB+0, 2 
+	GOTO        L__isOnThePath702
+	GOTO        L__isOnThePath698
+L__isOnThePath702:
+	BTFSC       PORTD+0, 4 
+	GOTO        L__isOnThePath701
+	BTFSS       PORTD+0, 5 
+	GOTO        L__isOnThePath701
+	BTFSS       PORTD+0, 6 
+	GOTO        L__isOnThePath701
+	BTFSS       PORTD+0, 7 
+	GOTO        L__isOnThePath701
+	BTFSC       PORTB+0, 2 
+	GOTO        L__isOnThePath701
+	GOTO        L__isOnThePath698
+L__isOnThePath701:
+	BTFSC       PORTD+0, 4 
+	GOTO        L__isOnThePath700
+	BTFSC       PORTD+0, 5 
+	GOTO        L__isOnThePath700
+	BTFSS       PORTD+0, 6 
+	GOTO        L__isOnThePath700
+	BTFSC       PORTD+0, 7 
+	GOTO        L__isOnThePath700
+	BTFSC       PORTB+0, 2 
+	GOTO        L__isOnThePath700
+	GOTO        L__isOnThePath698
+L__isOnThePath700:
 	BTFSC       PORTD+0, 4 
 	GOTO        L__isOnThePath699
-	BTFSS       PORTD+0, 5 
+	BTFSC       PORTD+0, 5 
 	GOTO        L__isOnThePath699
 	BTFSS       PORTD+0, 6 
 	GOTO        L__isOnThePath699
-	BTFSC       PORTD+0, 7 
+	BTFSS       PORTD+0, 7 
 	GOTO        L__isOnThePath699
 	BTFSC       PORTB+0, 2 
 	GOTO        L__isOnThePath699
-	GOTO        L__isOnThePath695
+	GOTO        L__isOnThePath698
 L__isOnThePath699:
-	BTFSC       PORTD+0, 4 
-	GOTO        L__isOnThePath698
-	BTFSS       PORTD+0, 5 
-	GOTO        L__isOnThePath698
-	BTFSS       PORTD+0, 6 
-	GOTO        L__isOnThePath698
-	BTFSS       PORTD+0, 7 
-	GOTO        L__isOnThePath698
-	BTFSC       PORTB+0, 2 
-	GOTO        L__isOnThePath698
-	GOTO        L__isOnThePath695
+	GOTO        L_isOnThePath579
 L__isOnThePath698:
-	BTFSC       PORTD+0, 4 
-	GOTO        L__isOnThePath697
-	BTFSC       PORTD+0, 5 
-	GOTO        L__isOnThePath697
-	BTFSS       PORTD+0, 6 
-	GOTO        L__isOnThePath697
-	BTFSC       PORTD+0, 7 
-	GOTO        L__isOnThePath697
-	BTFSC       PORTB+0, 2 
-	GOTO        L__isOnThePath697
-	GOTO        L__isOnThePath695
-L__isOnThePath697:
-	BTFSC       PORTD+0, 4 
-	GOTO        L__isOnThePath696
-	BTFSC       PORTD+0, 5 
-	GOTO        L__isOnThePath696
-	BTFSS       PORTD+0, 6 
-	GOTO        L__isOnThePath696
-	BTFSS       PORTD+0, 7 
-	GOTO        L__isOnThePath696
-	BTFSC       PORTB+0, 2 
-	GOTO        L__isOnThePath696
-	GOTO        L__isOnThePath695
-L__isOnThePath696:
-	GOTO        L_isOnThePath576
-L__isOnThePath695:
 	BTFSC       PORTB+0, 4 
-	GOTO        L_isOnThePath576
+	GOTO        L_isOnThePath579
 	BTFSC       PORTB+0, 3 
-	GOTO        L_isOnThePath576
+	GOTO        L_isOnThePath579
 	BTFSC       PORTB+0, 6 
-	GOTO        L_isOnThePath576
+	GOTO        L_isOnThePath579
 	BTFSC       PORTB+0, 7 
-	GOTO        L_isOnThePath576
-L__isOnThePath694:
-;Main 3.0V.c,342 :: 		return TRUE;
+	GOTO        L_isOnThePath579
+L__isOnThePath697:
+;Main 3.0V.c,348 :: 		return TRUE;
 	MOVLW       1
 	MOVWF       R0 
 	MOVLW       0
 	MOVWF       R1 
 	RETURN      0
-L_isOnThePath576:
-;Main 3.0V.c,344 :: 		return FALSE;
+L_isOnThePath579:
+;Main 3.0V.c,350 :: 		return FALSE;
 	CLRF        R0 
 	CLRF        R1 
-;Main 3.0V.c,345 :: 		}
+;Main 3.0V.c,351 :: 		}
 	RETURN      0
 ; end of _isOnThePath
